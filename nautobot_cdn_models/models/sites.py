@@ -6,7 +6,7 @@ from django.urls import reverse
 from nautobot.core.models.generics import OrganizationalModel, PrimaryModel
 from nautobot.core.models.tree_queries import TreeModel
 from nautobot.extras.utils import extras_features
-from nautobot.extras.models import StatusModel
+from nautobot.extras.models import StatusField
 
 
 __all__ = (
@@ -37,11 +37,25 @@ class HyperCacheMemoryProfile(PrimaryModel):
         validators=[MinValueValidator(0), MaxValueValidator(10000)],
     )
    
+    class Meta:
+        ordering = ["name"]
+        unique_together = (
+            ("name"),  # See validate_unique below
+        )
+        
+    def validate_unique(self, exclude=None):
+        if self.name and hasattr(self, "name") and self.location is None:
+            if CdnSite.objects.exclude(pk=self.pk).filter(name=self.name):
+                raise ValidationError({"name": "A profile with this name already exists."})
+
+        super().validate_unique(exclude)
+    
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_cdn_models:hypercachememoryprofile", args=[self.slug])
+        return reverse("plugins:nautobot_cdn_models:hypercachememoryprofile", args=[self.pk])
     
     def __str__(self):
         return self.name
+    
 
 @extras_features(
     "custom_validators",
@@ -56,6 +70,9 @@ class SiteRole(TreeModel, OrganizationalModel):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("plugins:nautobot_cdn_models:siterole", args=[self.pk])
 
 
 @extras_features(
@@ -65,7 +82,7 @@ class SiteRole(TreeModel, OrganizationalModel):
     "graphql",
     "webhooks",
 )
-class CdnSite(PrimaryModel, StatusModel):
+class CdnSite(PrimaryModel):
     name = models.CharField(max_length=100, help_text="Akamai Site Name.")
     cdn_site_role = models.ForeignKey(
         to="SiteRole",
@@ -81,6 +98,7 @@ class CdnSite(PrimaryModel, StatusModel):
         blank=True,
         null=True,
     )
+    status = StatusField(blank=False, null=False)
     abbreviatedName = models.CharField(max_length=255, blank=True, help_text="Akamai Site Name Abbreviation")
     bandwidthLimitMbps = models.IntegerField(
         validators=[MinValueValidator(1000), MaxValueValidator(10000000)],
@@ -179,8 +197,8 @@ class CdnSite(PrimaryModel, StatusModel):
         return reverse("plugins:nautobot_cdn_models:cdnsite", args=[self.pk])
        
     def validate_unique(self, exclude=None):
-        if self.name and hasattr(self, "cdnsite") and self.region is None:
-            if CdnSite.objects.exclude(pk=self.pk).filter(name=self.name, site=self.cdnsite, region__isnull=True):
+        if self.name and hasattr(self, "cdnsite") and self.location is None:
+            if CdnSite.objects.exclude(pk=self.pk).filter(name=self.name, location=self.cdnsite):
                 raise ValidationError({"name": "A cdnsite with this name already exists."})
 
         super().validate_unique(exclude)

@@ -1,34 +1,51 @@
 from django_tables2 import RequestConfig
 
-from nautobot.core.views import mixins as view_mixins
-from nautobot.circuits.models import Circuit
+from nautobot.core.views import generic, mixins as view_mixins
 from nautobot.core.models.querysets import count_related
-from nautobot.core.views import generic
 from nautobot.core.views.paginator import EnhancedPaginator, get_paginate_count
 from nautobot.dcim.models import Device, Location, Rack, RackReservation
-from nautobot.ipam.models import IPAddress, Prefix, VLAN, VRF
-from nautobot.virtualization.models import VirtualMachine, Cluster
-from . import filters, forms, tables
+from nautobot.ipam.models import IPAddress, Prefix
+from nautobot.virtualization.models import VirtualMachine
+
+from nautobot.extras.models import RelationshipAssociation
+from nautobot.extras.tables import RelationshipAssociationTable
+from . import filters, tables, forms
 from .models import CdnSite, HyperCacheMemoryProfile, SiteRole
 
-class HyperCacheMemoryProfileUIViewSet(
-    view_mixins.ObjectListViewMixin,
-    view_mixins.ObjectDetailViewMixin,
-    view_mixins.ObjectEditViewMixin,
-    view_mixins.ObjectDestroyViewMixin,
-    view_mixins.ObjectBulkDestroyViewMixin,
-):
+
+## HyperCache Memory Profiles
+class HyperCacheMemoryProfileListView(generic.ObjectListView):
     queryset = HyperCacheMemoryProfile.objects.all()
-    table_class = tables.HyperCacheMemoryProfileTable
-    form_class = forms.HyperCacheMemoryProfileForm
-    filterset_class = filters.HyperCacheMemoryProfileFilterSet
-    filterset_form_class = forms.HyperCacheMemoryProfileFilterForm
-    serializer_class = serializers.HyperCacheMemoryProfileSerializer
-    action_buttons = ("add",)
+    filterset = filters.HyperCacheMemoryProfileFilterSet
+    table = tables.HyperCacheMemoryProfileTable
+
+
+class HyperCacheMemoryProfileView(generic.ObjectView):
+    queryset = HyperCacheMemoryProfile.objects.all()
+
+
+class HyperCacheMemoryProfileEditView(generic.ObjectEditView):
+    queryset = HyperCacheMemoryProfile.objects.all()
+    model_form = forms.HyperCacheMemoryProfileForm
+
+
+class HyperCacheMemoryProfileDeleteView(generic.ObjectDeleteView):
+    queryset = HyperCacheMemoryProfile.objects.all()
+
+
+class HyperCacheMemoryProfileBulkImportView(generic.BulkImportView):
+    queryset = HyperCacheMemoryProfile.objects.all()
+    table = tables.HyperCacheMemoryProfileTable
+
+
+class HyperCacheMemoryProfileBulkDeleteView(generic.BulkDeleteView):
+    queryset = HyperCacheMemoryProfile.objects.all()
+    table = tables.HyperCacheMemoryProfileTable
+    filterset = filters.HyperCacheMemoryProfileFilterSet
 
 ## CDN Site Roles ##
 class SiteRoleListView(generic.ObjectListView):
-    queryset = SiteRole.objects.annotate(cdnsite_count=count_related(CdnSite, "site_role"))
+    queryset = SiteRole.objects.annotate(cdnsite_count=count_related(CdnSite, "cdn_site_role"))
     filterset = filters.SiteRoleFilterSet
     table = tables.SiteRoleTable
 
@@ -38,12 +55,12 @@ class SiteRoleView(generic.ObjectView):
 
     def get_extra_context(self, request, instance):
         # CdnSite
-        cndsites = CdnSite.objects.restrict(request.user, "view").filter(
-            cdnsite_role__in=instance.descendants(include_self=True)
+        cdnsites = CdnSite.objects.restrict(request.user, "view").filter(
+            cdn_site_role__in=instance.descendants(include_self=True)
         )
 
         cdnsite_table = tables.CdnSiteTable(cdnsites)
-        cdnsite_table.columns.hide("cdnsite_role")
+        cdnsite_table.columns.hide("cdn_site_role")
 
         paginate = {
             "paginator_class": EnhancedPaginator,
@@ -71,69 +88,88 @@ class SiteRoleBulkImportView(generic.BulkImportView):
 
 
 class SiteRoleBulkDeleteView(generic.BulkDeleteView):
-    queryset = SiteRole.objects.annotate(cdnsite_count=count_related(CdnSite, "cdnsite_role"))
+    queryset = SiteRole.objects.annotate(cdnsite_count=count_related(CdnSite, "cdn_site_role"))
     table = tables.SiteRoleTable
     filterset = filters.SiteRoleFilterSet
 
 ## CDN SITES ##
-class TenantListView(generic.ObjectListView):
-    queryset = CdnSite.objects.select_related("cdnsite_role")
+class CdnSiteListView(generic.ObjectListView):
+    queryset = CdnSite.objects.select_related("cdn_site_role")
     filterset = filters.CdnSiteFilterSet
     filterset_form = forms.CdnSiteFilterForm
     table = tables.CdnSiteTable
 
 
 class CdnSiteView(generic.ObjectView):
-    queryset = CdnSite.objects.select_related("cdnsite_role")
+    queryset = CdnSite.objects.select_related("cdn_site_role")
 
+    # def get_extra_context(self, request, instance):
+    #     stats = {
+    #         # TODO: Should we include child locations of the filtered locations in the location_count below?
+    #         "location_count": Location.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
+    #         "rack_count": Rack.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
+    #         "rackreservation_count": RackReservation.objects.restrict(request.user, "view")
+    #         .filter(cdnsites=instance)
+    #         .count(),
+    #         "device_count": Device.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
+    #         "prefix_count": Prefix.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
+    #         "ipaddress_count": IPAddress.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
+    #         "virtualmachine_count": VirtualMachine.objects.restrict(request.user, "view")
+    #         .filter(cdnsites=instance)
+    #         .count(),
+    #     }
+
+    #     return {
+    #         "stats": stats,
+    #     }
     def get_extra_context(self, request, instance):
         stats = {
-            # TODO: Should we include child locations of the filtered locations in the location_count below?
-            "location_count": Location.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "rack_count": Rack.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "rackreservation_count": RackReservation.objects.restrict(request.user, "view")
-            .filter(cdnsite=instance)
-            .count(),
-            "device_count": Device.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "vrf_count": VRF.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "prefix_count": Prefix.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "ipaddress_count": IPAddress.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "vlan_count": VLAN.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "circuit_count": Circuit.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
-            "virtualmachine_count": VirtualMachine.objects.restrict(request.user, "view")
-            .filter(cdnsite=instance)
-            .count(),
-            "cluster_count": Cluster.objects.restrict(request.user, "view").filter(cdnsite=instance).count(),
+            "device_count": RelationshipAssociation.objects.all().filter(destination_id=instance.id).count()
         }
+        return{
+            "stats": stats
+        }
+    
+    def get_extra_context(self, request, instance):
+        relations = RelationshipAssociation.objects.all().filter(destination_id=instance.id)
+
+        relation_table = RelationshipAssociationTable(relations)
+        relation_table.columns.hide("destination")
+
+        paginate = {
+            "paginator_class": EnhancedPaginator,
+            "per_page": get_paginate_count(request),
+        }
+        RequestConfig(request, paginate).configure(relation_table)
 
         return {
-            "stats": stats,
+            "relation_table": relation_table
         }
 
 
-class TenantEditView(generic.ObjectEditView):
+class CdnSiteEditView(generic.ObjectEditView):
     queryset = CdnSite.objects.all()
-    model_form = forms.TenantForm
-    template_name = "tenancy/tenant_edit.html"
+    model_form = forms.CdnSiteForm
+    template_name = "nautobot_cdn_models/cdnsite_edit.html"
 
 
-class TenantDeleteView(generic.ObjectDeleteView):
+class CdnSiteDeleteView(generic.ObjectDeleteView):
     queryset = CdnSite.objects.all()
 
 
-class TenantBulkImportView(generic.BulkImportView):
+class CdnSiteBulkImportView(generic.BulkImportView):
     queryset = CdnSite.objects.all()
-    table = tables.TenantTable
+    table = tables.CdnSiteTable
 
 
-class TenantBulkEditView(generic.BulkEditView):
-    queryset = CdnSite.objects.select_related("cdnsite_role")
-    filterset = filters.TenantFilterSet
-    table = tables.TenantTable
-    form = forms.TenantBulkEditForm
+class CdnSiteBulkEditView(generic.BulkEditView):
+    queryset = CdnSite.objects.select_related("cdn_site_role")
+    filterset = filters.CdnSiteFilterSet
+    table = tables.CdnSiteTable
+    form = forms.CdnSiteBulkEditForm
 
 
-class TenantBulkDeleteView(generic.BulkDeleteView):
-    queryset = CdnSite.objects.select_related("cdnsite_role")
-    filterset = filters.TenantFilterSet
-    table = tables.TenantTable
+class CdnSiteBulkDeleteView(generic.BulkDeleteView):
+    queryset = CdnSite.objects.select_related("cdn_site_role")
+    filterset = filters.CdnSiteFilterSet
+    table = tables.CdnSiteTable

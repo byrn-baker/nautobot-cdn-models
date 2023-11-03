@@ -1,0 +1,36 @@
+{% extends 'generic/object_retrieve.html' %}
+{% load helpers %}
+
+{% block content_left_page %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>HyperCache Memory Profiles</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table">
+                <tr>
+                    <td>HyperCache Memory Profile Name</td>
+                    <td>{{ object.name|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Front End Cache Memory Percent</td>
+                    <td>{{ object.frontEndCacheMemoryPercent|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>RAM-Only Cache Memory Percent</td>
+                    <td>{{ object.ramOnlyCacheMemoryPercent|placeholder }}</td>
+                </tr>  
+                <tr>
+                    <td>Hot Cache Memory Percent</td>
+                    <td>{{ object.hotCacheMemoryPercent|placeholder }}</td>
+                </tr>   
+                <tr>
+                    <td>Disk Index Memory Percent</td>
+                    <td>{{ object.diskIndexMemoryPercent|placeholder }}</td>
+                </tr>   
+                <tr>
+                    <td>Cache Memory Profile ID</td>
+                    <td>{{ object.cacheMemoryProfileId|placeholder }}</td>
+                </tr>                                                                                                              
+            </table>
+        </div>
+{% endblock content_left_page %}

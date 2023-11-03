@@ -25,7 +25,7 @@ class NautobotcdnModelsConfig(PluginConfig):
     max_version = "2.9999"
     default_settings = {
         "default_statuses": {
-            "CdnSite": ["active", "maintenance", "planned", "staged"],
+            "CdnSite": ["Active", "Maintenance", "Planned", "Staged"],
         }
     }
     caching_config = {}
@@ -33,15 +33,15 @@ class NautobotcdnModelsConfig(PluginConfig):
         """Callback invoked after the plugin is loaded."""
         super().ready()
 
-        # from .signals import (  # pylint: disable=import-outside-toplevel
-        #     post_migrate_create_statuses,
-        #     create_cdnsite_to_device_relationship,
-        #     create_cdnsite_to_vm_relationship
-        # )
+        from .signals import (  # pylint: disable=import-outside-toplevel
+            post_migrate_create_statuses,
+            create_cdnsite_to_device_relationship,
+            create_cdnsite_to_vm_relationship
+        )
 
-        # post_migrate.connect(post_migrate_create_statuses, sender=self)
-        # post_migrate.connect(create_cdnsite_to_device_relationship, sender=self)
-        # post_migrate.connect(create_cdnsite_to_vm_relationship, sender=self)
+        post_migrate.connect(post_migrate_create_statuses, sender=self)
+        post_migrate.connect(create_cdnsite_to_device_relationship, sender=self)
+        post_migrate.connect(create_cdnsite_to_vm_relationship, sender=self)
 
 
 config = NautobotcdnModelsConfig  # pylint:disable=invalid-name

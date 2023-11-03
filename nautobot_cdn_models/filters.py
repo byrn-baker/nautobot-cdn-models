@@ -1,4 +1,4 @@
-import django_filters
+from django_filters import ModelMultipleChoiceFilter
 
 from nautobot.core.filters import (
     NameSearchFilterSet,
@@ -12,18 +12,25 @@ from nautobot.extras.filters import NautobotFilterSet
 from nautobot.dcim.models import Device, Location
 from nautobot.ipam.models import IPAddress, Prefix
 from nautobot.virtualization.models import VirtualMachine
-from ..filters.mixins import CdnSiteModelFilterSetMixin
-from ..models import CdnSite, SiteRole
+from .models import CdnSite, SiteRole, HyperCacheMemoryProfile
 
 
 __all__ = (
-    "CdnsiteFilterSet",
-    "CdnsiteModelFilterSetMixin",
-    "CdnsiteFilterSet",
+    "CdnSiteFilterSet",
     "SiteRoleFilterSet",
+    "HyperCacheMemoryProfileFilterSet"
 )
 
-
+class HyperCacheMemoryProfileFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
+    )
+    class Meta:
+        model = HyperCacheMemoryProfile
+        fields = "__all__"
+        
 class SiteRoleFilterSet(NautobotFilterSet, NameSearchFilterSet):
     parent = NaturalKeyOrPKMultipleChoiceFilter(
         queryset=SiteRole.objects.all(),
@@ -62,9 +69,9 @@ class CdnSiteFilterSet(NautobotFilterSet):
             "comments": "icontains",
         },
     )
-    site_role = TreeNodeMultipleChoiceFilter(
+    cdn_site_role = TreeNodeMultipleChoiceFilter(
         queryset=SiteRole.objects.all(),
-        field_name="site_role",
+        field_name="cdn_site_role",
         label="Site Role (name or ID)",
         to_field_name="name",
     )
@@ -77,7 +84,7 @@ class CdnSiteFilterSet(NautobotFilterSet):
         field_name="devices",
         label="Has devices",
     )
-    ip_addresses = django_filters.ModelMultipleChoiceFilter(
+    ip_addresses = ModelMultipleChoiceFilter(
         queryset=IPAddress.objects.all(),
         label="IP addresses (ID)",
     )
@@ -94,7 +101,7 @@ class CdnSiteFilterSet(NautobotFilterSet):
         field_name="locations",
         label="Has locations",
     )
-    prefixes = django_filters.ModelMultipleChoiceFilter(
+    prefixes = ModelMultipleChoiceFilter(
         queryset=Prefix.objects.all(),
         label="Prefixes (ID)",
     )
@@ -115,15 +122,6 @@ class CdnSiteFilterSet(NautobotFilterSet):
     class Meta:
         model = CdnSite
         fields = [
-            "comments",
-            "description",
             "id",
             "name",
-            "tags",
         ]
-
-
-# TODO: remove in 2.2
-@class_deprecated_in_favor_of(CdnsiteModelFilterSetMixin)
-class CdnsiteFilterSet(CdnsiteModelFilterSetMixin):
-    pass

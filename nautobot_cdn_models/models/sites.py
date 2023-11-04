@@ -98,7 +98,10 @@ class CdnSite(PrimaryModel):
         blank=True,
         null=True,
     )
-    status = StatusField(blank=False, null=False)
+    status = StatusField(
+        blank=False, 
+        null=True,
+    )
     abbreviatedName = models.CharField(max_length=255, blank=True, help_text="Akamai Site Name Abbreviation")
     bandwidthLimitMbps = models.IntegerField(
         validators=[MinValueValidator(1000), MaxValueValidator(10000000)],

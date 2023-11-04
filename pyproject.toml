@@ -14,9 +14,18 @@ packages = [
     { include = "nautobot_cdn_models" },
 ]
 
+[[tool.poetry.source]]
+name = "pypi-repo"
+url = "https://pypi.org/simple"
+primary = true
+
+[tool.poetry.dependencies]
+python = "^3.8"
+ansible = "*"
+pynautobot = "^2.0.1"
+
 [tool.poetry.extras]
 nautobot = ["nautobot"]
-
 
 
 [tool.pylint.master]

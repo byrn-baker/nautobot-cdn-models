@@ -6,10 +6,11 @@ from nautobot.core.forms import (
     DynamicModelMultipleChoiceField,
     CSVContentTypeField,
 )
-from nautobot.utilities.forms import (
+from nautobot.core.forms import (
     BootstrapMixin,
     BulkEditForm,
     BulkEditNullBooleanSelect,
+    CommentField,
     DynamicModelChoiceField,
     DynamicModelMultipleChoiceField,
     JSONField,
@@ -18,6 +19,10 @@ from nautobot.extras.forms import (
     NautobotBulkEditForm,
     NautobotModelForm,
     NautobotFilterForm,
+)
+from nautobot.extras.forms.mixins import (
+    NoteModelBulkEditFormMixin,
+    NoteModelFormMixin,
 )
 from nautobot.dcim.models import Location
 from nautobot.extras.models import Status, Tag
@@ -127,7 +132,7 @@ class CdnSiteFilterForm(NautobotFilterForm):
     neighbor2 = DynamicModelChoiceField(required=False, queryset=CdnSite.objects.all(), label="Secondary Site Neighbor")
     cdn_site_role = DynamicModelMultipleChoiceField(required=False, queryset=SiteRole.objects.all())
 
-class RedirectMapContextForm(BootstrapMixin, NoteModelFormMixin, forms.ModelForm):
+class RedirectMapContextForm(BootstrapMixin, NoteModelFormMixin):
     locations = DynamicModelMultipleChoiceField(queryset=Location.objects.all(), required=False)
     cdnsites = DynamicModelMultipleChoiceField(queryset=CdnSite.objects.all(), required=False)
     cdn_site_roles = DynamicModelMultipleChoiceField(queryset=SiteRole.objects.all(), required=False)
@@ -139,18 +144,7 @@ class RedirectMapContextForm(BootstrapMixin, NoteModelFormMixin, forms.ModelForm
 
     class Meta:
         model = RedirectMapContext
-        fields = (
-            "name",
-            "weight",
-            "description",
-            "schema",
-            "is_active",
-            "locations",
-            "cdnsites",
-            "cdn_site_roles",
-            "tags",
-            "data",
-        )
+        fields = "__all__"
 
 
 class RedirectMapContextBulkEditForm(BootstrapMixin, NoteModelBulkEditFormMixin, BulkEditForm):

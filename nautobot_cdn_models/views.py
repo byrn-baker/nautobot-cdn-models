@@ -1,4 +1,5 @@
 from django_tables2 import RequestConfig
+from deepmerge import Merger
 
 from nautobot.core.views import generic, mixins as view_mixins
 from nautobot.core.models.querysets import count_related
@@ -6,6 +7,7 @@ from nautobot.core.views.paginator import EnhancedPaginator, get_paginate_count
 from nautobot.dcim.models import Device, Location, Rack, RackReservation
 from nautobot.ipam.models import IPAddress, Prefix
 from nautobot.virtualization.models import VirtualMachine
+from nautobot.extras.views import ObjectChangeLogView
 
 from nautobot.extras.models import RelationshipAssociation
 from nautobot.extras.tables import RelationshipAssociationTable
@@ -173,6 +175,9 @@ class CdnSiteBulkDeleteView(generic.BulkDeleteView):
     queryset = CdnSite.objects.select_related("cdn_site_role")
     filterset = filters.CdnSiteFilterSet
     table = tables.CdnSiteTable
+
+class CdnSiteChangeLogView(ObjectChangeLogView):
+    base_template = "nautobot_akamai_models/cdnsite.html"
     
 class RedirectMapContextListView(generic.ObjectListView):
     queryset = RedirectMapContext.objects.all()

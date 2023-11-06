@@ -28,16 +28,14 @@ from nautobot.extras.choices import (
     WebhookHttpMethodChoices,
 )
 from nautobot.extras.constants import HTTP_CONTENT_TYPE_JSON
-from nautobot.extras.models import ChangeLoggedModel, ConfigContextSchemaValidationMixin
+import nautobot.extras as extras
+from nautobot.extras.models.models import ChangeLoggedModel, ConfigContextSchemaValidationMixin
 from nautobot.extras.models.mixins import NotesMixin
 from nautobot.extras.models.relationships import RelationshipModel
 from nautobot.extras.querysets import NotesQuerySet
 from nautobot.extras.utils import extras_features, FeatureQuery, image_upload
 
 from ..querysets import RedirectMapContextQuerySet
-
-# Avoid breaking backward compatibility on anything that might expect these to still be defined here:
-from .jobs import JOB_LOGS, Job, JobLogEntry, JobResult, ScheduledJob, ScheduledJobs  # noqa: F401
 
 @extras_features("graphql")
 class RedirectMapContext(BaseModel, ChangeLoggedModel, ConfigContextSchemaValidationMixin, NotesMixin):
@@ -53,11 +51,11 @@ class RedirectMapContext(BaseModel, ChangeLoggedModel, ConfigContextSchemaValida
     owner_content_type = models.ForeignKey(
         to=ContentType,
         on_delete=models.CASCADE,
-        limit_choices_to=FeatureQuery("config_context_owners"),
+        limit_choices_to=FeatureQuery("redirectmap_context_owners"),
         default=None,
         null=True,
         blank=True,
-        related_name="config_contexts",
+        related_name="cdnsite_config_contexts",
     )
     owner_object_id = models.UUIDField(default=None, null=True, blank=True)
     owner = GenericForeignKey(
@@ -70,19 +68,20 @@ class RedirectMapContext(BaseModel, ChangeLoggedModel, ConfigContextSchemaValida
     is_active = models.BooleanField(
         default=True,
     )
-    config_context_schema = models.ForeignKey(
+    schema = models.ForeignKey(
         to="extras.ConfigContextSchema",
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
         help_text="Optional schema to validate the structure of the data",
-        related_name="config_contexts",
+        related_name="cdnsite_config_contexts",
     )
     locations = models.ManyToManyField(to="dcim.Location", related_name="+", blank=True)
     # TODO(timizuo): Find a way to limit role choices to cdnsite; as of now using
     #  limit_choices_to=Role.objects.get_for_model(Device), causes a partial import error
     cdn_site_roles = models.ManyToManyField(to="SiteRole", related_name="+", blank=True)
     cdnsites = models.ManyToManyField(to="CdnSite", related_name="+", blank=True)
+    tags = models.ManyToManyField(to="extras.Tag", related_name="+", blank=True)
 
     data = models.JSONField(encoder=DjangoJSONEncoder)
 
@@ -120,7 +119,7 @@ class RedirectMapContext(BaseModel, ChangeLoggedModel, ConfigContextSchemaValida
             raise ValidationError({"data": 'JSON data must be in object form. Example: {"foo": 123}'})
 
         # Validate data against schema
-        self._validate_with_schema("data", "config_context_schema")
+        self._validate_with_schema("data", "schema")
         
         # Check for a duplicated `name`. This is necessary because Django does not consider two NULL fields to be equal,
         # and thus if the `owner` is NULL, a duplicate `name` will not otherwise automatically raise an exception.
@@ -154,7 +153,7 @@ class RedirectMapContextModel(models.Model, ConfigContextSchemaValidationMixin):
     local_redirectmap_context_data_owner_content_type = ForeignKeyWithAutoRelatedName(
         to=ContentType,
         on_delete=models.CASCADE,
-        limit_choices_to=FeatureQuery("config_context_owners"),
+        limit_choices_to=FeatureQuery("redirectmap_context_owners"),
         default=None,
         null=True,
         blank=True,

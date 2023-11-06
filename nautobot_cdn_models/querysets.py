@@ -3,8 +3,8 @@ from django.db.models.functions import JSONObject
 from deepmerge import always_merger
 
 from nautobot.extras.models.tags import TaggedItem
-from nautobot.utilities.query_functions import EmptyGroupByJSONBAgg
-from nautobot.utilities.querysets import RestrictedQuerySet
+from nautobot.core.models.query_functions import EmptyGroupByJSONBAgg
+from nautobot.core.models.querysets import RestrictedQuerySet
 
 from django.core.cache import cache
 from django.conf import settings
@@ -110,9 +110,9 @@ class RedirectMapContextModelQuerySet(RestrictedQuerySet):
         )
         base_query.add((Q(cdn_site_roles=OuterRef("cdn_site_role")) | Q(cdn_site_roles=None)), Q.AND)
         if self.model._meta.model_name == "cdnsite":
-            base_query.add((Q(device_types=OuterRef("device_type")) | Q(device_types=None)), Q.AND)
-            # This is necessary to prevent location related config context to be applied now.
-            # The location hierarchy cannot be processed by the database and must be added by `ConfigContextModel.get_config_context`
+            # base_query.add((Q(device_types=OuterRef("device_type")) | Q(device_types=None)), Q.AND)
+            # # This is necessary to prevent location related config context to be applied now.
+            # # The location hierarchy cannot be processed by the database and must be added by `ConfigContextModel.get_config_context`
             base_query.add((Q(locations=None)), Q.AND)
 
         return base_query

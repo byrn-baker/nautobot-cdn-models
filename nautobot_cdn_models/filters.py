@@ -1,13 +1,14 @@
 import django_filters
 
 from nautobot.core.filters import (
+    BaseFilterSet,
+    ContentTypeFilter,
     NameSearchFilterSet,
     NaturalKeyOrPKMultipleChoiceFilter,
     RelatedMembershipBooleanFilter,
     SearchFilter,
     TreeNodeMultipleChoiceFilter,
 )
-from nautobot.core.utils.deprecation import class_deprecated_in_favor_of
 from nautobot.extras.filters import NautobotFilterSet
 from nautobot.dcim.models import Device, Location
 from nautobot.ipam.models import IPAddress, Prefix
@@ -15,13 +16,6 @@ from nautobot.virtualization.models import VirtualMachine
 from nautobot.extras.filters.mixins import (
     LocalContextModelFilterSetMixin,
     StatusModelFilterSetMixin,
-)
-from nautobot.utilities.filters import (
-    BaseFilterSet,
-    ContentTypeFilter,
-    NaturalKeyOrPKMultipleChoiceFilter,
-    SearchFilter,
-    TreeNodeMultipleChoiceFilter,
 )
 from nautobot.extras.models import ConfigContextSchema
 from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext

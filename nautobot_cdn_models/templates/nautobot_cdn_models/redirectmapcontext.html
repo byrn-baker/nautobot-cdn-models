@@ -1,0 +1,136 @@
+{% extends 'generic/object_detail.html' %}
+{% load helpers %}
+
+{% block content_left_page %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Config Context</strong>
+                </div>
+                <table class="table table-hover panel-body attr-table">
+                    <tr>
+                        <td>Name</td>
+                        <td>
+                            {{ object.name }}
+                        </td>
+                    </tr>
+                    {% if object.owner %}
+                        <tr>
+                            <td>Owner</td>
+                            <td>{{ object.owner|hyperlinked_object }}</td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <td>Weight</td>
+                        <td>
+                            {{ object.weight }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>{{ object.description|placeholder }}</td>
+                    </tr>
+                    <tr>
+                        <td>Schema</td>
+                        <td>{{ object.schema|hyperlinked_object }}</td>
+                    </tr>
+                    <tr>
+                        <td>Active</td>
+                        <td>{{ object.is_active | render_boolean }}</td>
+                    </tr>
+                </table>
+            </div>
+{% endblock content_left_page %}
+
+{% block content_right_page %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Assignment</strong>
+                </div>
+                <table class="table table-hover panel-body attr-table">
+                    <tr>
+                        <td>Regions</td>
+                        <td>
+                            {% if object.regions.all %}
+                                <ul>
+                                    {% for region in object.regions.all %}
+                                        <li>{{ region|hyperlinked_object }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cdn Sites</td>
+                        <td>
+                            {% if object.cdnsites.all %}
+                                <ul>
+                                    {% for site in object.cdnsites.all %}
+                                        <li>{{ site|hyperlinked_object }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cdn Site Roles</td>
+                        <td>
+                            {% if object.cdn_site_roles.all %}
+                                <ul>
+                                    {% for role in object.cdn_site_roles.all %}
+                                        <li><a href="{% url 'plugins:nautobot_cdn_models:cdnsite_list' %}?siterole={{ siterole.slug }}">{{ role }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tags</td>
+                        <td>
+                            {% if object.tags.all %}
+                                <ul>
+                                    {% for tag in object.tags.all %}
+                                        <li>{{ tag|hyperlinked_object }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if settings.CONFIG_CONTEXT_DYNAMIC_GROUPS_ENABLED %}
+                    <tr>
+                        <td>Dynamic Groups</td>
+                        <td>
+                            {% if object.dynamic_groups.all %}
+                                <ul>
+                                    {% for dynamic_group in object.dynamic_groups.all %}
+                                        <li>{{ dynamic_group|hyperlinked_object }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+{% endblock content_right_page %}
+
+{% block content_full_width_page %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>Data</strong>
+                    {% include 'nautobot_cdn_models/json_format.html' %}
+                </div>
+                <div class="panel-body">
+                    {% include 'nautobot_cdn_models/json_data.html' with data=object.data format=format %}
+                </div>
+            </div>
+{% endblock content_full_width_page %}

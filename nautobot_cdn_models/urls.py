@@ -1,6 +1,5 @@
 from django.urls import path
 
-from nautobot.core.views.routers import NautobotUIViewSetRouter
 from nautobot.extras.views import ObjectChangeLogView, ObjectNotesView
 from . import views
 from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
@@ -90,12 +89,12 @@ urlpatterns = [
         name="siterole_changelog",
         kwargs={"model": SiteRole},
     ),
-    path(
-        "cdn-site-roles/<uuid:pk>/notes/",
-        ObjectNotesView.as_view(),
-        name="siterole_notes",
-        kwargs={"model": SiteRole},
-    ),
+    # path(
+    #     "cdn-site-roles/<uuid:pk>/notes/",
+    #     ObjectNotesView.as_view(),
+    #     name="siterole_notes",
+    #     kwargs={"model": SiteRole},
+    # ),
     # CDN Sites
     path("cdn-sites/", views.CdnSiteListView.as_view(), name="cdnsite_list"),
     path("cdn-sites/add/", views.CdnSiteEditView.as_view(), name="cdnsite_add"),
@@ -119,58 +118,58 @@ urlpatterns = [
         name="cdnsite_changelog",
         kwargs={"model": CdnSite},
     ),
-    path(
-        "cdn-sites/<uuid:pk>/notes/",
-        ObjectNotesView.as_view(),
-        name="cdnsite_notes",
-        kwargs={"model": CdnSite},
-    ),
+    # path(
+    #     "cdn-sites/<uuid:pk>/notes/",
+    #     ObjectNotesView.as_view(),
+    #     name="cdnsite_notes",
+    #     kwargs={"model": CdnSite},
+    # ),
     # Config contexts
     path(
-        "cdnconfig-contexts/",
+        "cdn-redirect-map-contexts/",
         views.RedirectMapContextListView.as_view(),
         name="redirectmapcontext_list",
     ),
     path(
-        "cdnconfig-contexts/add/",
+        "cdn-redirect-map-contexts/add/",
         views.RedirectMapContextEditView.as_view(),
         name="redirectmapcontext_add",
     ),
     path(
-        "cdnconfig-contexts/edit/",
+        "cdn-redirect-map-contexts/edit/",
         views.RedirectMapContextBulkEditView.as_view(),
         name="redirectmapcontext_bulk_edit",
     ),
     path(
-        "cdnconfig-contexts/delete/",
+        "cdn-redirect-map-contexts/delete/",
         views.RedirectMapContextBulkDeleteView.as_view(),
         name="redirectmapcontext_bulk_delete",
     ),
     path(
-        "cdnconfig-contexts/<uuid:pk>/",
+        "cdn-redirect-map-contexts/<uuid:pk>/",
         views.RedirectMapContextView.as_view(),
-        name="RedirectMapContext",
+        name="redirectmapcontext",
     ),
     path(
-        "cdnconfig-contexts/<uuid:pk>/edit/",
+        "cdn-redirect-map-contexts/<uuid:pk>/edit/",
         views.RedirectMapContextEditView.as_view(),
         name="redirectmapcontext_edit",
     ),
     path(
-        "cdnconfig-contexts/<uuid:pk>/delete/",
+        "cdn-redirect-map-contexts/<uuid:pk>/delete/",
         views.RedirectMapContextDeleteView.as_view(),
         name="redirectmapcontext_delete",
     ),
     path(
-        "cdnconfig-contexts/<uuid:pk>/changelog/",
+        "cdn-redirect-map-contexts/<uuid:pk>/changelog/",
         views.ObjectChangeLogView.as_view(),
         name="redirectmapcontext_changelog",
         kwargs={"model": RedirectMapContext},
     ),
-    path(
-        "cdnconfig-contexts/<uuid:pk>/notes/",
-        ObjectNotesView.as_view(),
-        name="redirectmapcontext_notes",
-        kwargs={"model": RedirectMapContext},
-    ),
+    # path(
+    #     "cdn-redirect-map-contexts/<uuid:pk>/notes/",
+    #     ObjectNotesView.as_view(),
+    #     name="redirectmapcontext_notes",
+    #     kwargs={"model": RedirectMapContext},
+    # ),
 ]

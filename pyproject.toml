@@ -23,6 +23,8 @@ default = true
 python = "^3.8"
 ansible = "*"
 pynautobot = "^2.0.1"
+invoke = "^2.2.0"
+deepmerge = "^1.1.0"
 
 [tool.poetry.extras]
 nautobot = ["nautobot"]

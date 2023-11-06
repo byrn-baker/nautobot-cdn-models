@@ -55,23 +55,23 @@ menu_items = (
                     ),
                 ),
             ),
-            # NavMenuGroup(
-            #     name="Contexts",
-            #     weight=100,
-            #     items=(
-            #         NavMenuItem(
-            #             link="plugins:nautobot_cdn_models:cdnconfigcontext_list",
-            #             name="Contexts",
-            #             permissions=[],
-            #             buttons=(
-            #                 NavMenuAddButton(
-            #                     link="plugins:nautobot_cdn_models:cdnconfigcontext_add",
-            #                     permissions=[],
-            #                 ),
-            #             ),
-            #         ),
-            #     ),
-            # ),
+            NavMenuGroup(
+                name="Redirect Maps",
+                weight=100,
+                items=(
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:redirectmapcontext_list",
+                        name="Redirect Map Contexts",
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:redirectmapcontext_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                ),
+            ),
         ),
     ),
 )

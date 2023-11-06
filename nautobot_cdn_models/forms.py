@@ -6,16 +6,23 @@ from nautobot.core.forms import (
     DynamicModelMultipleChoiceField,
     CSVContentTypeField,
 )
+from nautobot.utilities.forms import (
+    BootstrapMixin,
+    BulkEditForm,
+    BulkEditNullBooleanSelect,
+    DynamicModelChoiceField,
+    DynamicModelMultipleChoiceField,
+    JSONField,
+)
 from nautobot.extras.forms import (
-    CustomFieldModelCSVForm,
-    NautobotFilterForm,
     NautobotBulkEditForm,
     NautobotModelForm,
-    TagsBulkEditFormMixin,
+    NautobotFilterForm,
 )
 from nautobot.dcim.models import Location
-from nautobot.extras.models import Status
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile
+from nautobot.extras.models import Status, Tag
+from nautobot.extras.models import ConfigContextSchema
+from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
 
 
 class HyperCacheMemoryProfileForm(NautobotModelForm):
@@ -120,55 +127,50 @@ class CdnSiteFilterForm(NautobotFilterForm):
     neighbor2 = DynamicModelChoiceField(required=False, queryset=CdnSite.objects.all(), label="Secondary Site Neighbor")
     cdn_site_role = DynamicModelMultipleChoiceField(required=False, queryset=SiteRole.objects.all())
 
-# class CdnSiteCSVForm(CustomFieldModelCSVForm):
-#     location = CSVContentTypeField(
-#         queryset=Location.objects.all(),
-#         required=False,
-#         to_field_name="name",
-#         help_text="Assigned location",
-#     )
-#     cdn_site_role = CSVContentTypeField(
-#         queryset=SiteRole.objects.all(),
-#         required=False,
-#         to_field_name="name",
-#         help_text="Assigned tenant",
-#     )
+class RedirectMapContextForm(BootstrapMixin, NoteModelFormMixin, forms.ModelForm):
+    locations = DynamicModelMultipleChoiceField(queryset=Location.objects.all(), required=False)
+    cdnsites = DynamicModelMultipleChoiceField(queryset=CdnSite.objects.all(), required=False)
+    cdn_site_roles = DynamicModelMultipleChoiceField(queryset=SiteRole.objects.all(), required=False)
+    
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
 
-#     class Meta:
-#         model = CdnSite
-#         fields = CdnSite.csv_headers
+    data = JSONField(label="")
 
-
-#
-# Form extensions
-#
-
-
-# class CdnSiteForm(forms.Form):
-#     cdn_site_role = DynamicModelChoiceField(
-#         queryset=SiteRole.objects.all(),
-#         required=False,
-#         null_option="None",
-#         initial_params={"cdnsites": "$cdnsite"},
-#     )
-#     cdnsite = DynamicModelChoiceField(
-#         queryset=CdnSite.objects.all(),
-#         required=False,
-#         query_params={"cdn_site_role": "$cdn_site_role"},
-#     )
+    class Meta:
+        model = RedirectMapContext
+        fields = (
+            "name",
+            "weight",
+            "description",
+            "schema",
+            "is_active",
+            "locations",
+            "cdnsites",
+            "cdn_site_roles",
+            "tags",
+            "data",
+        )
 
 
-# class CdnSiteFilterForm(forms.Form):
-#     cdn_site_role = DynamicModelMultipleChoiceField(
-#         queryset=SiteRole.objects.all(),
-#         to_field_name="name",
-#         required=False,
-#         null_option="None",
-#     )
-#     cdnsite = DynamicModelMultipleChoiceField(
-#         queryset=CdnSite.objects.all(),
-#         to_field_name="name",
-#         required=False,
-#         null_option="None",
-#         query_params={"cdn_site_role": "$cdn_site_role"},
-#     )
+class RedirectMapContextBulkEditForm(BootstrapMixin, NoteModelBulkEditFormMixin, BulkEditForm):
+    pk = forms.ModelMultipleChoiceField(queryset=RedirectMapContext.objects.all(), widget=forms.MultipleHiddenInput)
+    schema = DynamicModelChoiceField(queryset=ConfigContextSchema.objects.all(), required=False)
+    weight = forms.IntegerField(required=False, min_value=0)
+    is_active = forms.NullBooleanField(required=False, widget=BulkEditNullBooleanSelect())
+    description = forms.CharField(required=False, max_length=100)
+
+    class Meta:
+        nullable_fields = [
+            "description",
+            "schema",
+        ]
+
+
+class RedirectMapContextFilterForm(BootstrapMixin, forms.Form):
+    q = forms.CharField(required=False, label="Search")
+    schema = DynamicModelChoiceField(queryset=ConfigContextSchema.objects.all(), to_field_name="slug", required=False)
+    Location = DynamicModelMultipleChoiceField(queryset=Location.objects.all(), to_field_name="slug", required=False)
+    cdnsite = DynamicModelMultipleChoiceField(queryset=CdnSite.objects.all(), to_field_name="slug", required=False)
+    cdn_site_roles = DynamicModelMultipleChoiceField(queryset=SiteRole.objects.all(), to_field_name="slug", required=False)
+    tag = DynamicModelMultipleChoiceField(queryset=Tag.objects.all(), to_field_name="slug", required=False)

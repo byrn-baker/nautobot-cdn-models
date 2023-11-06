@@ -1,4 +1,4 @@
-from django_filters import ModelMultipleChoiceFilter
+import django_filters
 
 from nautobot.core.filters import (
     NameSearchFilterSet,
@@ -12,7 +12,19 @@ from nautobot.extras.filters import NautobotFilterSet
 from nautobot.dcim.models import Device, Location
 from nautobot.ipam.models import IPAddress, Prefix
 from nautobot.virtualization.models import VirtualMachine
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile
+from nautobot.extras.filters.mixins import (
+    LocalContextModelFilterSetMixin,
+    StatusModelFilterSetMixin,
+)
+from nautobot.utilities.filters import (
+    BaseFilterSet,
+    ContentTypeFilter,
+    NaturalKeyOrPKMultipleChoiceFilter,
+    SearchFilter,
+    TreeNodeMultipleChoiceFilter,
+)
+from nautobot.extras.models import ConfigContextSchema
+from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
 
 
 __all__ = (
@@ -84,7 +96,7 @@ class CdnSiteFilterSet(NautobotFilterSet):
         field_name="devices",
         label="Has devices",
     )
-    ip_addresses = ModelMultipleChoiceFilter(
+    ip_addresses = django_filters.ModelMultipleChoiceFilter(
         queryset=IPAddress.objects.all(),
         label="IP addresses (ID)",
     )
@@ -101,7 +113,7 @@ class CdnSiteFilterSet(NautobotFilterSet):
         field_name="locations",
         label="Has locations",
     )
-    prefixes = ModelMultipleChoiceFilter(
+    prefixes = django_filters.ModelMultipleChoiceFilter(
         queryset=Prefix.objects.all(),
         label="Prefixes (ID)",
     )
@@ -125,3 +137,62 @@ class CdnSiteFilterSet(NautobotFilterSet):
             "id",
             "name",
         ]
+
+#
+# Config Contexts
+#
+
+
+class RedirectMapContextFilterSet(BaseFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+            "description": "icontains",
+            "data": "icontains",
+        },
+    )
+    owner_content_type = ContentTypeFilter()
+    schema = NaturalKeyOrPKMultipleChoiceFilter(
+        field_name="schema",
+        queryset=ConfigContextSchema.objects.all(),
+        to_field_name="slug",
+        label="Schema (slug or PK)",
+    )
+    location_id = django_filters.ModelMultipleChoiceFilter(
+        field_name="locations",
+        queryset=Location.objects.all(),
+        label="Location (ID) - Deprecated (use region filter)",
+    )
+    region = NaturalKeyOrPKMultipleChoiceFilter(
+        field_name="Locations",
+        queryset=Location.objects.all(),
+        label="Location (ID or slug)",
+    )
+    cdnsite_id = django_filters.ModelMultipleChoiceFilter(
+        field_name="cdnsites",
+        queryset=CdnSite.objects.all(),
+        label="Site (ID) - Deprecated (use site filter)",
+    )
+    cdnsite = NaturalKeyOrPKMultipleChoiceFilter(
+        field_name="cdnsites",
+        queryset=CdnSite.objects.all(),
+        label="Site (ID or slug)",
+    )
+    cdn_site_role_id = django_filters.ModelMultipleChoiceFilter(
+        field_name="siteroles",
+        queryset=SiteRole.objects.all(),
+        label="Role (ID) - Deprecated (use role filter)",
+    )
+    cdn_site_role = NaturalKeyOrPKMultipleChoiceFilter(
+        field_name="siteroles",
+        queryset=SiteRole.objects.all(),
+        label="Role (ID or slug)",
+    )
+
+    # Conditional enablement of dynamic groups filtering
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = RedirectMapContext
+        fields = ["id", "name", "is_active", "owner_content_type", "owner_object_id"]

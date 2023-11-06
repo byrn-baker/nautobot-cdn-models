@@ -3,7 +3,7 @@ from django.urls import path
 from nautobot.core.views.routers import NautobotUIViewSetRouter
 from nautobot.extras.views import ObjectChangeLogView, ObjectNotesView
 from . import views
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile
+from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
 
 app_name = "nautobot_cdn_models"
 
@@ -124,5 +124,53 @@ urlpatterns = [
         ObjectNotesView.as_view(),
         name="cdnsite_notes",
         kwargs={"model": CdnSite},
+    ),
+    # Config contexts
+    path(
+        "cdnconfig-contexts/",
+        views.RedirectMapContextListView.as_view(),
+        name="redirectmapcontext_list",
+    ),
+    path(
+        "cdnconfig-contexts/add/",
+        views.RedirectMapContextEditView.as_view(),
+        name="redirectmapcontext_add",
+    ),
+    path(
+        "cdnconfig-contexts/edit/",
+        views.RedirectMapContextBulkEditView.as_view(),
+        name="redirectmapcontext_bulk_edit",
+    ),
+    path(
+        "cdnconfig-contexts/delete/",
+        views.RedirectMapContextBulkDeleteView.as_view(),
+        name="redirectmapcontext_bulk_delete",
+    ),
+    path(
+        "cdnconfig-contexts/<uuid:pk>/",
+        views.RedirectMapContextView.as_view(),
+        name="RedirectMapContext",
+    ),
+    path(
+        "cdnconfig-contexts/<uuid:pk>/edit/",
+        views.RedirectMapContextEditView.as_view(),
+        name="redirectmapcontext_edit",
+    ),
+    path(
+        "cdnconfig-contexts/<uuid:pk>/delete/",
+        views.RedirectMapContextDeleteView.as_view(),
+        name="redirectmapcontext_delete",
+    ),
+    path(
+        "cdnconfig-contexts/<uuid:pk>/changelog/",
+        views.ObjectChangeLogView.as_view(),
+        name="redirectmapcontext_changelog",
+        kwargs={"model": RedirectMapContext},
+    ),
+    path(
+        "cdnconfig-contexts/<uuid:pk>/notes/",
+        ObjectNotesView.as_view(),
+        name="redirectmapcontext_notes",
+        kwargs={"model": RedirectMapContext},
     ),
 ]

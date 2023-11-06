@@ -17,7 +17,7 @@ packages = [
 [[tool.poetry.source]]
 name = "pypi-repo"
 url = "https://pypi.org/simple"
-primary = true
+default = true
 
 [tool.poetry.dependencies]
 python = "^3.8"

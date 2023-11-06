@@ -3,12 +3,13 @@ import django_tables2 as tables
 from nautobot.core.tables import (
     BaseTable,
     ButtonsColumn,
+    BooleanColumn,
     LinkedCountColumn,
     TagColumn,
     ToggleColumn,
 )
 from nautobot.extras.tables import StatusTableMixin
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile
+from .models import CdnSite, SiteRole, HyperCacheMemoryProfile,RedirectMapContext
 
 TREE_LINK = """
 {% load helpers %}
@@ -80,7 +81,7 @@ class SiteRoleTable(BaseTable):
     pk = ToggleColumn()
     name = tables.TemplateColumn(template_code=TREE_LINK, orderable=False, attrs={"td": {"class": "text-nowrap"}})
     cdnsite_count = LinkedCountColumn(
-        viewname="cdnsite:cdnsite_list",
+        viewname="plugins:nautobot_cdn_models:cdnsite_list",
         url_params={"cdn_site_role": "name"},
         verbose_name="CdnSites",
     )
@@ -146,3 +147,23 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
             return related_cacheMemoryProfileId.name
         return 'No associated Profile'
 
+class RedirectMapContextTable(BaseTable):
+    pk = ToggleColumn()
+    name = tables.LinkColumn()
+    owner = tables.LinkColumn()
+    is_active = BooleanColumn(verbose_name="Active")
+
+    class Meta(BaseTable.Meta):
+        model = RedirectMapContext
+        fields = (
+            "pk",
+            "name",
+            "owner",
+            "weight",
+            "is_active",
+            "description",
+            "locations",
+            "cdnsites",
+            "cdn_site_roles",
+        )
+        default_columns = ("pk", "name", "weight", "is_active", "description")

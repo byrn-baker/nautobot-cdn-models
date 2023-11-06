@@ -10,7 +10,7 @@ from nautobot.virtualization.models import VirtualMachine
 from nautobot.extras.models import RelationshipAssociation
 from nautobot.extras.tables import RelationshipAssociationTable
 from . import filters, tables, forms
-from .models import CdnSite, HyperCacheMemoryProfile, SiteRole
+from .models import CdnSite, HyperCacheMemoryProfile, SiteRole, RedirectMapContext
 
 
 ## HyperCache Memory Profiles
@@ -173,3 +173,96 @@ class CdnSiteBulkDeleteView(generic.BulkDeleteView):
     queryset = CdnSite.objects.select_related("cdn_site_role")
     filterset = filters.CdnSiteFilterSet
     table = tables.CdnSiteTable
+    
+class RedirectMapContextListView(generic.ObjectListView):
+    queryset = RedirectMapContext.objects.all()
+    filterset = filters.RedirectMapContextFilterSet
+    filterset_form = forms.RedirectMapContextFilterForm
+    table = tables.RedirectMapContextTable
+    action_buttons = ("add",)
+
+
+class RedirectMapContextView(generic.ObjectView):
+    queryset = RedirectMapContext.objects.all()
+
+    def get_extra_context(self, request, instance):
+        # Determine user's preferred output format
+        if request.GET.get("format") in ["json", "yaml"]:
+            format_ = request.GET.get("format")
+            if request.user.is_authenticated:
+                request.user.set_config("redirectmapcontext.format", format_, commit=True)
+        elif request.user.is_authenticated:
+            format_ = request.user.get_config("redirectmapcontext.format", "json")
+        else:
+            format_ = "json"
+
+        return {
+            "format": format_,
+        }
+
+    
+class RedirectMapContextEditView(generic.ObjectEditView):
+    queryset = RedirectMapContext.objects.all()
+    model_form = forms.RedirectMapContextForm
+    template_name = "nautobot_cdn_models/redirectmapcontext_edit.html"
+
+
+class RedirectMapContextBulkEditView(generic.BulkEditView):
+    queryset = RedirectMapContext.objects.all()
+    filterset = filters.RedirectMapContextFilterSet
+    table = tables.RedirectMapContextTable
+    form = forms.RedirectMapContextBulkEditForm
+
+
+class RedirectMapContextDeleteView(generic.ObjectDeleteView):
+    queryset = RedirectMapContext.objects.all()
+
+
+class RedirectMapContextBulkDeleteView(generic.BulkDeleteView):
+    queryset = RedirectMapContext.objects.all()
+    table = tables.RedirectMapContextTable
+
+
+# define a merger with a custom list merge strategy
+list_merger = Merger(
+    # pass in a list of tuple, with the "strategy" as the first element and the "type" as the second element
+    [
+        (list, ["append"]),
+        (dict, ["merge"])
+    ],
+    ["override"],
+    ["override"]
+)
+
+class ObjectRedirectMapContextView(generic.ObjectView):
+    base_template = None
+    template_name = "nautobot_cdn_models/object_redirectmapcontext.html"
+
+    def get_extra_context(self, request, instance):
+        source_contexts = RedirectMapContext.objects.restrict(request.user, "view").get_for_object(instance)
+        # Merge the context data
+        merged_data = {}
+        for context in source_contexts:
+            merged_data = list_merger.merge(merged_data, context.data)
+
+        # Determine user's preferred output format
+        if request.GET.get("format") in ["json", "yaml"]:
+            format_ = request.GET.get("format")
+            if request.user.is_authenticated:
+                request.user.set_config("redirectmapcontext.format", format_, commit=True)
+        elif request.user.is_authenticated:
+            format_ = request.user.get_config("redirectmapcontext.format", "json")
+        else:
+            format_ = "json"
+
+        return {
+            "rendered_context": merged_data,  # return the merged data instead
+            "source_contexts": source_contexts,
+            "format": format_,
+            "base_template": self.base_template,
+            "active_tab": "config-context",
+        }
+
+class CdnSiteConfigContextView(ObjectRedirectMapContextView):
+    queryset = CdnSite.objects.annotate_config_context_data()
+    base_template = "nautobot_akamai_models/cdnsite.html"

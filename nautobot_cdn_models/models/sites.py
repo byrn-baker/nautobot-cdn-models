@@ -8,6 +8,9 @@ from nautobot.core.models.tree_queries import TreeModel
 from nautobot.extras.utils import extras_features
 from nautobot.extras.models import StatusField
 
+from .redirectmap import RedirectMapContextModel
+from ..querysets import RedirectMapContextModelQuerySet
+
 
 __all__ = (
     "CdnSite",
@@ -154,7 +157,7 @@ class CdnSite(PrimaryModel):
         default=None,
     )
 
-    # objects = CdnConfigContextModelQuerySet.as_manager()
+    objects = RedirectMapContextModelQuerySet.as_manager()
 
     csv_headers = [
         "name",

@@ -1,10 +1,5 @@
 from rest_framework import serializers
-from rest_framework import serializers
-
 from nautobot.core.api import WritableNestedSerializer
-
-from nautobot.core.api import WritableNestedSerializer
-
 from .. import models
 
 class NestedHyperCacheMemoryProfileSerializer(WritableNestedSerializer):

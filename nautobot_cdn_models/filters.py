@@ -13,12 +13,12 @@ from nautobot.extras.filters import NautobotFilterSet
 from nautobot.dcim.models import Device, Location
 from nautobot.ipam.models import IPAddress, Prefix
 from nautobot.virtualization.models import VirtualMachine
+from nautobot.extras.models import SecretsGroup
 from nautobot.extras.filters.mixins import (
     LocalContextModelFilterSetMixin,
     StatusModelFilterSetMixin,
 )
-from nautobot.extras.models import ConfigContextSchema
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
+from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext, RedirectMapContextSchema, CdnGitRepository
 
 
 __all__ = (
@@ -148,7 +148,7 @@ class RedirectMapContextFilterSet(BaseFilterSet):
     owner_content_type = ContentTypeFilter()
     schema = NaturalKeyOrPKMultipleChoiceFilter(
         field_name="schema",
-        queryset=ConfigContextSchema.objects.all(),
+        queryset=RedirectMapContextSchema.objects.all(),
         to_field_name="slug",
         label="Schema (slug or PK)",
     )
@@ -190,3 +190,54 @@ class RedirectMapContextFilterSet(BaseFilterSet):
     class Meta:
         model = RedirectMapContext
         fields = ["id", "name", "is_active", "owner_content_type", "owner_object_id"]
+
+#
+# Filter for RedirectMap context schema
+#
+
+
+class RedirectMapContextSchemaFilterSet(BaseFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+            "description": "icontains",
+            "data_schema": "icontains",
+        },
+    )
+    owner_content_type = ContentTypeFilter()
+
+    class Meta:
+        model = RedirectMapContextSchema
+        fields = [
+            "id",
+            "name",
+            "description",
+        ]
+
+#
+# CDN Datasources (Git)
+#
+
+
+class CdnGitRepositoryFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+            "remote_url": "icontains",
+            "branch": "icontains",
+        },
+    )
+    secrets_group_id = django_filters.ModelMultipleChoiceFilter(
+        field_name="secrets_group",
+        queryset=SecretsGroup.objects.all(),
+        label="Secrets group (ID) - Deprecated (use secrets_group filter)",
+    )
+    secrets_group = NaturalKeyOrPKMultipleChoiceFilter(
+        queryset=SecretsGroup.objects.all(),
+        label="Secrets group (ID or name)",
+        to_field_name="name",
+    )
+
+    class Meta:
+        model = CdnGitRepository
+        fields = ["id", "branch", "name", "provided_contents", "remote_url", "slug", "tags"]

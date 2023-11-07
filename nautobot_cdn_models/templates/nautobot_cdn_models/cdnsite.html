@@ -84,3 +84,11 @@
         {% include 'nautobot_cdn_models/inc/paginator.html' with paginator=relation_table.paginator page=relation_table.page %}
         <div class="row"></div>
 {% endblock content_right_page %}
+
+{% block extra_nav_tabs %}
+    {% if perms.view_redirectmapcontext %}
+        <li role="presentation"{% if active_tab == 'cdn-redirect-map-context' %} class="active"{% endif %}>
+            <a href="{% url 'plugins:nautobot_cdn_models:redirectmapcontext' pk=object.pk %}">CDN Redirect Map Context</a>
+        </li>
+    {% endif %}
+{% endblock extra_nav_tabs %}

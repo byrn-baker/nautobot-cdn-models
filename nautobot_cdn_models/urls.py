@@ -2,7 +2,7 @@ from django.urls import path
 
 from nautobot.extras.views import ObjectChangeLogView, ObjectNotesView
 from . import views
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
+from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext, RedirectMapContextSchema, CdnGitRepository
 
 app_name = "nautobot_cdn_models"
 
@@ -118,13 +118,12 @@ urlpatterns = [
         name="cdnsite_changelog",
         kwargs={"model": CdnSite},
     ),
-    # path(
-    #     "cdn-sites/<uuid:pk>/notes/",
-    #     ObjectNotesView.as_view(),
-    #     name="cdnsite_notes",
-    #     kwargs={"model": CdnSite},
-    # ),
-    # Config contexts
+    path(
+        "cdnsites/<uuid:pk>/cdn-redirect-map-context/",
+        views.CdnSiteRedirectMapContextView.as_view(),
+        name="cdnsite_redirectmapcontext",
+    ),
+
     path(
         "cdn-redirect-map-contexts/",
         views.RedirectMapContextListView.as_view(),
@@ -166,10 +165,125 @@ urlpatterns = [
         name="redirectmapcontext_changelog",
         kwargs={"model": RedirectMapContext},
     ),
+  
+    # Config context schema
+    path(
+        "cdn-redirect-map-schemas/",
+        views.RedirectMapContextSchemaListView.as_view(),
+        name="redirectmapcontextschema_list",
+    ),
+    path(
+        "cdn-redirect-map-schemas/",
+        views.RedirectMapContextSchemaListView.as_view(),
+        name="redirectmapcontextschema-list",
+    ),
+    path(
+        "cdn-redirect-map-schemas/add/",
+        views.RedirectMapContextSchemaEditView.as_view(),
+        name="redirectmapcontextschema_add",
+    ),
+    path(
+        "cdn-redirect-map-schemas/edit/",
+        views.RedirectMapContextSchemaBulkEditView.as_view(),
+        name="redirectmapcontextschema_bulk_edit",
+    ),
+    path(
+        "cdn-redirect-map-schemas/delete/",
+        views.RedirectMapContextSchemaBulkDeleteView.as_view(),
+        name="redirectmapcontextschema_bulk_delete",
+    ),
+    path(
+        "cdn-redirect-map-schemas/<uuid:pk>/",
+        views.RedirectMapContextSchemaView.as_view(),
+        name="configcontextschema",
+    ),
+    path(
+        "cdn-redirect-map-schemas/<uuid:pk>/validation/",
+        views.RedirectMapContextSchemaObjectValidationView.as_view(),
+        name="redirectmapcontextschema_object_validation",
+    ),
+    path(
+        "cdn-redirect-map-schemas/<uuid:pk>/edit/",
+        views.RedirectMapContextSchemaEditView.as_view(),
+        name="redirectmapcontextschema_edit",
+    ),
+    path(
+        "cdn-redirect-map-schemas/<uuid:pk>/delete/",
+        views.RedirectMapContextSchemaDeleteView.as_view(),
+        name="redirectmapcontextschema_delete",
+    ),
+    path(
+        "cdn-redirect-map-schemas/<uuid:pk>/changelog/",
+        views.ObjectChangeLogView.as_view(),
+        name="redirectmapcontextschema_changelog",
+        kwargs={"model": RedirectMapContextSchema},
+    ),
+    # CDN Git repositories
+    path(
+        "cdn-git-repositories/",
+        views.CdnGitRepositoryListView.as_view(),
+        name="cdngitrepository_list",
+    ),
+    path(
+        "cdn-git-repositories/add/",
+        views.CdnGitRepositoryEditView.as_view(),
+        name="cdngitrepository_add",
+    ),
+    path(
+        "cdn-git-repositories/delete/",
+        views.CdnGitRepositoryBulkDeleteView.as_view(),
+        name="cdngitrepository_bulk_delete",
+    ),
+    path(
+        "cdn-git-repositories/edit/",
+        views.CdnGitRepositoryBulkEditView.as_view(),
+        name="cdngitrepository_bulk_edit",
+    ),
+    path(
+        "cdn-git-repositories/import/",
+        views.CdnGitRepositoryBulkImportView.as_view(),
+        name="cdngitrepository_import",
+    ),
+    path(
+        "cdn-git-repositories/<uuid:pk>/",
+        views.CdnGitRepositoryView.as_view(),
+        name="gitrepository",
+    ),
+    path(
+        "cdn-git-repositories/<uuid:pk>/edit/",
+        views.CdnGitRepositoryEditView.as_view(),
+        name="cdngitrepository_edit",
+    ),
+    path(
+        "cdn-git-repositories/<uuid:pk>/delete/",
+        views.CdnGitRepositoryDeleteView.as_view(),
+        name="cdngitrepository_delete",
+    ),
+    path(
+        "cdn-git-repositories/<uuid:pk>/changelog/",
+        views.ObjectChangeLogView.as_view(),
+        name="cdngitrepository_changelog",
+        kwargs={"model": CdnGitRepository},
+    ),
     # path(
-    #     "cdn-redirect-map-contexts/<uuid:pk>/notes/",
-    #     ObjectNotesView.as_view(),
-    #     name="redirectmapcontext_notes",
-    #     kwargs={"model": RedirectMapContext},
+    #     "cdn-git-repositories/<uuid:pk>/notes/",
+    #     views.ObjectNotesView.as_view(),
+    #     name="cdngitrepository_notes",
+    #     kwargs={"model": CdnGitRepository},
     # ),
+    path(
+        "cdn-git-repositories/<uuid:pk>/result/",
+        views.CdnGitRepositoryResultView.as_view(),
+        name="cdngitrepository_result",
+    ),
+    path(
+        "cdn-git-repositories/<uuid:pk>/sync/",
+        views.CdnGitRepositorySyncView.as_view(),
+        name="cdngitrepository_sync",
+    ),
+    path(
+        "cdn-git-repositories/<uuid:pk>/dry-run/",
+        views.CdnGitRepositoryDryRunView.as_view(),
+        name="cdngitrepository_dryrun",
+    ),
 ]

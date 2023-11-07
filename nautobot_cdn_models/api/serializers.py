@@ -1,16 +1,25 @@
 from rest_framework import serializers
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from drf_spectacular.utils import extend_schema_field
 
-from nautobot.core.api import TreeModelSerializerMixin
+from nautobot.core.api import (
+    BaseModelSerializer,
+    ChoiceField,
+    ContentTypeField,
+    CustomFieldModelSerializerMixin,
+    NautobotModelSerializer,
+    NotesSerializerMixin,
+    RelationshipModelSerializerMixin,
+    ValidatedModelSerializer,
+    TreeModelSerializerMixin
+)
 from nautobot.dcim.models import Location
 from nautobot.dcim.api.serializers import (
     LocationSerializer
 )
 from nautobot.extras.api.serializers import NautobotModelSerializer
-# from nautobot.extras.api.nested_serializers import (
-#     NestedConfigContextSchemaSerializer,
-# )
+from nautobot.extras.utils import FeatureQuery
 
 from .. import models
 
@@ -73,3 +82,76 @@ class CdnSiteSerializer(NautobotModelSerializer):
             "neighbor2",
             "neighbor2_preference",
         ]
+        
+# class CdnSiteWithRedirectMapContextSerializer(CdnSiteSerializer):
+#     redirect_map_context = serializers.SerializerMethodField()
+
+#     class Meta(CdnSiteSerializer.Meta):
+#         fields = CdnSiteSerializer.Meta.fields + ["redirect_map_context"]
+
+#     @extend_schema_field(serializers.DictField)
+#     def get_redirect_map_context(self, obj):
+#         return obj.get_redirect_map_context()
+
+# class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixin):
+#     url = serializers.HyperlinkedIdentityField(view_name="plugins-api:nautobot_cdn_models-api:redirectmapcontext-detail")
+#     owner_content_type = ContentTypeField(
+#         queryset=ContentType.objects.filter(FeatureQuery("config_context_owners").get_query()),
+#         required=False,
+#         allow_null=True,
+#         default=None,
+#     )
+#     owner = serializers.SerializerMethodField(read_only=True)
+#     schema = NestedConfigContextSchemaSerializer(required=False, allow_null=True)
+#     regions = SerializedPKRelatedField(
+#         queryset=Region.objects.all(),
+#         serializer=NestedRegionSerializer,
+#         required=False,
+#         many=True,
+#     )
+#     cdnsites = SerializedPKRelatedField(
+#         queryset=models.CdnSite.objects.all(),
+#         serializer=nested_serializers.NestedCdnSiteSerializer,
+#         required=False,
+#         many=True,
+#     )
+#     cdn_site_roles = SerializedPKRelatedField(
+#         queryset=models.SiteRole.objects.all(),
+#         serializer=nested_serializers.NestedSiteRoleSerializer,
+#         required=False,
+#         many=True,
+#     )
+#     tags = serializers.SlugRelatedField(queryset=Tag.objects.all(), slug_field="slug", required=False, many=True)
+
+
+#     # Conditional enablement of dynamic groups filtering
+#     # def __init__(self, *args, **kwargs):
+#     #     super().__init__(*args, **kwargs)
+
+
+#     class Meta:
+#         model = models.CdnConfigContext
+#         fields = [
+#             "url",
+#             "name",
+#             "owner_content_type",
+#             "owner_object_id",
+#             "owner",
+#             "weight",
+#             "description",
+#             "schema",
+#             "is_active",
+#             "regions",
+#             "cdnsites",
+#             "cdn_site_roles",
+#             "tags",
+#             "data",
+#         ]
+
+#     @extend_schema_field(serializers.DictField(allow_null=True))
+#     def get_owner(self, obj):
+#         if obj.owner is None:
+#             return None
+#         serializer = get_serializer_for_model(obj.owner, prefix="Nested")
+#         context = {"request": self.context["request"]}
+#         return serializer(obj.owner, context=context).data

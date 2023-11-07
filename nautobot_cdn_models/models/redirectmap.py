@@ -37,8 +37,31 @@ from nautobot.extras.utils import extras_features, FeatureQuery, image_upload
 
 from ..querysets import RedirectMapContextQuerySet
 
+
+class RedirectMapContextSchemaValidationMixin:
+    """
+    Mixin that provides validation of config context data against a json schema.
+    """
+
+    def _validate_with_schema(self, data_field, schema_field):
+        schema = getattr(self, schema_field)
+        data = getattr(self, data_field)
+
+        # If schema is None, then no schema has been specified on the instance and thus no validation should occur.
+        if schema:
+            try:
+                Draft7Validator(schema.data_schema, format_checker=Draft7Validator.FORMAT_CHECKER).validate(data)
+            except JSONSchemaValidationError as e:
+                raise ValidationError({data_field: [f"Validation using the JSON Schema {schema} failed.", e.message]})
+
+
+def limit_dynamic_group_choices():
+    return models.Q(content_type__app_label="virtualization", content_type__model="virtualmachine") | models.Q(
+        content_type__app_label="dcim", content_type__model="device"
+    )
+    
 @extras_features("graphql")
-class RedirectMapContext(BaseModel, ChangeLoggedModel, ConfigContextSchemaValidationMixin, NotesMixin):
+class RedirectMapContext(BaseModel, ChangeLoggedModel, RedirectMapContextSchemaValidationMixin, NotesMixin):
     """
     A RedirectMapContext represents a set of arbitrary data available to any CDN Site matching its assigned
     qualifiers (location, etc.). For example, the data stored in a RedirectMapContext assigned to location A will be available 
@@ -51,11 +74,11 @@ class RedirectMapContext(BaseModel, ChangeLoggedModel, ConfigContextSchemaValida
     owner_content_type = models.ForeignKey(
         to=ContentType,
         on_delete=models.CASCADE,
-        limit_choices_to=FeatureQuery("redirectmap_context_owners"),
+        limit_choices_to=FeatureQuery("config_context_owners"),
         default=None,
         null=True,
         blank=True,
-        related_name="cdnsite_config_contexts",
+        related_name="cdnsite_redirectmap_contexts",
     )
     owner_object_id = models.UUIDField(default=None, null=True, blank=True)
     owner = GenericForeignKey(
@@ -74,7 +97,7 @@ class RedirectMapContext(BaseModel, ChangeLoggedModel, ConfigContextSchemaValida
         null=True,
         blank=True,
         help_text="Optional schema to validate the structure of the data",
-        related_name="cdnsite_config_contexts",
+        related_name="cdnsite_redirectmap_contexts",
     )
     locations = models.ManyToManyField(to="dcim.Location", related_name="+", blank=True)
     # TODO(timizuo): Find a way to limit role choices to cdnsite; as of now using
@@ -153,7 +176,7 @@ class RedirectMapContextModel(models.Model, ConfigContextSchemaValidationMixin):
     local_redirectmap_context_data_owner_content_type = ForeignKeyWithAutoRelatedName(
         to=ContentType,
         on_delete=models.CASCADE,
-        limit_choices_to=FeatureQuery("redirectmap_context_owners"),
+        limit_choices_to=FeatureQuery("config_context_owners"),
         default=None,
         null=True,
         blank=True,
@@ -177,11 +200,11 @@ class RedirectMapContextModel(models.Model, ConfigContextSchemaValidationMixin):
         Return the rendered configuration context for a device or VM.
         """
 
-        if not hasattr(self, "config_context_data"):
+        if not hasattr(self, "redirectmap_context_data"):
             # Annotation not available, so fall back to manually querying for the config context
-            config_context_data = RedirectMapContext.objects.get_for_object(self).values_list("data", flat=True)
+            redirectmap_context_data = RedirectMapContext.objects.get_for_object(self).values_list("data", flat=True)
         else:
-            config_context_data = self.config_context_data or []
+            redirectmap_context_data = self.redirectmap_context_data or []
             # Device and VirtualMachine's Location has its own RedirectMapContext and its parent Locations' RedirectMapContext, if any, should
             # also be applied. However, since moving from mptt to django-tree-queries https://github.com/nautobot/nautobot/issues/510,
             # we lost the ability to query the ancestors for a particular tree node for subquery https://github.com/matthiask/django-tree-queries/issues/54.
@@ -200,14 +223,14 @@ class RedirectMapContextModel(models.Model, ConfigContextSchemaValidationMixin):
 
             # Annotation has keys "weight" and "name" (used for ordering) and "data" (the actual config context data)
             for cc in location_redirectmap_context_queryset:
-                config_context_data.append({"data": cc.data, "name": cc.name, "weight": cc.weight})
-            config_context_data = [
-                c["data"] for c in sorted(config_context_data, key=lambda k: (k["weight"], k["name"]))
+                redirectmap_context_data.append({"data": cc.data, "name": cc.name, "weight": cc.weight})
+            redirectmap_context_data = [
+                c["data"] for c in sorted(redirectmap_context_data, key=lambda k: (k["weight"], k["name"]))
             ]
 
         # Compile all config data, overwriting lower-weight values with higher-weight values where a collision occurs
         data = OrderedDict()
-        for context in config_context_data:
+        for context in redirectmap_context_data:
             data = deepmerge(data, context)
 
         # If the object has local config context data defined, merge it last
@@ -232,3 +255,59 @@ class RedirectMapContextModel(models.Model, ConfigContextSchemaValidationMixin):
 
         # Validate data against schema
         self._validate_with_schema("local_redirectmap_context_data", "local_redirectmap_context_schema")
+        
+class RedirectMapContextSchema(OrganizationalModel):
+    """
+    This model stores jsonschema documents where are used to optionally validate config context data payloads.
+    """
+
+    name = models.CharField(max_length=200, unique=True)
+    description = models.CharField(max_length=200, blank=True)
+    data_schema = models.JSONField(
+        help_text="A JSON Schema document which is used to validate a config context object."
+    )
+    # A ConfigContextSchema *may* be owned by another model, such as a GitRepository, or it may be un-owned
+    owner_content_type = models.ForeignKey(
+        to=ContentType,
+        on_delete=models.CASCADE,
+        limit_choices_to=FeatureQuery("config_context_owners"),
+        default=None,
+        null=True,
+        blank=True,
+        related_name="redirectmap_context_schemas",
+    )
+    owner_object_id = models.UUIDField(default=None, null=True, blank=True)
+    owner = GenericForeignKey(
+        ct_field="owner_content_type",
+        fk_field="owner_object_id",
+    )
+
+    documentation_static_path = "docs/user-guide/core-data-model/extras/configcontextschema.html"
+
+    def __str__(self):
+        if self.owner:
+            return f"[{self.owner}] {self.name}"
+        return self.name
+
+    def clean(self):
+        """
+        Validate the schema
+        """
+        super().clean()
+
+        try:
+            Draft7Validator.check_schema(self.data_schema)
+        except SchemaError as e:
+            raise ValidationError({"data_schema": e.message})
+
+        if (
+            not isinstance(self.data_schema, dict)
+            or "properties" not in self.data_schema
+            or self.data_schema.get("type") != "object"
+        ):
+            raise ValidationError(
+                {
+                    "data_schema": "Nautobot only supports context data in the form of an object and thus the "
+                    "JSON schema must be of type object and specify a set of properties."
+                }
+            )

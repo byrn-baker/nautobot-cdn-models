@@ -57,7 +57,7 @@ menu_items = (
             ),
             NavMenuGroup(
                 name="Redirect Maps",
-                weight=100,
+                weight=200,
                 items=(
                     NavMenuItem(
                         link="plugins:nautobot_cdn_models:redirectmapcontext_list",
@@ -66,6 +66,34 @@ menu_items = (
                         buttons=(
                             NavMenuAddButton(
                                 link="plugins:nautobot_cdn_models:redirectmapcontext_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:redirectmapcontextschema_list",
+                        name="Config Context Schemas",
+                        weight=150,
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:redirectmapcontextschema_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:cdngitrepository_list",
+                        name="CDN Git Repositories",
+                        weight=100,
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:cdngitrepository_add",
+                                permissions=[],
+                            ),
+                            NavMenuImportButton(
+                                link="plugins:nautobot_cdn_models:cdngitrepository_import",
                                 permissions=[],
                             ),
                         ),

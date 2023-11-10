@@ -39,7 +39,7 @@ class RedirectMapContextQuerySet(RestrictedQuerySet):
             Q(cdnsites=obj.id) | Q(cdnsites=None),
             Q(locations__in=locations) | Q(locations=None),
             Q(cdn_site_roles=cdn_site_role) | Q(cdn_site_roles=None),
-            Q(tags__slug__in=obj.tags.slugs()) | Q(tags=None),
+            Q(tags__name__in=obj.tags.all().values_list('name', flat=True)) | Q(tags=None)
         ]
 
         queryset = (

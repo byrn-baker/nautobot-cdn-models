@@ -6,11 +6,10 @@ from django.urls import reverse
 from nautobot.core.models.generics import OrganizationalModel, PrimaryModel
 from nautobot.core.models.tree_queries import TreeModel
 from nautobot.extras.utils import extras_features
-from nautobot.extras.models import StatusField
+from nautobot.extras.models import StatusField, Tag
 
-from .redirectmap import RedirectMapContextModel
 from ..querysets import RedirectMapContextModelQuerySet
-
+from .redirectmap import RedirectMapContextModel
 
 __all__ = (
     "CdnSite",
@@ -47,7 +46,7 @@ class HyperCacheMemoryProfile(PrimaryModel):
         )
         
     def validate_unique(self, exclude=None):
-        if self.name and hasattr(self, "name") and self.location is None:
+        if self.name and hasattr(self, "name"):
             if CdnSite.objects.exclude(pk=self.pk).filter(name=self.name):
                 raise ValidationError({"name": "A profile with this name already exists."})
 
@@ -85,7 +84,7 @@ class SiteRole(TreeModel, OrganizationalModel):
     "graphql",
     "webhooks",
 )
-class CdnSite(PrimaryModel):
+class CdnSite(PrimaryModel, RedirectMapContextModel):
     name = models.CharField(max_length=100, help_text="Akamai Site Name.")
     cdn_site_role = models.ForeignKey(
         to="SiteRole",
@@ -156,6 +155,7 @@ class CdnSite(PrimaryModel):
         null=True,
         default=None,
     )
+    tags = models.ManyToManyField(to="extras.Tag", related_name="+", blank=True)
 
     objects = RedirectMapContextModelQuerySet.as_manager()
 

@@ -142,6 +142,14 @@ class CdnSite(PrimaryModel, RedirectMapContextModel):
         null=True,
         default=750
     )
+    failover_site = models.ForeignKey(
+        to="self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="sister_site",
+        help_text="Select the site to which this site will failover to."
+    )
     cacheMemoryProfileId = models.ForeignKey(
         to="HyperCacheMemoryProfile",
         on_delete=models.PROTECT,
@@ -172,6 +180,7 @@ class CdnSite(PrimaryModel, RedirectMapContextModel):
         "neighbor1_preference",
         "neighbor2",
         "neighbor2_preference",
+        "failover_site",
         "cacheMemoryProfileId",
         "siteId",
 
@@ -186,6 +195,7 @@ class CdnSite(PrimaryModel, RedirectMapContextModel):
         "neighbor1_preference",
         "neighbor2",
         "neighbor2_preference",
+        "failover_site",
         "cacheMemoryProfileId",
         "siteId",
     ]
@@ -225,6 +235,7 @@ class CdnSite(PrimaryModel, RedirectMapContextModel):
             self.neighbor2,
             self.neighbor2_preference,
             self.cacheMemoryProfileId,
+            self.failover_site,
             self.status,
             self.siteId,
         )

@@ -34,7 +34,7 @@ class HyperCacheMemoryProfileListView(generic.ObjectListView):
     queryset = HyperCacheMemoryProfile.objects.all()
     filterset = filters.HyperCacheMemoryProfileFilterSet
     table = tables.HyperCacheMemoryProfileTable
-    action_buttons = ("add",)
+    use_new_ui = True
 
 
 class HyperCacheMemoryProfileView(generic.ObjectView):
@@ -54,6 +54,12 @@ class HyperCacheMemoryProfileBulkImportView(generic.BulkImportView):
     queryset = HyperCacheMemoryProfile.objects.all()
     table = tables.HyperCacheMemoryProfileTable
 
+class HyperCacheMemoryProfileBulkEditView(generic.BulkEditView):
+    queryset = HyperCacheMemoryProfile.objects.all()
+    filterset = filters.HyperCacheMemoryProfileFilterSet
+    table = tables.HyperCacheMemoryProfileTable
+    form = forms.HyperCacheMemoryProfileBulkEditForm
+
 
 class HyperCacheMemoryProfileBulkDeleteView(generic.BulkDeleteView):
     queryset = HyperCacheMemoryProfile.objects.all()
@@ -65,7 +71,7 @@ class SiteRoleListView(generic.ObjectListView):
     queryset = SiteRole.objects.annotate(cdnsite_count=count_related(CdnSite, "cdn_site_role"))
     filterset = filters.SiteRoleFilterSet
     table = tables.SiteRoleTable
-    action_buttons = ("add",)
+    use_new_ui = True
 
 
 class SiteRoleView(generic.ObjectView):
@@ -116,7 +122,7 @@ class CdnSiteListView(generic.ObjectListView):
     filterset = filters.CdnSiteFilterSet
     filterset_form = forms.CdnSiteFilterForm
     table = tables.CdnSiteTable
-    action_buttons = ("add",)
+    use_new_ui = True
 
 
 class CdnSiteView(generic.ObjectView):

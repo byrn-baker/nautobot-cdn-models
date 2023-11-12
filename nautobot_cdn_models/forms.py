@@ -20,6 +20,9 @@ from nautobot.extras.forms import (
     NautobotBulkEditForm,
     NautobotModelForm,
     NautobotFilterForm,
+    StatusModelBulkEditFormMixin,
+    StatusModelFilterFormMixin,
+    TagsBulkEditFormMixin,
 )
 from nautobot.extras.forms.mixins import (
     NoteModelBulkEditFormMixin,
@@ -54,6 +57,23 @@ class HyperCacheMemoryProfileFilterForm(NautobotFilterForm):
     q = forms.CharField(required=False, label="Search")
     name = forms.CharField(required=False)
 
+class HyperCacheMemoryProfileBulkEditForm(NautobotBulkEditForm):
+    pk = DynamicModelMultipleChoiceField(queryset=HyperCacheMemoryProfile.objects.all(), widget=forms.MultipleHiddenInput)
+    hotCacheMemoryPercent = forms.IntegerField(required=False, label="Hot Cache Memory Percent")
+    ramOnlyCacheMemoryPercent = forms.IntegerField(required=False, label="RAM Only Cache Memory Percent")
+    diskIndexMemoryPercent = forms.IntegerField(required=False, label="Disk Index Memory Percent")
+    frontEndCacheMemoryPercent = forms.IntegerField(required=False, label="Front End Cache Memory Percent")
+    cacheMemoryProfileId = forms.IntegerField(required=False, label="Akamai Site Memory Profile ID")
+    
+    class Meta:
+        nullable_fields = [
+            "hotCacheMemoryPercent",
+            "ramOnlyCacheMemoryPercent",
+            "diskIndexMemoryPercent",
+            "frontEndCacheMemoryPercent",
+            "cacheMemoryProfileId",
+        ]
+
 #
 # Site Roles
 #
@@ -78,6 +98,11 @@ class SiteRoleForm(NautobotModelForm):
 
 class CdnSiteForm(NautobotModelForm):
     cdn_site_role = DynamicModelChoiceField(queryset=SiteRole.objects.all(), required=False)
+    location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False)
+    neighbor1 = DynamicModelChoiceField(required=False, queryset=CdnSite.objects.all(), label="Primary Site Neighbor")
+    neighbor2 = DynamicModelChoiceField(required=False, queryset=CdnSite.objects.all(), label="Secondary Site Neighbor")
+    cacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
+    failover_site = DynamicModelChoiceField(required=False, queryset=CdnSite.objects.all(), label="Failover Site")
     status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False)
     comments = CommentField()
 
@@ -93,6 +118,7 @@ class CdnSiteForm(NautobotModelForm):
             'neighbor1_preference',
             'neighbor2',
             'neighbor2_preference',
+            "failover_site",
             'cacheMemoryProfileId',
             'siteId',
             'cdn_site_role',
@@ -102,7 +128,7 @@ class CdnSiteForm(NautobotModelForm):
         ]
 
 
-class CdnSiteBulkEditForm(NautobotBulkEditForm):
+class CdnSiteBulkEditForm(TagsBulkEditFormMixin, StatusModelBulkEditFormMixin, NautobotBulkEditForm):
     pk = forms.ModelMultipleChoiceField(queryset=CdnSite.objects.all(), widget=forms.MultipleHiddenInput)
     status = forms.ModelChoiceField(queryset=Status.objects.all(), required=False)
     location = DynamicModelChoiceField(queryset=Location.objects.all(), required=False)
@@ -123,6 +149,7 @@ class CdnSiteBulkEditForm(NautobotBulkEditForm):
             "enableDisklessMode",
             "neighbor1",
             "neighbor2",
+            "failover_site",
         ]
 
 

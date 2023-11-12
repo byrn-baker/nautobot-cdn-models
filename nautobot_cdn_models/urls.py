@@ -14,6 +14,8 @@ urlpatterns = [
         views.HyperCacheMemoryProfileEditView.as_view(),
         name="hypercachememoryprofile_add",
     ),
+    path('hyper_cache_memory_profiles/edit/', views.HyperCacheMemoryProfileBulkEditView.as_view(), name='hypercachememoryprofile_bulk_edit'),
+    path('hyper_cache_memory_profiles/delete/', views.HyperCacheMemoryProfileBulkDeleteView.as_view(), name='hypercachememoryprofile_bulk_delete'),
     path(
         "hypercache-memory-profiles/import/",
         views.HyperCacheMemoryProfileBulkImportView.as_view(),
@@ -109,12 +111,12 @@ urlpatterns = [
     ),
     path("cdn-sites/edit/", 
          views.CdnSiteBulkEditView.as_view(), 
-         name="cdnsite_bulkedit"
+         name="cdnsite_bulk_edit"
     ),
     path(
         "cdn-sites/delete/",
         views.CdnSiteBulkDeleteView.as_view(),
-        name="cdnsitebulk_delete",
+        name="cdnsite_bulk_delete",
     ),
     path("cdn-sites/<uuid:pk>/", 
          views.CdnSiteView.as_view(), 

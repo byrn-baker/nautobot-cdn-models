@@ -51,9 +51,9 @@ class CdnSiteSerializer(NautobotModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="plugins-api:nautobot_cdn_models-api:cdnsite-detail"
     )
-    cdn_site_role = nested_serializers.NestedSiteRoleSerializer(required=False, allow_null=True)
+    cdn_site_role = nested_serializers.CdnNestedSiteRoleSerializer(required=False, allow_null=True)
     location = LocationSerializer(required=False, allow_null=True)
-    cacheMemoryProfileId = nested_serializers.NestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
+    cacheMemoryProfileId = nested_serializers.CdnNestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
     device_count = serializers.IntegerField(read_only=True)
     ipaddress_count = serializers.IntegerField(read_only=True)
     prefix_count = serializers.IntegerField(read_only=True)
@@ -81,6 +81,7 @@ class CdnSiteSerializer(NautobotModelSerializer):
             "neighbor1_preference",
             "neighbor2",
             "neighbor2_preference",
+            "failover_site",
             "local_context_schema",
             "local_context_data",
         ]
@@ -119,7 +120,7 @@ class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixi
     )
     cdn_site_roles = SerializedPKRelatedField(
         queryset=models.SiteRole.objects.all(),
-        serializer=nested_serializers.NestedSiteRoleSerializer,
+        serializer=nested_serializers.CdnNestedSiteRoleSerializer,
         required=False,
         many=True,
     )

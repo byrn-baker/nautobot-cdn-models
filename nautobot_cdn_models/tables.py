@@ -63,7 +63,7 @@ class CdnSiteColumn(tables.TemplateColumn):
         return str(kwargs["value"]) if kwargs["value"] else None
 
 class HyperCacheMemoryProfileTable(BaseTable):
-    pk = ToggleColumn()
+    pk = tables.TemplateColumn(template_code='<input type="checkbox" name="pk" value="{{ record.pk }}">', verbose_name=' ')
     name = tables.LinkColumn(verbose_name="Site HyperCache Memory Profile Name")
 
     class Meta(BaseTable.Meta):
@@ -117,7 +117,7 @@ class SiteRoleTable(BaseTable):
 
 
 class CdnSiteTable(StatusTableMixin, BaseTable):
-    pk = ToggleColumn()
+    pk = tables.TemplateColumn(template_code='<input type="checkbox" name="pk" value="{{ record.pk }}">', verbose_name=' ')
     name = tables.LinkColumn(verbose_name="Akamai Site Name")
     cdn_site_role = tables.LinkColumn()
     location = tables.LinkColumn()
@@ -164,6 +164,40 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
         if related_cacheMemoryProfileId:
             return related_cacheMemoryProfileId.name
         return 'No associated Profile'
+
+CDNSITE_LINK = """
+<a href="{% url '"plugins:nautobot_cdn_models:cdnsite' pk=record.pk %}">
+    {{ record.name|default:'<span class="label label-info">Unnamed site</span>' }}
+</a>
+"""
+
+class CdnSiteImportTable(BaseTable):
+    name = tables.Column(verbose_name="Akamai Site Name")
+    cdn_site_role = tables.Column(verbose_name="Site Role")
+    location = tables.Column(verbose_name="Location")
+    abbreviatedName = tables.Column(verbose_name="Abbreviated Name")
+    bandwidthLimitMbps = tables.Column(verbose_name="Bandwidth Limit (MB)")
+    enableDisklessMode = tables.Column(verbose_name="Enable Diskless Mode")
+    neighbor1 = tables.Column(verbose_name="Primary Site Neighbor")
+    neighbor1_preference = tables.Column(verbose_name="Primary Site Neighbor Preference")
+    neighbor2 = tables.Column(verbose_name="Secondary Site Neighbor")
+    neighbor2_preference = tables.Column(verbose_name="Secondary Site Neighbor Preference")
+    siteId = tables.Column(verbose_name="Akamai Site ID")
+    cacheMemoryProfileId = tables.Column(verbose_name="Cache Memory Profile")
+
+    class Meta(BaseTable.Meta):
+        model = CdnSite
+        fields = (
+            'name',
+            'status',
+            'cdn_site_role',
+            'location',
+            'abbreviatedName',
+            'bandwidthLimitMbps',
+            'enableDisklessMode',
+            'siteId',
+        )
+        empty_text = False
 
 class RedirectMapContextTable(BaseTable):
     pk = ToggleColumn()

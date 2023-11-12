@@ -2,7 +2,7 @@ from rest_framework import serializers
 from nautobot.core.api import WritableNestedSerializer
 from .. import models
 
-class NestedHyperCacheMemoryProfileSerializer(WritableNestedSerializer):
+class CdnNestedHyperCacheMemoryProfileSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="plugins-api:nautobot_cdn_models-api:hypercachememoryprofile-detail"
     )
@@ -11,7 +11,7 @@ class NestedHyperCacheMemoryProfileSerializer(WritableNestedSerializer):
         model = models.HyperCacheMemoryProfile
         fields = "__all__"
 
-class NestedSiteRoleSerializer(WritableNestedSerializer):
+class CdnNestedSiteRoleSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="plugins-api:nautobot_cdn_models-api:siterole-detail"
     )

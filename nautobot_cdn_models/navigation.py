@@ -17,7 +17,7 @@ menu_items = (
                                 link="plugins:nautobot_cdn_models:hypercachememoryprofile_add",
                                 permissions=[],
                             ),
-                            NavMenuAddButton(
+                            NavMenuImportButton(
                                 link="plugins:nautobot_cdn_models:hypercachememoryprofile_import",
                                 permissions=[],
                             ),
@@ -32,7 +32,7 @@ menu_items = (
                                 link="plugins:nautobot_cdn_models:siterole_add",
                                 permissions=[],
                             ),
-                            NavMenuAddButton(
+                            NavMenuImportButton(
                                 link="plugins:nautobot_cdn_models:siterole_import",
                                 permissions=[],
                             ),
@@ -47,7 +47,7 @@ menu_items = (
                                 link="plugins:nautobot_cdn_models:cdnsite_add",
                                 permissions=[],
                             ),
-                            NavMenuAddButton(
+                            NavMenuImportButton(
                                 link="plugins:nautobot_cdn_models:cdnsite_import",
                                 permissions=[],
                             ),

@@ -83,56 +83,32 @@ class CdnSiteFilterSet(NautobotFilterSet):
         label="Site Role (name or ID)",
         to_field_name="name",
     )
-    devices = NaturalKeyOrPKMultipleChoiceFilter(
-        queryset=Device.objects.all(),
-        to_field_name="name",
-        label="Devices (name or ID)",
-    )
-    has_devices = RelatedMembershipBooleanFilter(
-        field_name="devices",
-        label="Has devices",
-    )
-    ip_addresses = django_filters.ModelMultipleChoiceFilter(
-        queryset=IPAddress.objects.all(),
-        label="IP addresses (ID)",
-    )
-    has_ip_addresses = RelatedMembershipBooleanFilter(
-        field_name="ip_addresses",
-        label="Has IP addresses",
-    )
     locations = TreeNodeMultipleChoiceFilter(
         queryset=Location.objects.all(),
         to_field_name="name",
         label="Locations (names and/or IDs)",
     )
-    has_locations = RelatedMembershipBooleanFilter(
-        field_name="locations",
-        label="Has locations",
+    cacheMemoryProfileId = django_filters.ModelChoiceFilter(
+        field_name='name',
+        to_field_name='name',
+        queryset=HyperCacheMemoryProfile.objects.all(),
     )
-    prefixes = django_filters.ModelMultipleChoiceFilter(
-        queryset=Prefix.objects.all(),
-        label="Prefixes (ID)",
-    )
-    has_prefixes = RelatedMembershipBooleanFilter(
-        field_name="prefixes",
-        label="Has prefixes",
-    )
-    virtual_machines = NaturalKeyOrPKMultipleChoiceFilter(
-        queryset=VirtualMachine.objects.all(),
-        to_field_name="name",
-        label="Virtual machines (name or ID)",
-    )
-    has_virtual_machines = RelatedMembershipBooleanFilter(
-        field_name="virtual_machines",
-        label="Has virtual machines",
-    )
-
     class Meta:
         model = CdnSite
         fields = [
-            "id",
-            "name",
-        ]
+        "name",
+        "abbreviatedName",
+        "bandwidthLimitMbps",
+        "enableDisklessMode",
+        "siteId",
+        "cdn_site_role",
+        "cacheMemoryProfileId",
+        "neighbor1",
+        "neighbor1_preference",
+        "neighbor2",
+        "neighbor2_preference",
+        "failover_site",
+    ]
 
 #
 # Config Contexts

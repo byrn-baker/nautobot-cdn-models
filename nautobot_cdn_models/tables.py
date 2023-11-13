@@ -63,7 +63,7 @@ class CdnSiteColumn(tables.TemplateColumn):
         return str(kwargs["value"]) if kwargs["value"] else None
 
 class HyperCacheMemoryProfileTable(BaseTable):
-    pk = tables.TemplateColumn(template_code='<input type="checkbox" name="pk" value="{{ record.pk }}">', verbose_name=' ')
+    pk = ToggleColumn()
     name = tables.LinkColumn(verbose_name="Site HyperCache Memory Profile Name")
 
     class Meta(BaseTable.Meta):
@@ -117,7 +117,7 @@ class SiteRoleTable(BaseTable):
 
 
 class CdnSiteTable(StatusTableMixin, BaseTable):
-    pk = tables.TemplateColumn(template_code='<input type="checkbox" name="pk" value="{{ record.pk }}">', verbose_name=' ')
+    pk = ToggleColumn()
     name = tables.LinkColumn(verbose_name="Akamai Site Name")
     cdn_site_role = tables.LinkColumn()
     location = tables.LinkColumn()

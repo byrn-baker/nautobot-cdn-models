@@ -1,0 +1,29 @@
+origins:
+  - hostname: charter-unified.deluxeone.com
+    originId: 2
+    contendprovider: Deluxe VOD
+    contendproviderId: 2
+  - hostname: ipads.srta.spectrum.com
+    originId: 2528
+    contendprovider: Spectrum Reach
+    contendproviderId: 3
+  - hostname: prog.srta.spectrum.com
+    originId: 2529
+    contendprovider: Programmer
+    contendproviderId: 4
+  - hostname: hevc-gem.spectrum.com
+    originId: 2521
+    contendprovider: HaloLIVE
+    contendproviderId: 5
+  - hostname: olb.spectrum.com
+    originId: 2522
+    contendprovider: HaloLIVE
+    contendproviderId: 5
+  - hostname: gemini-ndc-midtier.ipd.rr.com
+    originId: 1260
+    contendprovider: GeminiHalo
+    contendproviderId: 7
+  - hostname: pvdcco-ci-cos.cdvr.spectrum.com
+    originId: 2523
+    contendprovider: cdvrcos
+    contendproviderId: 9

@@ -1,0 +1,5 @@
+prod_regions:
+{% for region in prod_regions['data']['regions'] %}
+  - name: {{region['name']}}
+    slug: {{ region['slug'] }}
+{% endfor %}

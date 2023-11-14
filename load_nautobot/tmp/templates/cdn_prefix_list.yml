@@ -1,0 +1,81 @@
+cdn_prefixes:
+  - prefix: midtier-deluxe.stvacdn.spectrum.com
+    cdnPrefixId: 2
+    contentprovider: Deluxe VOD
+    contentProviderId: 2
+  - prefix: pacwest-test.stvacdn.spectrum.com
+    cdnPrefixId: 5
+    contentprovider: Deluxe VOD
+    contentProviderId: 2
+  - prefix: dluxvod.stvacdn.spectrum.com
+    cdnPrefixId: 13
+    contentprovider: Deluxe VOD
+    contentProviderId: 2
+  - prefix: dluxvod-novi.stvacdn.spectrum.com
+    cdnPrefixId: 14
+    contentprovider: Deluxe VOD
+    contentProviderId: 2
+  - prefix: vod.stvacdn.spectrum.com
+    cdnPrefixId: 19
+    contentprovider: Deluxe VOD
+    contentProviderId: 2
+  - prefix: midtier-spectre.stvacdn.spectrum.com
+    cdnPrefixId: 3
+    contentprovider: Spectrum Reach
+    contentProviderId: 3
+  - prefix: spectre.stvacdn.spectrum.com
+    cdnPrefixId: 17
+    contentprovider: Spectrum Reach
+    contentProviderId: 3
+  - prefix: spectre-novi.stvacdn.spectrum.com
+    cdnPrefixId: 18
+    contentprovider: Spectrum Reach
+    contentProviderId: 3
+  - prefix: midtier-programmers.stvacdn.spectrum.com
+    cdnPrefixId: 4
+    contentprovider: Programmer
+    contentProviderId: 4
+  - prefix: prog.stvacdn.spectrum.com
+    cdnPrefixId: 15
+    contentprovider: Programmer
+    contentProviderId: 4
+  - prefix: prog-novi.stvacdn.spectrum.com
+    cdnPrefixId: 16
+    contentprovider: Programmer
+    contentProviderId: 4
+  - prefix: linear.stvacdn.spectrum.com
+    cdnPrefixId: 6
+    contentprovider: HaloLIVE
+    contentProviderId: 5
+  - prefix: linear-novi.stvacdn.spectrum.com
+    cdnPrefixId: 7
+    contentprovider: HaloLIVE
+    contentProviderId: 5
+  - prefix: cloudtest-linear.stvacdn.spectrum.com
+    cdnPrefixId: 20
+    contentprovider: HaloLIVE
+    contentProviderId: 5
+  - prefix: origin.stvacdn.spectrum.com
+    cdnPrefixId: 21
+    contentprovider: HaloLIVE
+    contentProviderId: 5
+  - prefix: dts.stvacdn.spectrum.com
+    cdnPrefixId: 24
+    contentprovider: HaloLIVE
+    contentProviderId: 5
+  - prefix: cdvr.stvacdn.spectrum.com
+    cdnPrefixId: 12
+    contentprovider: TelurioDASH
+    contentProviderId: 6
+  - prefix: linear-test.stvacdn.spectrum.com
+    cdnPrefixId: 10
+    contentprovider: GeminiHalo
+    contentProviderId: 7
+  - prefix: linearnovi.stvacdn.spectrum.com
+    cdnPrefixId: 11
+    contentprovider: GeminiHalo
+    contentProviderId: 7
+  - prefix: cos.stvacdn.spectrum.com
+    cdnPrefixId: 22
+    contentprovider: cdvrcos
+    contentProviderId: 9

@@ -1,0 +1,224 @@
+{
+  "origin_details":[
+{
+  "cacheableErrorResponseCodes": [
+    "404"
+  ],
+  "cachingType": "OPTIMISTIC",
+  "contentProviderId": 2,
+  "dynamicHierarchy": {
+    "healthCheckUrl": "/crossdomain.xml"
+  },
+  "edgeHostType": "HTTP",
+  "enable": true,
+  "enableAuthenticatedContent": false,
+  "enableRequestIdExport": false,
+  "enableSiteRedirects": true,
+  "errorCacheMaxAge": 60,
+  "fastReroute": {
+    "enable": true,
+    "intraCdnTimeout": 2.5,
+    "originTimeout": 2.0
+  },
+  "hostname": "charter-unified.deluxeone.com",
+  "interSiteProtocol": "HTTP",
+  "intraSiteProtocol": "HTTP",
+  "ipAddressTypes": [
+    "IPV4"
+  ],
+  "originId": 2,
+  "originTimeout": 5
+},
+{
+  "cacheableErrorResponseCodes": [
+    "404"
+  ],
+  "cachingType": "OPTIMISTIC",
+  "contentProviderId": 3,
+  "dynamicHierarchy": {
+    "healthCheckUrl": "/crossdomain.xml"
+  },
+  "edgeHostType": "HTTP",
+  "enable": true,
+  "enableAuthenticatedContent": false,
+  "enableRequestIdExport": false,
+  "enableSiteRedirects": true,
+  "errorCacheMaxAge": 60,
+  "fastReroute": {
+    "enable": true,
+    "intraCdnTimeout": 2.5,
+    "originTimeout": 2.0
+  },
+  "hostname": "ipads.srta.spectrum.com",
+  "interSiteProtocol": "HTTP",
+  "intraSiteProtocol": "HTTP",
+  "ipAddressTypes": [
+    "IPV4"
+  ],
+  "originId": 2528,
+  "originTimeout": 10
+},
+{
+  "cacheableErrorResponseCodes": [
+    "404"
+  ],
+  "cachingType": "OPTIMISTIC",
+  "contentProviderId": 4,
+  "dynamicHierarchy": {
+    "healthCheckInterval": 2,
+    "healthCheckUrl": "/crossdomain.xml"
+  },
+  "edgeHostType": "HTTP",
+  "enable": true,
+  "enableAuthenticatedContent": false,
+  "enableRequestIdExport": false,
+  "enableSiteRedirects": true,
+  "errorCacheMaxAge": 60,
+  "fastReroute": {
+    "enable": true,
+    "intraCdnTimeout": 2.5,
+    "originTimeout": 2.0
+  },
+  "hostname": "prog.srta.spectrum.com",
+  "interSiteProtocol": "HTTP",
+  "intraSiteProtocol": "HTTP",
+  "ipAddressTypes": [
+    "IPV4"
+  ],
+  "originId": 2529,
+  "originTimeout": 10
+},
+{
+  "cacheableErrorResponseCodes": [
+    "500-599"
+  ],
+  "cachingType": "OPTIMISTIC",
+  "contentProviderId": 5,
+  "description": "Temporary HEVC origin pointing to Gemini Mid tiers in the NDC",
+  "dynamicHierarchy": {
+    "healthCheckUrl": "/crossdomain.xml",
+    "healthCheckValidResponseCodes": [
+      "200-299",
+      "404"
+    ]
+  },
+  "edgeHostType": "HTTP",
+  "enable": true,
+  "enableAuthenticatedContent": false,
+  "enableRequestIdExport": false,
+  "enableSiteRedirects": false,
+  "errorCacheMaxRetry": 1,
+  "fastReroute": {
+    "enable": true,
+    "intraCdnTimeout": 1.5,
+    "originTimeout": 1.0
+  },
+  "hostname": "hevc-gem.spectrum.com",
+  "interSiteProtocol": "HTTP",
+  "intraSiteProtocol": "HTTP",
+  "ipAddressTypes": [
+    "IPV6",
+    "IPV4"
+  ],
+  "originId": 2521,
+  "originTimeout": 300
+},
+{
+  "cacheableErrorResponseCodes": [
+    "500-599"
+  ],
+  "cachingType": "OPTIMISTIC",
+  "contentProviderId": 5,
+  "description": "Origin Load Balancer for all Packagers.",
+  "dynamicHierarchy": {
+    "healthCheckUrl": "/imalive.chk",
+    "healthCheckValidResponseCodes": [
+      "200-299"
+    ]
+  },
+  "edgeHostType": "HTTP",
+  "enable": true,
+  "enableAuthenticatedContent": false,
+  "enableRequestIdExport": false,
+  "enableSiteRedirects": false,
+  "errorCacheMaxRetry": 1,
+  "fastReroute": {
+    "enable": false,
+    "intraCdnTimeout": 1.5,
+    "originTimeout": 1.0
+  },
+  "hostname": "olb.spectrum.com",
+  "interSiteProtocol": "HTTP",
+  "intraSiteProtocol": "HTTP",
+  "ipAddressTypes": [
+    "IPV6",
+    "IPV4"
+  ],
+  "originId": 2522,
+  "originTimeout": 300
+},
+{
+  "cachingType": "OPTIMISTIC",
+  "contentProviderId": 7,
+  "dynamicHierarchy": {
+    "healthCheckInterval": 2,
+    "healthCheckUrl": "/imalive.chk",
+    "healthCheckValidResponseCodes": [
+      "200-299"
+    ]
+  },
+  "edgeHostType": "HTTP",
+  "enable": true,
+  "enableAuthenticatedContent": false,
+  "enableRequestIdExport": false,
+  "enableSiteRedirects": true,
+  "fastReroute": {
+    "enable": true,
+    "intraCdnTimeout": 1.5,
+    "originTimeout": 1.0
+  },
+  "hostname": "gemini-ndc-midtier.ipd.rr.com",
+  "interSiteProtocol": "HTTP",
+  "intraSiteProtocol": "HTTP",
+  "ipAddressTypes": [
+    "IPV4"
+  ],
+  "originId": 1260,
+  "originTimeout": 5
+},
+{
+  "cacheableErrorResponseCodes": [
+    "500-599"
+  ],
+  "cachingType": "OPTIMISTIC",
+  "contentProviderId": 9,
+  "description": "LB origin for COS cluster",
+  "dynamicHierarchy": {
+    "healthCheckUrl": "/imalive.chk",
+    "healthCheckValidResponseCodes": [
+      "200-299"
+    ]
+  },
+  "edgeHostType": "HTTP",
+  "enable": true,
+  "enableAuthenticatedContent": false,
+  "enableRequestIdExport": false,
+  "enableSiteRedirects": false,
+  "errorCacheMaxRetry": 1,
+  "fastReroute": {
+    "enable": true,
+    "intraCdnTimeout": 1.5,
+    "originTimeout": 1.0
+  },
+  "hostname": "pvdcco-ci-cos.cdvr.spectrum.com",
+  "interSiteProtocol": "HTTP",
+  "intraSiteProtocol": "HTTP",
+  "ipAddressTypes": [
+    "IPV6",
+    "IPV4"
+  ],
+  "originId": 2523,
+  "originTimeout": 300
+},
+  ]
+}

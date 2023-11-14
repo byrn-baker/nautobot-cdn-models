@@ -1,0 +1,2074 @@
+dev_sites:
+  - name: control_aas
+    site_id: 67bf3179-94a9-45f8-b49c-1a92d308236e
+    abbreviatedName: null
+    slug: control_aas
+    cdn_site_role: Akamai Control Plane
+    cdn_site_role_id: 10bfbc2d-e0e2-4028-9735-5d1088bc0a07
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    siteId: 3
+  - name: nceast_control
+    site_id: 78e2c26f-6ae5-48c7-8598-715ee404c9c3
+    abbreviatedName: null
+    slug: nceast_control
+    cdn_site_role: Akamai Control Plane
+    cdn_site_role_id: 10bfbc2d-e0e2-4028-9735-5d1088bc0a07
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    siteId: 5
+  - name: ncwest_control
+    site_id: c7a1a282-b196-4482-9848-9a5e69a46d36
+    abbreviatedName: null
+    slug: ncwest_control
+    cdn_site_role: Akamai Control Plane
+    cdn_site_role_id: 10bfbc2d-e0e2-4028-9735-5d1088bc0a07
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    siteId: 1
+  - name: NorthWest_NCWest_CO_linear_shield
+    site_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    abbreviatedName: dnvrco02_l_shc
+    slug: northwest_ncwest_co_linear_shield
+    cdn_site_role: Linear-Shields
+    cdn_site_role_id: 7c72725a-3f35-40cb-b2d4-44c1e1ee8a95
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    cacheMemoryProfile: Linear-Shield
+    cacheMemoryProfileId: c7553b79-a664-4f46-b9b6-e59837465355
+    siteId: 11
+  - name: Carolinas_Amity_NC_linear_hpc
+    site_id: 06589ff9-86ba-4e42-b5f2-ee4e8e3dfdef
+    abbreviatedName: chrbnccf_l_hpc
+    slug: carolinas_amity_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 70
+  - name: Carolinas_Apex_NC_linear_hpc
+    site_id: 9ed19a00-6465-479a-9e4b-0f84f6099b32
+    abbreviatedName: apexncco_l_hpc
+    slug: carolinas_apex_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 69
+  - name: Carolinas_Charlotte_NC_linear_hpc
+    site_id: 3152bc90-13cb-48fe-8980-cc382532be55
+    abbreviatedName: chrlnc01_l_hpc
+    slug: carolinas_charlotte_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 17
+  - name: Carolinas_Columbia_SC_linear_hpc
+    site_id: 34f1e0fc-6f24-4483-b326-4e85ac98d3a6
+    abbreviatedName: clmcsc30_l_hpc
+    slug: carolinas_columbia_sc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 74
+  - name: Carolinas_Durham_NC_linear_hpc
+    site_id: 9cad8200-eb59-4093-85ac-d9b3c94c6527
+    abbreviatedName: drhmncev_l_hpc
+    slug: carolinas_durham_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 15
+  - name: Carolinas_Fayetteville_NC_linear_hpc
+    site_id: dad6d527-5e3d-4185-b5b4-6a937a1ec87c
+    abbreviatedName: fyvlnch_l_hpc
+    slug: carolinas_fayetteville_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 78
+  - name: Carolinas_Greensboro_NC_linear_hpc
+    site_id: 131c7ca4-f573-4c56-bc06-93f25066b320
+    abbreviatedName: gnboncnn_l_hpc
+    slug: carolinas_greensboro_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 79
+  - name: Carolinas_Leland_NC_linear_hpc
+    site_id: d7049a7d-9da3-4b89-8e2a-4871577ddd81
+    abbreviatedName: leldnc12_l_hpc
+    slug: carolinas_leland_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 80
+  - name: Carolinas_MyrtleBeach_SC_linear_hpc
+    site_id: 58ea2a19-ade4-410e-94f8-e0f0dca97db5
+    abbreviatedName: mybhsc06_l_hpc
+    slug: carolinas_myrtlebeach_sc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 81
+  - name: Carolinas_SouthernPine_NC_linear_hpc
+    site_id: aced3a8a-966e-47f2-871d-7b12280e99cd
+    abbreviatedName: spnsnces_l_hpc
+    slug: carolinas_southernpine_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 82
+  - name: Carolinas_Wilmington_NC_linear_hpc
+    site_id: 169c58a5-406f-4a37-befb-6279770d2017
+    abbreviatedName: wlmincdm_l_hpc
+    slug: carolinas_wilmington_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 83
+  - name: Carolinas_Winston-Salem_NC_linear_hpc
+    site_id: 74d49a59-2514-4a26-b818-9d0714e14003
+    abbreviatedName: wnslncpv_l_hpc
+    slug: carolinas_winston-salem_nc_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 84
+  - name: MidWest_Chambers_OH_linear_hpc
+    site_id: f54ad1c2-dea1-4060-88e3-4dba27fb8c9b
+    abbreviatedName: clmcohib_l_hpc
+    slug: midwest_chambers_oh_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 25
+  - name: MidWest_Cleveland-Heights_OH_linear_hpc
+    site_id: da57358e-2e52-40b6-b7a1-2162b790db92
+    abbreviatedName: clevohek_l_hpc
+    slug: midwest_cleveland-heights_oh_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 22
+  - name: MidWest_North-Canton_OH_linear_hpc
+    site_id: 3d85ce0b-9164-4765-9e31-9771483b6eb9
+    abbreviatedName: pltsohae_l_hpc
+    slug: midwest_north-canton_oh_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 23
+  - name: MidWest_Okolona_KY_linear_hpc
+    site_id: 638336ed-7b6e-46de-80a1-6f733b5ea777
+    abbreviatedName: lsvmkyzo_l_hpc
+    slug: midwest_okolona_ky_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 24
+  - name: MidWest_Olentangy_OH_linear_hpc
+    site_id: 49f2c5dc-7061-4935-8fbe-de83d887339f
+    abbreviatedName: clmkohpe_l_hpc
+    slug: midwest_olentangy_oh_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 26
+  - name: NorthEast_Albany_NY_linear_hpc
+    site_id: 4b9d09ba-d243-49e6-8a89-c0b665e7cf17
+    abbreviatedName: albynyyf_l_hpc
+    slug: northeast_albany_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 106
+  - name: NorthEast_Henrietta_NY_linear_hpc
+    site_id: 2b4e0c1d-57d5-4b03-9af7-7eb08951acdb
+    abbreviatedName: hnrtnyaf_l_hpc
+    slug: northeast_henrietta_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 45
+  - name: NorthEast_Ithaca_NY_linear_hpc
+    site_id: 8f65a97d-8bc2-4e1a-9499-9fc4a28c2428
+    abbreviatedName: ithcnycy_l_hpc
+    slug: northeast_ithaca_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 46
+  - name: NorthEast_Lackwanna_NY_linear_hpc
+    site_id: fff1528e-e10d-4a7a-b459-3bd6c1f0a970
+    abbreviatedName: lkwnnyad_l_hpc
+    slug: northeast_lackwanna_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 47
+  - name: NorthEast_Lancaster_NY_linear_hpc
+    site_id: 68ccd627-7c93-4e95-9ddb-95939302aa23
+    abbreviatedName: lncsnycd_l_hpc
+    slug: northeast_lancaster_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 98
+  - name: NorthEast_Portland_ME_linear_hpc
+    site_id: a67abe85-76dc-4052-8b83-2f03a08c1955
+    abbreviatedName: ptldmehx_l_hpc
+    slug: northeast_portland_me_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 48
+  - name: NorthEast_Rochester_NY_linear_hpc
+    site_id: c169dba7-0b2b-41e0-be8e-3e2b7bd63767
+    abbreviatedName: rochnyei_l_hpc
+    slug: northeast_rochester_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 105
+  - name: NorthEast_Sebago_ME_linear_hpc
+    site_id: 88b7d55a-9697-4116-9c51-5531e05ca0bd
+    abbreviatedName: sebgme03_l_hpc
+    slug: northeast_sebago_me_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 52
+  - name: NorthEast_Syracuse-CourtSt_NY_linear_hpc
+    site_id: 306c32ac-740c-4bbd-9c34-22621a43954a
+    abbreviatedName: esyrnyaw_l_hpc
+    slug: northeast_syracuse-courtst_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 42
+  - name: NorthEast_Syracuse-Fairlakes_NY_linear_hpc
+    site_id: 066ae804-e823-4ae1-ac5f-49d5fb99eb42
+    abbreviatedName: esyrnydr_l_hpc
+    slug: northeast_syracuse-fairlakes_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 43
+  - name: NorthEast_Vestal_NY_linear_hpc
+    site_id: a8d696b6-700b-4118-9dcb-754bcd376b52
+    abbreviatedName: vstlnyhe_l_hpc
+    slug: northeast_vestal_ny_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 53
+  - name: PacWest_Bowcroft_CA_linear_hpc
+    site_id: 9a094655-9bce-4d8d-b5ce-310c7ac7b9f0
+    abbreviatedName: lsaicaev_l_hpc
+    slug: pacwest_bowcroft_ca_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 59
+  - name: PacWest_Cypress_CA_linear_hpc
+    site_id: 7f658a3b-b76e-42a3-9f79-11755cf70ca8
+    abbreviatedName: cyprcabw_l_hpc
+    slug: pacwest_cypress_ca_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 57
+  - name: PacWest_LaMiranda_CA_linear_hpc
+    site_id: 1c463354-55c2-4bd4-9c70-fb3db7c9818c
+    abbreviatedName: lamrcadq_l_hpc
+    slug: pacwest_lamiranda_ca_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 58
+  - name: PacWest_Mililani_HI_linear_hpc
+    site_id: f67ef2a5-0f2c-4351-b9ae-4b2799397cf6
+    abbreviatedName: milnhixd_l_hpc
+    slug: pacwest_mililani_hi_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 61
+  - name: PacWest_Ontario_CA_linear_hpc
+    site_id: 3f35c2dd-cce3-4714-b066-0e1b6a0ab1f0
+    abbreviatedName: ontrcacp_l_hpc
+    slug: pacwest_ontario_ca_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 62
+  - name: PacWest_SanDiego_CA_linear_hpc
+    site_id: 7fa34d5d-3ace-4ea0-a0cb-ce17d48cc35c
+    abbreviatedName: sndhcaax_l_hpc
+    slug: pacwest_sandiego_ca_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 63
+  - name: PacWest_VanNuys_CA_linear_hpc
+    site_id: 719888b0-91fd-4870-8b84-45e0d6b5ad2a
+    abbreviatedName: vnnycajz_l_hpc
+    slug: pacwest_vannuys_ca_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 65
+  - name: Texas_Austin-DuvalA_TX_linear_hpc
+    site_id: bd963a03-dcc7-4611-b50e-c578bdfc2829
+    abbreviatedName: ausutxla_l_hpc
+    slug: texas_austin-duvala_tx_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 88
+  - name: Texas_Austin-RDC_TX_linear_hpc
+    site_id: ebef0864-3afd-409f-998e-1363d73bcb64
+    abbreviatedName: ausdtxir_l_hpc
+    slug: texas_austin-rdc_tx_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 87
+  - name: Texas_Carrollton_TX_linear_hpc
+    site_id: 44731ffe-f502-4784-8dd4-c0bc45c3ed3c
+    abbreviatedName: crtntxjt_l_hpc
+    slug: texas_carrollton_tx_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 89
+  - name: Texas_Dallas_TX_linear_hpc
+    site_id: 903e51f7-32d3-4fad-bc9a-27a656891ffa
+    abbreviatedName: dllbtxlb_l_hpc
+    slug: texas_dallas_tx_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 4
+  - name: Texas_SanAntonio-LaColonia_TX_linear_hpc
+    site_id: cb05c9e7-a9ef-4a22-902e-0c98be85e988
+    abbreviatedName: snavtxuu_l_hpc
+    slug: texas_sanantonio-lacolonia_tx_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 92
+  - name: Texas_SanAntonio-UrbanLoop_TX_linear_hpc
+    site_id: b10365e3-d1ba-45b5-83cb-2765fdf99442
+    abbreviatedName: snantxvy_l_hpc
+    slug: texas_sanantonio-urbanloop_tx_linear_hpc
+    cdn_site_role: Market Linear Edge
+    cdn_site_role_id: 85847428-49cf-4c92-90c1-82771b79ca08
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 91
+  - name: Carolinas_Charlotte-POP_NC_linear_hpc
+    site_id: 70546596-2a45-411b-b837-3ad839fdf386
+    abbreviatedName: chrlnc01_l_hpc
+    slug: carolinas_charlotte-pop_nc_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 72
+  - name: Carolinas_Durham-POP_NC_linear_hpc
+    site_id: d43437d9-a5a1-492a-9cc1-575767af6e50
+    abbreviatedName: drhmncev_l_hpc
+    slug: carolinas_durham-pop_nc_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 76
+  - name: Central_Belleville-CHTR_IL_linear_hpc
+    site_id: 6baa3b6b-0a63-4819-b53d-baf845bddab7
+    abbreviatedName: swnsilbl_l_hpc
+    slug: central_belleville-chtr_il_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_id: a39c5f31-b520-4c1d-890d-f737393af869
+    neighbor1_preference: 1000
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2_id: a70a671a-e392-4501-9a67-b89e6f5a2fc1
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 107
+  - name: Central_EauClaire-CHTR_WI_linear_hpc
+    site_id: 835cc5e6-fba8-4019-bf59-82ada28b708d
+    abbreviatedName: unecwiac_l_hpc
+    slug: central_eauclaire-chtr_wi_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Central_StCloud-CHTR_MN_linear_mid
+    neighbor1_id: a70a671a-e392-4501-9a67-b89e6f5a2fc1
+    neighbor1_preference: 1000
+    neighbor2: Central_EauClaire-CHTR_WI_linear_mid
+    neighbor2_id: b3f59143-a440-498d-8c29-fc0018a0251d
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 34
+  - name: Central_Kearney-CHTR_NE_linear_hpc
+    site_id: b5a6e47f-1cd7-414d-bec7-0356f3a97219
+    abbreviatedName: krnynegq_l_hpc
+    slug: central_kearney-chtr_ne_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Central_StCloud-CHTR_MN_linear_mid
+    neighbor1_id: a70a671a-e392-4501-9a67-b89e6f5a2fc1
+    neighbor1_preference: 1000
+    neighbor2: Central_EauClaire-CHTR_WI_linear_mid
+    neighbor2_id: b3f59143-a440-498d-8c29-fc0018a0251d
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 36
+  - name: Central_Olivette-CHTR_MO_linear_hpc
+    site_id: 53306c82-43c1-44a1-95e2-6d0699454907
+    abbreviatedName: olvemoad_l_hpc
+    slug: central_olivette-chtr_mo_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_id: a39c5f31-b520-4c1d-890d-f737393af869
+    neighbor1_preference: 1000
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2_id: a70a671a-e392-4501-9a67-b89e6f5a2fc1
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 55
+  - name: Central_StCloud-CHTR_MN_linear_hpc
+    site_id: a85f8943-603e-41a7-841a-b7b0b3890dee
+    abbreviatedName: wtpkmnac_l_hpc
+    slug: central_stcloud-chtr_mn_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Central_StCloud-CHTR_MN_linear_mid
+    neighbor1_id: a70a671a-e392-4501-9a67-b89e6f5a2fc1
+    neighbor1_preference: 1000
+    neighbor2: Central_EauClaire-CHTR_WI_linear_mid
+    neighbor2_id: b3f59143-a440-498d-8c29-fc0018a0251d
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 86
+  - name: Florida_Orlando-POP_FL_linear_hpc
+    site_id: 9d32ecd4-b2cb-441f-af0f-03c4a093d514
+    abbreviatedName: orld71_l_hpc
+    slug: florida_orlando-pop_fl_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Florida_Orlando-POP_FL_linear_mid
+    neighbor1_id: 4dc57b22-2b63-4a87-b4f3-3cc737092155
+    neighbor1_preference: 1000
+    neighbor2: Florida_Tampa-POP_FL_linear_mid
+    neighbor2_id: 31081b59-9963-4521-bfc3-a027ee4759c8
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 29
+  - name: Florida_Tampa-POP_FL_linear_hpc
+    site_id: 895ffe5c-551f-48e3-bbcf-b927e0701b35
+    abbreviatedName: tamp20_l_hpc
+    slug: florida_tampa-pop_fl_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Florida_Orlando-POP_FL_linear_mid
+    neighbor1_id: 4dc57b22-2b63-4a87-b4f3-3cc737092155
+    neighbor1_preference: 1000
+    neighbor2: Florida_Tampa-POP_FL_linear_mid
+    neighbor2_id: 31081b59-9963-4521-bfc3-a027ee4759c8
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 31
+  - name: GreatLakes_Allendale-CHTR_MI_linear_hpc
+    site_id: d0138575-bcf5-49a3-b08b-74de7d494e5c
+    abbreviatedName: antsmiad_l_hpc
+    slug: greatlakes_allendale-chtr_mi_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: GreatLakes_Allendale-CHTR_MI_linear_mid
+    neighbor1_id: 828cce53-2e1e-4307-8ebf-dc0522a95acc
+    neighbor1_preference: 1000
+    neighbor2: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    neighbor2_id: 6ed35002-acd7-43c6-bf47-93c7f1cf79bc
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 33
+  - name: GreatLakes_Saginaw-CHTR_MI_linear_hpc
+    site_id: 941e1b00-5c4d-41af-92df-a30ecfda644f
+    abbreviatedName: sgnwmipa_l_hpc
+    slug: greatlakes_saginaw-chtr_mi_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: GreatLakes_Allendale-CHTR_MI_linear_mid
+    neighbor1_id: 828cce53-2e1e-4307-8ebf-dc0522a95acc
+    neighbor1_preference: 1000
+    neighbor2: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    neighbor2_id: 6ed35002-acd7-43c6-bf47-93c7f1cf79bc
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 112
+  - name: MidWest_Cleveland-POP_OH_linear_hpc
+    site_id: c801fa80-84dd-472d-a95a-4472f302a906
+    abbreviatedName: clevohek_l_hpc
+    slug: midwest_cleveland-pop_oh_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 8
+  - name: MidWest_Columbus-POP_OH_linear_hpc
+    site_id: 6255f54c-18bd-442e-b7e7-d47c89af2188
+    abbreviatedName: clmkohpe_l_hpc
+    slug: midwest_columbus-pop_oh_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 9
+  - name: NYC_Manhattan-POP_NY_linear_hpc
+    site_id: 2c3a3279-507f-46cb-a345-09690aba466c
+    abbreviatedName: nyclnyrg_l_hpc
+    slug: nyc_manhattan-pop_ny_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NYC_Manhattan-POP_NY_linear_mid
+    neighbor1_id: edf0e85c-da18-4739-a740-5c1dcefe48a0
+    neighbor1_preference: 1000
+    neighbor2: NYC_Queens-POP_NY_linear_mid
+    neighbor2_id: 5c6e58c4-3a5f-4fb2-8718-4c2c0b4fb53d
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 10
+  - name: NYC_Queens-POP_NY_linear_hpc
+    site_id: 6739b23a-73ae-4a1a-8ff7-794148e67aac
+    abbreviatedName: nyquny91_l_hpc
+    slug: nyc_queens-pop_ny_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NYC_Manhattan-POP_NY_linear_mid
+    neighbor1_id: edf0e85c-da18-4739-a740-5c1dcefe48a0
+    neighbor1_preference: 1000
+    neighbor2: NYC_Queens-POP_NY_linear_mid
+    neighbor2_id: 5c6e58c4-3a5f-4fb2-8718-4c2c0b4fb53d
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 14
+  - name: NorthEast_Albany-POP_NY_linear_hpc
+    site_id: e8e75895-b0df-470e-8668-c7329e01e262
+    abbreviatedName: albynyyf_l_hpc
+    slug: northeast_albany-pop_ny_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 40
+  - name: NorthEast_Newtown-CHTR_CT_linear_hpc
+    site_id: fda650f6-d450-4ed8-b37e-0c813e2ddf3f
+    abbreviatedName: nwtwctac_l_hpc
+    slug: northeast_newtown-chtr_ct_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Newtown-CHTR_CT_linear_mid
+    neighbor1_id: 7044f9c3-2c76-489d-b7a0-ded86d3b9bdf
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Oxford-CHTR_MA_linear_mid
+    neighbor2_id: 21a1c768-7524-4195-bb06-61199752af67
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 114
+  - name: NorthEast_Oxford-CHTR_MA_linear_hpc
+    site_id: 38849988-f60c-4b90-abcf-594c9d22fb64
+    abbreviatedName: oxfrmaak_l_hpc
+    slug: northeast_oxford-chtr_ma_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Newtown-CHTR_CT_linear_mid
+    neighbor1_id: 7044f9c3-2c76-489d-b7a0-ded86d3b9bdf
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Oxford-CHTR_MA_linear_mid
+    neighbor2_id: 21a1c768-7524-4195-bb06-61199752af67
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 56
+  - name: NorthEast_Rochester-POP_NY_linear_hpc
+    site_id: 962bd7f7-5b76-45c0-8025-b8dddef65015
+    abbreviatedName: rochnyei_l_hpc
+    slug: northeast_rochester-pop_ny_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 51
+  - name: NorthWest_Denver-CHTR_CO_linear_hpc
+    site_id: 9cb4467f-10c4-466b-af18-8c6341348711
+    abbreviatedName: dnvtco56_l_hpc
+    slug: northwest_denver-chtr_co_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 750
+    failover_site: NorthWest_Missoula-CHTR_MT_linear_hpc
+    failover_site_id: c53a9dfd-cd39-45a9-954e-7dcc13994b9d
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 38
+  - name: NorthWest_Missoula-CHTR_MT_linear_hpc
+    site_id: c53a9dfd-cd39-45a9-954e-7dcc13994b9d
+    abbreviatedName: msslmteh_l_hpc
+    slug: northwest_missoula-chtr_mt_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 750
+    failover_site: NorthWest_Denver-CHTR_CO_linear_hpc
+    failover_site_id: 9cb4467f-10c4-466b-af18-8c6341348711
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 117
+  - name: NorthWest_Portland-CHTR_OR_linear_hpc
+    site_id: 9b2cf223-cb05-46ae-b650-47499333c373
+    abbreviatedName: ptldorpb_l_hpc
+    slug: northwest_portland-chtr_or_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 118
+  - name: NorthWest_RenoMHE-CHTR_NV_linear_hpc
+    site_id: c915ec8a-006a-4a8e-9e53-c63e88a07b5b
+    abbreviatedName: renqnvlx_l_hpc
+    slug: northwest_renomhe-chtr_nv_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 119
+  - name: NorthWest_RenoPRI-CHTR_NV_linear_hpc
+    site_id: 9502ce42-1441-4966-bf84-b3b0ac650578
+    abbreviatedName: renpnvmw_l_hpc
+    slug: northwest_renopri-chtr_nv_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 66
+  - name: NorthWest_SanJose-CHTR_CA_linear_hpc
+    site_id: 88574ef9-aff4-4d55-910d-017e6154278a
+    abbreviatedName: snjycahm_l_hpc
+    slug: northwest_sanjose-chtr_ca_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 120
+  - name: NorthWest_SanLuisObispo-CHTR_CA_linear_hpc
+    site_id: 3c7bc591-f82d-4970-b1c5-d81224deb815
+    abbreviatedName: snloca88_l_hpc
+    slug: northwest_sanluisobispo-chtr_ca_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 54
+  - name: PacWest_Lancaster-POP_CA_linear_hpc
+    site_id: d787fe75-4159-4626-9248-af4c954df606
+    abbreviatedName: lsancarc_l_hpc
+    slug: pacwest_lancaster-pop_ca_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 27
+  - name: PacWest_MontereyPark-CHTR_CA_linear_hpc
+    site_id: 8aad73f0-b5be-4602-8919-cbbc5b8f60eb
+    abbreviatedName: mtpkcacg_l_hpc
+    slug: pacwest_montereypark-chtr_ca_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor1_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    neighbor1_preference: 1000
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 122
+  - name: PacWest_Riverside-CHTR_CA_linear_hpc
+    site_id: 5ec13cd8-7066-4cd2-8f2f-cabffbe487a8
+    abbreviatedName: rvsdcaqu_l_hpc
+    slug: pacwest_riverside-chtr_ca_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor1_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    neighbor1_preference: 1000
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 67
+  - name: PacWest_Tustin-POP_CA_linear_hpc
+    site_id: 32784f33-9e29-4f7b-8580-f07ec281a5c9
+    abbreviatedName: tustcaft_l_hpc
+    slug: pacwest_tustin-pop_ca_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 28
+  - name: South_Manchester-CHTR_TN_linear_hpc
+    site_id: 2ebfd6ba-2c52-41d3-92ea-51369bdeb099
+    abbreviatedName: mnchtnem_l_hpc
+    slug: south_manchester-chtr_tn_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: South_Manchester-CHTR_TN_linear_mid
+    neighbor1_id: 302de475-b079-460a-a089-0b228210be77
+    neighbor1_preference: 1000
+    neighbor2: South_SugarHill-CHTR_GA_linear_mid
+    neighbor2_id: 8a6a6e80-c2de-4051-9a3b-1bc23dfcc30c
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 124
+  - name: South_Slidell-CHTR_LA_linear_hpc
+    site_id: 48e14846-8fcc-4dbd-a619-a184879b61b8
+    abbreviatedName: slidladf_l_hpc
+    slug: south_slidell-chtr_la_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: South_Manchester-CHTR_TN_linear_mid
+    neighbor1_id: 302de475-b079-460a-a089-0b228210be77
+    neighbor1_preference: 1000
+    neighbor2: South_SugarHill-CHTR_GA_linear_mid
+    neighbor2_id: 8a6a6e80-c2de-4051-9a3b-1bc23dfcc30c
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 68
+  - name: South_SugarHill-CHTR_GA_linear_hpc
+    site_id: e09a0f54-d020-419d-8b97-ea01db586d54
+    abbreviatedName: sghlgaao_l_hpc
+    slug: south_sugarhill-chtr_ga_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: South_Manchester-CHTR_TN_linear_mid
+    neighbor1_id: 302de475-b079-460a-a089-0b228210be77
+    neighbor1_preference: 1000
+    neighbor2: South_SugarHill-CHTR_GA_linear_mid
+    neighbor2_id: 8a6a6e80-c2de-4051-9a3b-1bc23dfcc30c
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 126
+  - name: Texas_Dallas-CHTR_TX_linear_hpc
+    site_id: 9f638b4e-cdeb-4e56-9597-03015f31e9e4
+    abbreviatedName: dllstx97_l_hpc
+    slug: texas_dallas-chtr_tx_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: South_Manchester-CHTR_TN_linear_mid
+    neighbor1_id: 302de475-b079-460a-a089-0b228210be77
+    neighbor1_preference: 1000
+    neighbor2: South_SugarHill-CHTR_GA_linear_mid
+    neighbor2_id: 8a6a6e80-c2de-4051-9a3b-1bc23dfcc30c
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 128
+  - name: Texas_Dallas-POP_TX_linear_hpc
+    site_id: 4440b1b0-cd99-4eb5-84cc-8a589d8b6cf7
+    abbreviatedName: dllatx37_l_hpc
+    slug: texas_dallas-pop_tx_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 17
+  - name: Texas_FortWorth-CHTR_TX_linear_hpc
+    site_id: 52400eeb-d5b8-40e7-8a45-b7956509e902
+    abbreviatedName: ftwptxzp_l_hpc
+    slug: texas_fortworth-chtr_tx_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: South_Manchester-CHTR_TN_linear_mid
+    neighbor1_id: 302de475-b079-460a-a089-0b228210be77
+    neighbor1_preference: 1000
+    neighbor2: South_SugarHill-CHTR_GA_linear_mid
+    neighbor2_id: 8a6a6e80-c2de-4051-9a3b-1bc23dfcc30c
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 35
+  - name: Texas_Houston-POP_TX_linear_hpc
+    site_id: 94a8cf74-d482-4051-a3fe-83d2d8e7f322
+    abbreviatedName: hstqtx02_l_hpc
+    slug: texas_houston-pop_tx_linear_hpc
+    cdn_site_role: Regional Linear Edge
+    cdn_site_role_id: 4c4975dc-5121-48a2-a9ea-965d4a272bed
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_id: c02ef019-3092-4cbb-b821-50818d372204
+    neighbor2_preference: 750
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 16
+  - name: Carolinas_Charlotte-POP_NC_linear_mid
+    site_id: 6f2b23e3-9349-4280-b17d-b7ecb7d5e928
+    abbreviatedName: chrlnc01_l_mid
+    slug: carolinas_charlotte-pop_nc_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 71
+  - name: Carolinas_Durham-POP_NC_linear_mid
+    site_id: b4df8e8c-3bdf-4632-bedf-fe58dc4af446
+    abbreviatedName: drhmncev_l_mid
+    slug: carolinas_durham-pop_nc_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 75
+  - name: Central_EauClaire-CHTR_WI_linear_mid
+    site_id: b3f59143-a440-498d-8c29-fc0018a0251d
+    abbreviatedName: unecwiac_l_mid
+    slug: central_eauclaire-chtr_wi_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 108
+  - name: Central_Olivette-CHTR_MO_linear_mid
+    site_id: a39c5f31-b520-4c1d-890d-f737393af869
+    abbreviatedName: olvemoad_l_mid
+    slug: central_olivette-chtr_mo_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 109
+  - name: Central_StCloud-CHTR_MN_linear_mid
+    site_id: a70a671a-e392-4501-9a67-b89e6f5a2fc1
+    abbreviatedName: wtpkmnac_l_mid
+    slug: central_stcloud-chtr_mn_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 110
+  - name: Florida_Orlando-POP_FL_linear_mid
+    site_id: 4dc57b22-2b63-4a87-b4f3-3cc737092155
+    abbreviatedName: orld71_l_mid
+    slug: florida_orlando-pop_fl_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 30
+  - name: Florida_Tampa-POP_FL_linear_mid
+    site_id: 31081b59-9963-4521-bfc3-a027ee4759c8
+    abbreviatedName: tamp20_l_mid
+    slug: florida_tampa-pop_fl_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 32
+  - name: GreatLakes_Allendale-CHTR_MI_linear_mid
+    site_id: 828cce53-2e1e-4307-8ebf-dc0522a95acc
+    abbreviatedName: antsmiad_l_mid
+    slug: greatlakes_allendale-chtr_mi_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 111
+  - name: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    site_id: 6ed35002-acd7-43c6-bf47-93c7f1cf79bc
+    abbreviatedName: sgnwmipa_l_mid
+    slug: greatlakes_saginaw-chtr_mi_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 113
+  - name: MidWest_Cleveland-POP_OH_linear_mid
+    site_id: 644bb716-5a59-4332-81f2-b1df0a2ed930
+    abbreviatedName: clevohek_l_mid
+    slug: midwest_cleveland-pop_oh_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 12
+  - name: MidWest_Columbus-POP_OH_linear_mid
+    site_id: 7e140015-c69c-45d8-8eb4-105dea70c644
+    abbreviatedName: clmkohpe_l_mid
+    slug: midwest_columbus-pop_oh_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 13
+  - name: NYC_Manhattan-POP_NY_linear_mid
+    site_id: edf0e85c-da18-4739-a740-5c1dcefe48a0
+    abbreviatedName: nyclnyrg_l_mid
+    slug: nyc_manhattan-pop_ny_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 11
+  - name: NYC_Queens-POP_NY_linear_mid
+    site_id: 5c6e58c4-3a5f-4fb2-8718-4c2c0b4fb53d
+    abbreviatedName: nyquny91_l_mid
+    slug: nyc_queens-pop_ny_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 15
+  - name: NorthEast_Albany-POP_NY_linear_mid
+    site_id: 39de2d49-34de-4331-a5e8-15f6472a750e
+    abbreviatedName: albynyyf_l_mid
+    slug: northeast_albany-pop_ny_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 39
+  - name: NorthEast_Newtown-CHTR_CT_linear_mid
+    site_id: 7044f9c3-2c76-489d-b7a0-ded86d3b9bdf
+    abbreviatedName: nwtwctac_l_mid
+    slug: northeast_newtown-chtr_ct_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 115
+  - name: NorthEast_Oxford-CHTR_MA_linear_mid
+    site_id: 21a1c768-7524-4195-bb06-61199752af67
+    abbreviatedName: oxfrmaak_l_mid
+    slug: northeast_oxford-chtr_ma_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 116
+  - name: NorthEast_Rochester-POP_NY_linear_mid
+    site_id: 0df92a7a-81a9-47cf-ba0b-21126b0b8a21
+    abbreviatedName: rochnyei_l_mid
+    slug: northeast_rochester-pop_ny_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 50
+  - name: NorthWest_SanJose-CHTR_CA_linear_mid
+    site_id: 7dadc277-d9fc-41ae-9dd4-eec30eea45f0
+    abbreviatedName: snjycahm_l_mid
+    slug: northwest_sanjose-chtr_ca_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-HPC-FEC
+    cacheMemoryProfileId: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+    siteId: 121
+  - name: PacWest_Lancaster-POP_CA_linear_mid
+    site_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    abbreviatedName: lsancarc_l_mid
+    slug: pacwest_lancaster-pop_ca_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 60
+  - name: PacWest_Riverside-CHTR_CA_linear_mid
+    site_id: a9ec9bfb-1582-4aa8-a90f-9e9c64ff80dc
+    abbreviatedName: rvsdcaqu_l_mid
+    slug: pacwest_riverside-chtr_ca_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 123
+  - name: PacWest_Tustin-POP_CA_linear_mid
+    site_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    abbreviatedName: tustcaft_l_mid
+    slug: pacwest_tustin-pop_ca_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 64
+  - name: South_Manchester-CHTR_TN_linear_mid
+    site_id: 302de475-b079-460a-a089-0b228210be77
+    abbreviatedName: mnchtnem_l_mid
+    slug: south_manchester-chtr_tn_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 125
+  - name: South_SugarHill-CHTR_GA_linear_mid
+    site_id: 8a6a6e80-c2de-4051-9a3b-1bc23dfcc30c
+    abbreviatedName: sghlgaao_l_mid
+    slug: south_sugarhill-chtr_ga_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 127
+  - name: Texas_Dallas-POP_TX_linear_mid
+    site_id: 3fb48c77-886a-449b-a9d9-4b396f1f9d9b
+    abbreviatedName: dllatx37_l_mid
+    slug: texas_dallas-pop_tx_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 18
+  - name: Texas_Houston-POP_TX_linear_mid
+    site_id: c02ef019-3092-4cbb-b821-50818d372204
+    abbreviatedName: hstqtx02_l_mid
+    slug: texas_houston-pop_tx_linear_mid
+    cdn_site_role: Regional Linear MidTier
+    cdn_site_role_id: 6aaac0c7-ec7e-45ad-80a2-f18a1170c92b
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_id: 1fe8db75-fb85-4058-9783-ab5a65ab9172
+    neighbor2_preference: 500
+    cacheMemoryProfile: Linear-MidTier
+    cacheMemoryProfileId: c386c9bb-16a3-40e3-9b68-c1305afcece1
+    siteId: 19
+  - name: Carolinas_Charlotte-POP_NC_vod_hpc
+    site_id: 58d53d6a-a3df-449d-a9c7-097c6dc2f470
+    abbreviatedName: chrlnc01_v_hpc
+    slug: carolinas_charlotte-pop_nc_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 96
+  - name: Carolinas_Durham-POP_NC_vod_hpc
+    site_id: 7a2ac369-0ce0-4898-a6af-2b348837b49d
+    abbreviatedName: drhmncev_v_hpc
+    slug: carolinas_durham-pop_nc_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 97
+  - name: MidWest_Cleveland-POP_OH_vod_hpc
+    site_id: 7dd4c445-062f-4f1a-8b7c-58fd420a819c
+    abbreviatedName: clevohek_v_hpc
+    slug: midwest_cleveland-pop_oh_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 103
+  - name: MidWest_Columbus-POP_OH_vod_hpc
+    site_id: 3f208be0-9a60-49ce-88b8-c15969d7dc48
+    abbreviatedName: clmkohpe_v_hpc
+    slug: midwest_columbus-pop_oh_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 104
+  - name: NYC_Manhattan-POP_NY_vod_hpc
+    site_id: ea34602f-e507-439b-8b83-48ef2c21592d
+    abbreviatedName: nyclnyrg_v_hpc
+    slug: nyc_manhattan-pop_ny_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 101
+  - name: NYC_Queens-POP_NY_vod_hpc
+    site_id: 9da0346b-e212-4e34-b770-e46be076f73d
+    abbreviatedName: nyquny91_v_hpc
+    slug: nyc_queens-pop_ny_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 93
+  - name: NorthEast_Albany-POP_NY_vod_hpc
+    site_id: 8bf48624-e4ba-4391-8194-63029f7a9c17
+    abbreviatedName: albynyyf_v_hpc
+    slug: northeast_albany-pop_ny_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 102
+  - name: NorthEast_Rochester-POP_NY_vod_hpc
+    site_id: b5773667-9bcb-493b-b40a-5a3848513a02
+    abbreviatedName: rochnyei_v_hpc
+    slug: northeast_rochester-pop_ny_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 94
+  - name: PacWest_Lancaster-POP_CA_vod_hpc
+    site_id: 32687bbd-bbea-4e32-b2a6-cff87865a51a
+    abbreviatedName: lsancarc_v_hpc
+    slug: pacwest_lancaster-pop_ca_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: True
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1_id: aee8a179-f451-4079-aa6e-9c57ce5ab106
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2_id: f8368787-bcf9-4486-b826-a1e4eee677a3
+    neighbor2_preference: 750
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 21
+  - name: PacWest_Mililani_HI_vod_hpc
+    site_id: c5a9aea6-7f2a-4a4a-90e4-c2a939e09fa4
+    abbreviatedName: milnhixd_v_hpc
+    slug: pacwest_mililani_hi_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 95
+  - name: PacWest_Tustin-POP_CA_vod_hpc
+    site_id: 2e65e03f-652c-4b81-8fe3-f86dc9a854b0
+    abbreviatedName: tustcaft_v_hpc
+    slug: pacwest_tustin-pop_ca_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    region: TWC Pacwest
+    region_id: 80917b34-2cba-4553-92d4-ee50d5329214
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 20
+  - name: Texas_Dallas-POP_TX_vod_hpc
+    site_id: 58001188-b3a6-4eaf-ba2f-2247adcd2b57
+    abbreviatedName: dllatx37_v_hpc
+    slug: texas_dallas-pop_tx_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 99
+  - name: Texas_Houston-POP_TX_vod_hpc
+    site_id: 859f6c62-0993-49b6-86f8-199548ef177a
+    abbreviatedName: hstqtx02_v_hpc
+    slug: texas_houston-pop_tx_vod_hpc
+    cdn_site_role: Regional VOD
+    cdn_site_role_id: 50feb6d6-3276-4a98-bdef-38a9666d3030
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    neighbor2_preference: 500
+    cacheMemoryProfile: VOD-HPC-FEC
+    cacheMemoryProfileId: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+    siteId: 100
+  - name: Carolinas_NCEast_NC_vod_shield
+    site_id: 471df6e2-416c-4a2b-84a6-212ca078d393
+    abbreviatedName: chrlnc01_v_shc
+    slug: carolinas_nceast_nc_vod_shield
+    cdn_site_role: VOD-Shields
+    cdn_site_role_id: 42f27697-e57a-45f0-966f-6cac1935cee4
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    cacheMemoryProfile: VOD-Shield
+    cacheMemoryProfileId: 7b65a9d1-3698-429a-b7b6-09f3e70a1b40
+    siteId: 4
+  - name: NorthWest_NCWest_CO_vod_shield
+    site_id: 596bf08d-6a0e-431c-9cef-d065b71ff85b
+    abbreviatedName: dnvrco02_v_shc
+    slug: northwest_ncwest_co_vod_shield-2
+    cdn_site_role: VOD-Shields
+    cdn_site_role_id: 42f27697-e57a-45f0-966f-6cac1935cee4
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    cacheMemoryProfile: VOD-Shield
+    cacheMemoryProfileId: 7b65a9d1-3698-429a-b7b6-09f3e70a1b40
+    siteId: 3
+  - name: Carolinas_NCEast_NC_linear_shield
+    site_id: 0c1c68f7-a3c1-4a5f-b23f-7e901d72f496
+    abbreviatedName: chrlnc01_l_shc
+    slug: carolinas_nceast_nc_linear_shield
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    cacheMemoryProfile: Linear-Shield
+    cacheMemoryProfileId: c7553b79-a664-4f46-b9b6-e59837465355
+    siteId: 9

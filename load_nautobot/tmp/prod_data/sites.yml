@@ -1,0 +1,2162 @@
+sites:
+  - name: control_aas
+    abbreviatedName: 
+    siteid: 3
+    role: Akamai Control Plane
+    region: none-assigned
+    site: none-assigned
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: nceast_control
+    abbreviatedName: 
+    siteid: 5
+    role: Akamai Control Plane
+    region: National Datacenter East
+    site: charlotte_chrcnctr
+    site_slug: chrcnctr
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: ncwest_control
+    abbreviatedName: 
+    siteid: 1
+    role: Akamai Control Plane
+    region: National Datacenter West
+    site: centennial_enwdcocd
+    site_slug: enwdcocd
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_Carolinas_Charlotte_NC_linear_hpc
+    abbreviatedName: chrlnc01_l_hpc
+    siteid: 17
+    role: Beta_Site
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 150000
+    enableDisklessMode: False
+    neighbor1: beta_Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 1000
+    neighbor2: beta_NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_Carolinas_Durham_NC_linear_hpc
+    abbreviatedName: drhmncev_l_hpc
+    siteid: 15
+    role: Beta_Site
+    region: Carolinas
+    site: durham_drhmncev
+    site_slug: drhmncev
+    bandwidthLimitMbps: 150000
+    enableDisklessMode: False
+    neighbor1: beta_Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 1000
+    neighbor2: beta_NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_Carolinas_NCEast_NC_linear_rtr
+    abbreviatedName: 
+    siteid: 8
+    role: Beta_Site
+    region: Carolinas
+    site: none-assigned
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_Carolinas_NCEast_NC_linear_shield
+    abbreviatedName: chrlnc01_l_shc
+    siteid: 9
+    role: Beta_Site
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_control_aas
+    abbreviatedName: 
+    siteid: 3
+    role: Beta_Site
+    region: none-assigned
+    site: none-assigned
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_NorthWest_NCWest_CO_linear_rtr
+    abbreviatedName: 
+    siteid: 10
+    role: Beta_Site
+    region: Northwest
+    site: centennial_enwdcocd
+    site_slug: enwdcocd
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_NorthWest_NCWest_CO_linear_shield
+    abbreviatedName: dnvrco02_l_shc
+    siteid: 11
+    role: Beta_Site
+    region: Northwest
+    site: centennial_enwdcocd
+    site_slug: enwdcocd
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_PacWest_Lancaster_CA_linear_hpc
+    abbreviatedName: lsancarc_l_hpc
+    siteid: 14
+    role: Beta_Site
+    region: West
+    site: los angeles_lsancarc
+    site_slug: lsancarc
+    bandwidthLimitMbps: 150000
+    enableDisklessMode: False
+    neighbor1: beta_NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 1000
+    neighbor2: beta_Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_PacWest_Tustin_CA_linear_hpc
+    abbreviatedName: tustcaft_l_hpc
+    siteid: 13
+    role: Beta_Site
+    region: West
+    site: tustin_tustcaft
+    site_slug: tustcaft
+    bandwidthLimitMbps: 150000
+    enableDisklessMode: False
+    neighbor1: beta_NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 1000
+    neighbor2: beta_Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_Texas_Dallas_TX_linear_hpc
+    abbreviatedName: dllbtxlb_l_hpc
+    siteid: 4
+    role: Beta_Site
+    region: Texas
+    site: dallas_dllbtxlb
+    site_slug: dllbtxlb
+    bandwidthLimitMbps: 450000
+    enableDisklessMode: False
+    neighbor1: beta_NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 1000
+    neighbor2: beta_Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: beta_Texas_Houston_TX_linear_hpc
+    abbreviatedName: hstntx_l_hpc
+    siteid: 6
+    role: Beta_Site
+    region: Texas
+    site: none-assigned
+    bandwidthLimitMbps: 150000
+    enableDisklessMode: False
+    neighbor1: beta_Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 1000
+    neighbor2: beta_NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Tustin_CA_linear_hpc
+    abbreviatedName: 
+    siteid: 13
+    role: Beta_Site
+    region: West
+    site: none-assigned
+    bandwidthLimitMbps: 
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_NCEast_NC_linear_shield
+    abbreviatedName: chrlnc01_l_shc
+    siteid: 9
+    role: Linear-Shields
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: none-assigned
+    neighbor2_preference: 
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_NCWest_CO_linear_shield
+    abbreviatedName: dnvrco02_l_shc
+    siteid: 11
+    role: Linear-Shields
+    region: Northwest
+    site: centennial_enwdcocd
+    site_slug: enwdcocd
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: none-assigned
+    neighbor2_preference: 
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Amity_NC_linear_hpc
+    abbreviatedName: chrbnccf_l_hpc
+    siteid: 70
+    role: Market Linear Edge
+    region: Carolinas
+    site: charlotte_chrbnccf
+    site_slug: chrbnccf
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Apex_NC_linear_hpc
+    abbreviatedName: apexncco_l_hpc
+    siteid: 69
+    role: Market Linear Edge
+    region: Carolinas
+    site: apex_apexncco
+    site_slug: apexncco
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Charlotte_NC_linear_hpc
+    abbreviatedName: chrlnc01_l_hpc
+    siteid: 17
+    role: Market Linear Edge
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Columbia_SC_linear_hpc
+    abbreviatedName: clmcsc30_l_hpc
+    siteid: 74
+    role: Market Linear Edge
+    region: Carolinas
+    site: columbia_clmcsc30
+    site_slug: clmcsc30
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Fayetteville_NC_linear_hpc
+    abbreviatedName: fyvlnch_l_hpc
+    siteid: 78
+    role: Market Linear Edge
+    region: Carolinas
+    site: fayetteville_fyvlnch
+    site_slug: fyvlnch
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Greensboro_NC_linear_hpc
+    abbreviatedName: gnboncnn_l_hpc
+    siteid: 79
+    role: Market Linear Edge
+    region: Carolinas
+    site: greensboro_gnboncnn
+    site_slug: gnboncnn
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Leland_NC_linear_hpc
+    abbreviatedName: leldnc12_l_hpc
+    siteid: 80
+    role: Market Linear Edge
+    region: Carolinas
+    site: leland_leldnc12
+    site_slug: leldnc12
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_MyrtleBeach_SC_linear_hpc
+    abbreviatedName: mybhsc06_l_hpc
+    siteid: 81
+    role: Market Linear Edge
+    region: Carolinas
+    site: myrtle beach_mybhsc06
+    site_slug: mybhsc06
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_SouthernPine_NC_linear_hpc
+    abbreviatedName: spnsnces_l_hpc
+    siteid: 82
+    role: Market Linear Edge
+    region: Carolinas
+    site: southern pines_spnsnces
+    site_slug: spnsnces
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Wilmington_NC_linear_hpc
+    abbreviatedName: wlmincdm_l_hpc
+    siteid: 83
+    role: Market Linear Edge
+    region: Carolinas
+    site: wilmington_wlmincdm
+    site_slug: wlmincdm
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Winston-Salem_NC_linear_hpc
+    abbreviatedName: wnslncpv_l_hpc
+    siteid: 84
+    role: Market Linear Edge
+    region: Carolinas
+    site: winston salem_wnslncpv
+    site_slug: wnslncpv
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Florida_Deland_FL_linear_hpc
+    abbreviatedName: deldfl05_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Florida
+    site: deland_deldfl05
+    site_slug: deldfl05
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Florida_Orlando-POP_FL_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Florida_Tampa-POP_FL_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Florida_Palm-Harbor_FL_linear_hpc
+    abbreviatedName: plhrfliq_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Florida
+    site: palm harbor_plhrfliq
+    site_slug: plhrfliq
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Florida_Orlando-POP_FL_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Florida_Tampa-POP_FL_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Chambers_OH_linear_hpc
+    abbreviatedName: clmcohib_l_hpc
+    siteid: 25
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: columbus_clmcohib
+    site_slug: clmcohib
+    bandwidthLimitMbps: 720000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Cleveland-Heights_OH_linear_hpc
+    abbreviatedName: clevohek_l_hpc
+    siteid: 22
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: cleveland_clevohek
+    site_slug: clevohek
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Greenfiled_WI_linear_hpc
+    abbreviatedName: gnfdwibb_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: greenfield_gnfdwibb
+    site_slug: gnfdwibb
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Lincoln_NE_linear_hpc
+    abbreviatedName: lnclnebt_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: lincoln_lnclnebt
+    site_slug: lnclnebt
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_North-Canton_OH_linear_hpc
+    abbreviatedName: pltsohae_l_hpc
+    siteid: 23
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: plain township (stark)_pltsohae
+    site_slug: pltsohae
+    bandwidthLimitMbps: 720000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Okolona_KY_linear_hpc
+    abbreviatedName: lsvmkyzo_l_hpc
+    siteid: 24
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: louisville_lsvmkyzo
+    site_slug: lsvmkyzo
+    bandwidthLimitMbps: 480000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Olentangy_OH_linear_hpc
+    abbreviatedName: clmkohpe_l_hpc
+    siteid: 26
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: columbus_clmkohpe
+    site_slug: clmkohpe
+    bandwidthLimitMbps: 960000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Walnut_Milwaukee_WI_linear_hpc
+    abbreviatedName: milzwift_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Southern Ohio
+    site: milwaukee_milzwift
+    site_slug: milzwift
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Albany_NY_linear_hpc
+    abbreviatedName: albynyyf_l_hpc
+    siteid: 106
+    role: Market Linear Edge
+    region: Northeast
+    site: albany_albynyyf
+    site_slug: albynyyf
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Henrietta_NY_linear_hpc
+    abbreviatedName: hnrtnyaf_l_hpc
+    siteid: 45
+    role: Market Linear Edge
+    region: Northeast
+    site: henrietta_hnrtnyaf
+    site_slug: hnrtnyaf
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Ithaca_NY_linear_hpc
+    abbreviatedName: ithcnycy_l_hpc
+    siteid: 46
+    role: Market Linear Edge
+    region: Northeast
+    site: ithaca_ithcnycy
+    site_slug: ithcnycy
+    bandwidthLimitMbps: 210000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Lackwanna_NY_linear_hpc
+    abbreviatedName: lkwnnyad_l_hpc
+    siteid: 47
+    role: Market Linear Edge
+    region: Northeast
+    site: lackawanna_lkwnnyad
+    site_slug: lkwnnyad
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Lancaster_NY_linear_hpc
+    abbreviatedName: lncsnycd_l_hpc
+    siteid: 98
+    role: Market Linear Edge
+    region: Northeast
+    site: lancaster_lncsnycd
+    site_slug: lncsnycd
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Portland_ME_linear_hpc
+    abbreviatedName: ptldmehx_l_hpc
+    siteid: 48
+    role: Market Linear Edge
+    region: Northeast
+    site: portland_ptldmehx
+    site_slug: ptldmehx
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Rochester_NY_linear_hpc
+    abbreviatedName: rochnyei_l_hpc
+    siteid: 105
+    role: Market Linear Edge
+    region: Northeast
+    site: rochester_rochnyei
+    site_slug: rochnyei
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Sebago_ME_linear_hpc
+    abbreviatedName: sebgme03_l_hpc
+    siteid: 52
+    role: Market Linear Edge
+    region: Northeast
+    site: sebago_sebgme03
+    site_slug: sebgme03
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Syracuse-CourtSt_NY_linear_hpc
+    abbreviatedName: esyrnyaw_l_hpc
+    siteid: 42
+    role: Market Linear Edge
+    region: Northeast
+    site: east syracuse_esyrnyaw
+    site_slug: esyrnyaw
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Syracuse-Fairlakes_NY_linear_hpc
+    abbreviatedName: esyrnydr_l_hpc
+    siteid: 43
+    role: Market Linear Edge
+    region: Northeast
+    site: east syracuse_esyrnydr
+    site_slug: esyrnydr
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Vestal_NY_linear_hpc
+    abbreviatedName: vstlnyhe_l_hpc
+    siteid: 53
+    role: Market Linear Edge
+    region: Northeast
+    site: vestal_vstlnyhe
+    site_slug: vstlnyhe
+    bandwidthLimitMbps: 210000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Bowcroft_CA_linear_hpc
+    abbreviatedName: lsaicaev_l_hpc
+    siteid: 59
+    role: Market Linear Edge
+    region: West
+    site: los angeles_lsaicaev
+    site_slug: lsaicaev
+    bandwidthLimitMbps: 420000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Chatsworth_CA_linear_hpc
+    abbreviatedName: chwocadq_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: West
+    site: chatsworth_chwocadq
+    site_slug: chwocadq
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Cypress_CA_linear_hpc
+    abbreviatedName: cyprcabw_l_hpc
+    siteid: 57
+    role: Market Linear Edge
+    region: West
+    site: cypress_cyprcabw
+    site_slug: cyprcabw
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_LaMiranda_CA_linear_hpc
+    abbreviatedName: lamrcadq_l_hpc
+    siteid: 58
+    role: Market Linear Edge
+    region: West
+    site: la mirada_lamrcadq
+    site_slug: lamrcadq
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Mililani_HI_linear_hpc
+    abbreviatedName: milnhixd_l_hpc
+    siteid: 61
+    role: Market Linear Edge
+    region: West
+    site: mililani_milnhixd
+    site_slug: milnhixd
+    bandwidthLimitMbps: 140000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Ontario_CA_linear_hpc
+    abbreviatedName: ontrcacp_l_hpc
+    siteid: 62
+    role: Market Linear Edge
+    region: West
+    site: ontario_ontrcacp
+    site_slug: ontrcacp
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_PalmDesert_CA_linear_hpc
+    abbreviatedName: pldscabx_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: West
+    site: palm desert_pldscabx
+    site_slug: pldscabx
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_SanDiego_CA_linear_hpc
+    abbreviatedName: sndhcaax_l_hpc
+    siteid: 63
+    role: Market Linear Edge
+    region: West
+    site: san diego_sndhcaax
+    site_slug: sndhcaax
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_VanNuys_CA_linear_hpc
+    abbreviatedName: vnnycajz_l_hpc
+    siteid: 65
+    role: Market Linear Edge
+    region: West
+    site: van nuys_vnnycajz
+    site_slug: vnnycajz
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Austin-DuvalA_TX_linear_hpc
+    abbreviatedName: ausutxla_l_hpc
+    siteid: 88
+    role: Market Linear Edge
+    region: Texas
+    site: austin_ausutxla
+    site_slug: ausutxla
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Austin-RDC_TX_linear_hpc
+    abbreviatedName: ausdtxir_l_hpc
+    siteid: 87
+    role: Market Linear Edge
+    region: Texas
+    site: austin_ausdtxir
+    site_slug: ausdtxir
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Beaumont_TX_linear_hpc
+    abbreviatedName: bumutx28_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Texas
+    site: beaumont_bumutx28
+    site_slug: bumutx28
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Carrollton_TX_linear_hpc
+    abbreviatedName: crtntxjt_l_hpc
+    siteid: 89
+    role: Market Linear Edge
+    region: Texas
+    site: carrollton_crtntxjt
+    site_slug: crtntxjt
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Dallas_TX_linear_hpc
+    abbreviatedName: dllbtxlb_l_hpc
+    siteid: 4
+    role: Market Linear Edge
+    region: Texas
+    site: dallas_dllbtxlb
+    site_slug: dllbtxlb
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Gibbs_KS_linear_hpc
+    abbreviatedName: ksczksmp_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Texas
+    site: kansas city_ksczksmp
+    site_slug: ksczksmp
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Harlingen_TX_linear_hpc
+    abbreviatedName: hrlntxcb_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Texas
+    site: harlingen_hrlntxcb
+    site_slug: hrlntxcb
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Pharr_TX_linear_hpc
+    abbreviatedName: phrrtxgy_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Texas
+    site: pharr_phrrtxgy
+    site_slug: phrrtxgy
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Port-Neches_TX_linear_hpc
+    abbreviatedName: ptnhtxak_l_hpc
+    siteid: 0
+    role: Market Linear Edge
+    region: Texas
+    site: port neches_ptnhtxak
+    site_slug: ptnhtxak
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_SanAntonio-LaColonia_TX_linear_hpc
+    abbreviatedName: snavtxuu_l_hpc
+    siteid: 92
+    role: Market Linear Edge
+    region: Texas
+    site: san antonio_snavtxuu
+    site_slug: snavtxuu
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_SanAntonio-UrbanLoop_TX_linear_hpc
+    abbreviatedName: snantxvy_l_hpc
+    siteid: 91
+    role: Market Linear Edge
+    region: Texas
+    site: san antonio_snantxvy
+    site_slug: snantxvy
+    bandwidthLimitMbps: 180000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Mililani_HI_vod_hpc
+    abbreviatedName: milnhixd_v_hpc
+    siteid: 95
+    role: Market VOD
+    region: West
+    site: mililani_milnhixd
+    site_slug: milnhixd
+    bandwidthLimitMbps: 140000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Charlotte-POP_NC_linear_hpc
+    abbreviatedName: chrlnc01_l_hpc
+    siteid: 72
+    role: Regional Linear Edge
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 1320000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Durham-POP_NC_linear_hpc
+    abbreviatedName: drhmncev_l_hpc
+    siteid: 76
+    role: Regional Linear Edge
+    region: Carolinas
+    site: durham_drhmncev
+    site_slug: drhmncev
+    bandwidthLimitMbps: 1320000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Central_Belleville-CHTR_IL_linear_hpc
+    abbreviatedName: swnsilbl_l_hpc
+    siteid: 107
+    role: Regional Linear Edge
+    region: Central
+    site: swansea_swnsilbl
+    site_slug: swnsilbl
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Central_EauClaire-CHTR_WI_linear_hpc
+    abbreviatedName: unecwiac_l_hpc
+    siteid: 34
+    role: Regional Linear Edge
+    region: Central
+    site: eau claire_unecwiac
+    site_slug: unecwiac
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: Central_EauClaire-CHTR_WI_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Central_Kearney-CHTR_NE_linear_hpc
+    abbreviatedName: krnynegq_l_hpc
+    siteid: 36
+    role: Regional Linear Edge
+    region: Central
+    site: kearney_krnynegq
+    site_slug: krnynegq
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Central_Olivette-CHTR_MO_linear_hpc
+    abbreviatedName: olvemoad_l_hpc
+    siteid: 55
+    role: Regional Linear Edge
+    region: Central
+    site: olivette_olvemoad
+    site_slug: olvemoad
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Central_StCloud-CHTR_MN_linear_hpc
+    abbreviatedName: wtpkmnac_l_hpc
+    siteid: 86
+    role: Regional Linear Edge
+    region: Central
+    site: waite park_wtpkmnac
+    site_slug: wtpkmnac
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: Central_EauClaire-CHTR_WI_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Florida_Orlando-POP_FL_linear_hpc
+    abbreviatedName: orld71_l_hpc
+    siteid: 29
+    role: Regional Linear Edge
+    region: Florida
+    site: orlando_orld71
+    site_slug: orld71
+    bandwidthLimitMbps: 1200000
+    enableDisklessMode: True
+    neighbor1: Florida_Tampa-POP_FL_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Florida_Orlando-POP_FL_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Florida_Tampa-POP_FL_linear_hpc
+    abbreviatedName: tamp20_l_hpc
+    siteid: 31
+    role: Regional Linear Edge
+    region: Florida
+    site: tampa_tamp20
+    site_slug: tamp20
+    bandwidthLimitMbps: 1200000
+    enableDisklessMode: True
+    neighbor1: Florida_Tampa-POP_FL_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Florida_Orlando-POP_FL_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: GreatLakes_Allendale-CHTR_MI_linear_hpc
+    abbreviatedName: antsmiad_l_hpc
+    siteid: 33
+    role: Regional Linear Edge
+    region: Great Lakes
+    site: allendale_antsmiad
+    site_slug: antsmiad
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: GreatLakes_Allendale-CHTR_MI_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: GreatLakes_Saginaw-CHTR_MI_linear_hpc
+    abbreviatedName: sgnwmipa_l_hpc
+    siteid: 112
+    role: Regional Linear Edge
+    region: Great Lakes
+    site: saginaw_sgnwmipa
+    site_slug: sgnwmipa
+    bandwidthLimitMbps: 360000
+    enableDisklessMode: True
+    neighbor1: GreatLakes_Allendale-CHTR_MI_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Cleveland-POP_OH_linear_hpc
+    abbreviatedName: clevohek_l_hpc
+    siteid: 8
+    role: Regional Linear Edge
+    region: Southern Ohio
+    site: cleveland_clevohek
+    site_slug: clevohek
+    bandwidthLimitMbps: 1200000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Columbus-POP_OH_linear_hpc
+    abbreviatedName: clmkohpe_l_hpc
+    siteid: 9
+    role: Regional Linear Edge
+    region: Southern Ohio
+    site: columbus_clmkohpe
+    site_slug: clmkohpe
+    bandwidthLimitMbps: 1200000
+    enableDisklessMode: True
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Albany-POP_NY_linear_hpc
+    abbreviatedName: albynyyf_l_hpc
+    siteid: 40
+    role: Regional Linear Edge
+    region: Northeast
+    site: albany_albynyyf
+    site_slug: albynyyf
+    bandwidthLimitMbps: 840000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Newtown-CHTR_CT_linear_hpc
+    abbreviatedName: nwtwctac_l_hpc
+    siteid: 114
+    role: Regional Linear Edge
+    region: Northeast
+    site: newtown_nwtwctac
+    site_slug: nwtwctac
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Newtown-CHTR_CT_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Oxford-CHTR_MA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Oxford-CHTR_MA_linear_hpc
+    abbreviatedName: oxfrmaak_l_hpc
+    siteid: 56
+    role: Regional Linear Edge
+    region: Northeast
+    site: north oxford_oxfrmaak
+    site_slug: oxfrmaak
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Newtown-CHTR_CT_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Oxford-CHTR_MA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Rochester-POP_NY_linear_hpc
+    abbreviatedName: rochnyei_l_hpc
+    siteid: 51
+    role: Regional Linear Edge
+    region: Northeast
+    site: rochester_rochnyei
+    site_slug: rochnyei
+    bandwidthLimitMbps: 840000
+    enableDisklessMode: True
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_Denver-CHTR_CO_linear_hpc
+    abbreviatedName: dnvtco56_l_hpc
+    siteid: 38
+    role: Regional Linear Edge
+    region: Northwest
+    site: denver_dnvtco56
+    site_slug: dnvtco56
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_Missoula-CHTR_MT_linear_hpc
+    abbreviatedName: msslmteh_l_hpc
+    siteid: 117
+    role: Regional Linear Edge
+    region: Northwest
+    site: missoula_msslmteh
+    site_slug: msslmteh
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_Portland-CHTR_OR_linear_hpc
+    abbreviatedName: ptldorpb_l_hpc
+    siteid: 118
+    role: Regional Linear Edge
+    region: Northwest
+    site: portland_ptldorpb
+    site_slug: ptldorpb
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_RenoMHE-CHTR_NV_linear_hpc
+    abbreviatedName: renqnvlx_l_hpc
+    siteid: 119
+    role: Regional Linear Edge
+    region: Northwest
+    site: reno_renqnvlx
+    site_slug: renqnvlx
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_RenoPRI-CHTR_NV_linear_hpc
+    abbreviatedName: renpnvmw_l_hpc
+    siteid: 66
+    role: Regional Linear Edge
+    region: Northwest
+    site: reno_renpnvmw
+    site_slug: renpnvmw
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_SanJose-CHTR_CA_linear_hpc
+    abbreviatedName: snjycahm_l_hpc
+    siteid: 120
+    role: Regional Linear Edge
+    region: Northwest
+    site: san jose_snjycahm
+    site_slug: snjycahm
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_SanLuisObispo-CHTR_CA_linear_hpc
+    abbreviatedName: snloca88_l_hpc
+    siteid: 54
+    role: Regional Linear Edge
+    region: Northwest
+    site: san luis obispo_snloca88
+    site_slug: snloca88
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NYC_Manhattan-POP_NY_linear_hpc
+    abbreviatedName: nyclnyrg_l_hpc
+    siteid: 10
+    role: Regional Linear Edge
+    region: New York City
+    site: new york_nyclnyrg
+    site_slug: nyclnyrg
+    bandwidthLimitMbps: 480000
+    enableDisklessMode: True
+    neighbor1: NYC_Manhattan-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NYC_Queens-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NYC_Queens-POP_NY_linear_hpc
+    abbreviatedName: nyquny91_l_hpc
+    siteid: 14
+    role: Regional Linear Edge
+    region: New York City
+    site: woodside_nyquny91
+    site_slug: nyquny91
+    bandwidthLimitMbps: 480000
+    enableDisklessMode: True
+    neighbor1: NYC_Manhattan-POP_NY_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NYC_Queens-POP_NY_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Lancaster-POP_CA_linear_hpc
+    abbreviatedName: lsancarc_l_hpc
+    siteid: 27
+    role: Regional Linear Edge
+    region: West
+    site: los angeles_lsancarc
+    site_slug: lsancarc
+    bandwidthLimitMbps: 720000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_MontereyPark-CHTR_CA_linear_hpc
+    abbreviatedName: mtpkcacg_l_hpc
+    siteid: 122
+    role: Regional Linear Edge
+    region: West
+    site: monterey park_mtpkcacg
+    site_slug: mtpkcacg
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Riverside-CHTR_CA_linear_hpc
+    abbreviatedName: rvsdcaqu_l_hpc
+    siteid: 67
+    role: Regional Linear Edge
+    region: West
+    site: riverside_rvsdcaqu
+    site_slug: rvsdcaqu
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Tustin-POP_CA_linear_hpc
+    abbreviatedName: tustcaft_l_hpc
+    siteid: 28
+    role: Regional Linear Edge
+    region: West
+    site: tustin_tustcaft
+    site_slug: tustcaft
+    bandwidthLimitMbps: 720000
+    enableDisklessMode: True
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_Greenville-CHTR_SC_linear_hpc
+    abbreviatedName: gnvqsc18_l_hpc
+    siteid: 0
+    role: Regional Linear Edge
+    region: South
+    site: greenville_gnvqsc18
+    site_slug: gnvqsc18
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_Leeds-CHTR_LA_linear_hpc
+    abbreviatedName: ledsalan_l_hpc
+    siteid: 0
+    role: Regional Linear Edge
+    region: South
+    site: leeds_ledsalan
+    site_slug: ledsalan
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_Manchester-CHTR_TN_linear_hpc
+    abbreviatedName: mnchtnem_l_hpc
+    siteid: 124
+    role: Regional Linear Edge
+    region: South
+    site: manchester_mnchtnem
+    site_slug: mnchtnem
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_Montgomery-CHTR_LA_linear_hpc
+    abbreviatedName: mtgmalmh_l_hpc
+    siteid: 0
+    role: Regional Linear Edge
+    region: South
+    site: montgomery_mtgmalmh
+    site_slug: mtgmalmh
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_Slidell-CHTR_LA_linear_hpc
+    abbreviatedName: slidladf_l_hpc
+    siteid: 68
+    role: Regional Linear Edge
+    region: South
+    site: slidell_slidladf
+    site_slug: slidladf
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_Spartanburg-CHTR_SC_linear_hpc
+    abbreviatedName: spbgscfe_l_hpc
+    siteid: 0
+    role: Regional Linear Edge
+    region: South
+    site: spartanburg_spbgscfe
+    site_slug: spbgscfe
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_SugarHill-CHTR_GA_linear_hpc
+    abbreviatedName: sghlgaao_l_hpc
+    siteid: 126
+    role: Regional Linear Edge
+    region: South
+    site: sugar hill_sghlgaao
+    site_slug: sghlgaao
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: True
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Dallas-CHTR_TX_linear_hpc
+    abbreviatedName: dllstx97_l_hpc
+    siteid: 128
+    role: Regional Linear Edge
+    region: none-assigned
+    site: dallas_dllstx97
+    site_slug: dllstx97
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Dallas-POP_TX_linear_hpc
+    abbreviatedName: dllatx37_l_hpc
+    siteid: 17
+    role: Regional Linear Edge
+    region: Texas
+    site: dallas_dllatx37
+    site_slug: dllatx37
+    bandwidthLimitMbps: 960000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_FortWorth-CHTR_TX_linear_hpc
+    abbreviatedName: ftwptxzp_l_hpc
+    siteid: 35
+    role: Regional Linear Edge
+    region: Texas
+    site: ft worth_ftwptxzp
+    site_slug: ftwptxzp
+    bandwidthLimitMbps: 240000
+    enableDisklessMode: True
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Houston-POP_TX_linear_hpc
+    abbreviatedName: hstqtx02_l_hpc
+    siteid: 16
+    role: Regional Linear Edge
+    region: Texas
+    site: houston_hstqtx02
+    site_slug: hstqtx02
+    bandwidthLimitMbps: 960000
+    enableDisklessMode: True
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Charlotte-POP_NC_linear_mid
+    abbreviatedName: chrlnc01_l_mid
+    siteid: 71
+    role: Regional Linear MidTier
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 450000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Durham-POP_NC_linear_mid
+    abbreviatedName: drhmncev_l_mid
+    siteid: 75
+    role: Regional Linear MidTier
+    region: Carolinas
+    site: durham_drhmncev
+    site_slug: drhmncev
+    bandwidthLimitMbps: 450000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Central_EauClaire-CHTR_WI_linear_mid
+    abbreviatedName: unecwiac_l_mid
+    siteid: 108
+    role: Regional Linear MidTier
+    region: Central
+    site: eau claire_unecwiac
+    site_slug: unecwiac
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Central_Olivette-CHTR_MO_linear_mid
+    abbreviatedName: olvemoad_l_mid
+    siteid: 109
+    role: Regional Linear MidTier
+    region: Central
+    site: olivette_olvemoad
+    site_slug: olvemoad
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Central_StCloud-CHTR_MN_linear_mid
+    abbreviatedName: wtpkmnac_l_mid
+    siteid: 110
+    role: Regional Linear MidTier
+    region: Central
+    site: waite park_wtpkmnac
+    site_slug: wtpkmnac
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Florida_Orlando-POP_FL_linear_mid
+    abbreviatedName: orld71_l_mid
+    siteid: 30
+    role: Regional Linear MidTier
+    region: Florida
+    site: orlando_orld71
+    site_slug: orld71
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Florida_Tampa-POP_FL_linear_mid
+    abbreviatedName: tamp20_l_mid
+    siteid: 32
+    role: Regional Linear MidTier
+    region: Florida
+    site: tampa_tamp20
+    site_slug: tamp20
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: GreatLakes_Allendale-CHTR_MI_linear_mid
+    abbreviatedName: antsmiad_l_mid
+    siteid: 111
+    role: Regional Linear MidTier
+    region: Great Lakes
+    site: allendale_antsmiad
+    site_slug: antsmiad
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    abbreviatedName: sgnwmipa_l_mid
+    siteid: 113
+    role: Regional Linear MidTier
+    region: Great Lakes
+    site: saginaw_sgnwmipa
+    site_slug: sgnwmipa
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Cleveland-POP_OH_linear_mid
+    abbreviatedName: clevohek_l_mid
+    siteid: 12
+    role: Regional Linear MidTier
+    region: Southern Ohio
+    site: cleveland_clevohek
+    site_slug: clevohek
+    bandwidthLimitMbps: 750000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Columbus-POP_OH_linear_mid
+    abbreviatedName: clmkohpe_l_mid
+    siteid: 13
+    role: Regional Linear MidTier
+    region: Southern Ohio
+    site: columbus_clmkohpe
+    site_slug: clmkohpe
+    bandwidthLimitMbps: 750000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Albany-POP_NY_linear_mid
+    abbreviatedName: albynyyf_l_mid
+    siteid: 39
+    role: Regional Linear MidTier
+    region: Northeast
+    site: albany_albynyyf
+    site_slug: albynyyf
+    bandwidthLimitMbps: 450000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Newtown-CHTR_CT_linear_mid
+    abbreviatedName: nwtwctac_l_mid
+    siteid: 115
+    role: Regional Linear MidTier
+    region: Northeast
+    site: newtown_nwtwctac
+    site_slug: nwtwctac
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Oxford-CHTR_MA_linear_mid
+    abbreviatedName: oxfrmaak_l_mid
+    siteid: 116
+    role: Regional Linear MidTier
+    region: Northeast
+    site: north oxford_oxfrmaak
+    site_slug: oxfrmaak
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Rochester-POP_NY_linear_mid
+    abbreviatedName: rochnyei_l_mid
+    siteid: 50
+    role: Regional Linear MidTier
+    region: Northeast
+    site: rochester_rochnyei
+    site_slug: rochnyei
+    bandwidthLimitMbps: 450000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_SanJose-CHTR_CA_linear_mid
+    abbreviatedName: snjycahm_l_mid
+    siteid: 121
+    role: Regional Linear MidTier
+    region: Northwest
+    site: san jose_snjycahm
+    site_slug: snjycahm
+    bandwidthLimitMbps: 900000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NYC_Manhattan-POP_NY_linear_mid
+    abbreviatedName: nyclnyrg_l_mid
+    siteid: 11
+    role: Regional Linear MidTier
+    region: New York City
+    site: new york_nyclnyrg
+    site_slug: nyclnyrg
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NYC_Queens-POP_NY_linear_mid
+    abbreviatedName: nyquny91_l_mid
+    siteid: 15
+    role: Regional Linear MidTier
+    region: New York City
+    site: woodside_nyquny91
+    site_slug: nyquny91
+    bandwidthLimitMbps: 300000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Lancaster-POP_CA_linear_mid
+    abbreviatedName: lsancarc_l_mid
+    siteid: 60
+    role: Regional Linear MidTier
+    region: West
+    site: los angeles_lsancarc
+    site_slug: lsancarc
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Riverside-CHTR_CA_linear_mid
+    abbreviatedName: rvsdcaqu_l_mid
+    siteid: 123
+    role: Regional Linear MidTier
+    region: West
+    site: riverside_rvsdcaqu
+    site_slug: rvsdcaqu
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Tustin-POP_CA_linear_mid
+    abbreviatedName: tustcaft_l_mid
+    siteid: 64
+    role: Regional Linear MidTier
+    region: West
+    site: tustin_tustcaft
+    site_slug: tustcaft
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Dallas-POP_TX_linear_mid
+    abbreviatedName: dllatx37_l_mid
+    siteid: 18
+    role: Regional Linear MidTier
+    region: none-assigned
+    site: dallas_dllatx37
+    site_slug: dllatx37
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Houston-POP_TX_linear_mid
+    abbreviatedName: hstqtx02_l_mid
+    siteid: 19
+    role: Regional Linear MidTier
+    region: none-assigned
+    site: houston_hstqtx02
+    site_slug: hstqtx02
+    bandwidthLimitMbps: 600000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Charlotte-POP_NC_vod_hpc
+    abbreviatedName: chrlnc01_v_hpc
+    siteid: 96
+    role: Regional VOD
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Durham-POP_NC_vod_hpc
+    abbreviatedName: drhmncev_v_hpc
+    siteid: 97
+    role: Regional VOD
+    region: Carolinas
+    site: durham_drhmncev
+    site_slug: drhmncev
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Cleveland-POP_OH_vod_hpc
+    abbreviatedName: clevohek_v_hpc
+    siteid: 103
+    role: Regional VOD
+    region: Southern Ohio
+    site: cleveland_clevohek
+    site_slug: clevohek
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: MidWest_Columbus-POP_OH_vod_hpc
+    abbreviatedName: clmkohpe_v_hpc
+    siteid: 104
+    role: Regional VOD
+    region: Southern Ohio
+    site: columbus_clmkohpe
+    site_slug: clmkohpe
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Albany-POP_NY_vod_hpc
+    abbreviatedName: albynyyf_v_hpc
+    siteid: 102
+    role: Regional VOD
+    region: Northeast
+    site: albany_albynyyf
+    site_slug: albynyyf
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NorthEast_Rochester-POP_NY_vod_hpc
+    abbreviatedName: rochnyei_v_hpc
+    siteid: 94
+    role: Regional VOD
+    region: Northeast
+    site: rochester_rochnyei
+    site_slug: rochnyei
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NYC_Manhattan-POP_NY_vod_hpc
+    abbreviatedName: nyclnyrg_v_hpc
+    siteid: 101
+    role: Regional VOD
+    region: New York City
+    site: new york_nyclnyrg
+    site_slug: nyclnyrg
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: NYC_Queens-POP_NY_vod_hpc
+    abbreviatedName: nyquny91_v_hpc
+    siteid: 93
+    role: Regional VOD
+    region: New York City
+    site: woodside_nyquny91
+    site_slug: nyquny91
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Lancaster-POP_CA_vod_hpc
+    abbreviatedName: lsancarc_v_hpc
+    siteid: 21
+    role: Regional VOD
+    region: West
+    site: los angeles_lsancarc
+    site_slug: lsancarc
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: PacWest_Tustin-POP_CA_vod_hpc
+    abbreviatedName: tustcaft_v_hpc
+    siteid: 20
+    role: Regional VOD
+    region: West
+    site: tustin_tustcaft
+    site_slug: tustcaft
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Dallas-POP_TX_vod_hpc
+    abbreviatedName: dllatx37_v_hpc
+    siteid: 99
+    role: Regional VOD
+    region: none-assigned
+    site: dallas_dllatx37
+    site_slug: dllatx37
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: Texas_Houston-POP_TX_vod_hpc
+    abbreviatedName: hstqtx02_v_hpc
+    siteid: 100
+    role: Regional VOD
+    region: none-assigned
+    site: houston_hstqtx02
+    site_slug: hstqtx02
+    bandwidthLimitMbps: 280000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: enterprise_cdn_control
+    abbreviatedName: 
+    siteid: 1
+    role: Spectrum Enterprise Control Plane
+    region: none-assigned
+    site: none-assigned
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: enterprise_cdn_control_aas
+    abbreviatedName: 
+    siteid: 3
+    role: Spectrum Enterprise Control Plane
+    region: none-assigned
+    site: none-assigned
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: none-assigned
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_NCEast_NC_ent_hpc
+    abbreviatedName: 
+    siteid: 4
+    role: Spectrum Enterprise HPCs
+    region: Carolinas
+    site: none-assigned
+    bandwidthLimitMbps: 30000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_ent_hpc
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_NCWest_CO_ent_hpc
+    abbreviatedName: 
+    siteid: 5
+    role: Spectrum Enterprise HPCs
+    region: Northwest
+    site: none-assigned
+    bandwidthLimitMbps: 30000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_ent_hpc
+    neighbor1_preference: 1000
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_NCEast_NC_vod_shield
+    abbreviatedName: chrlnc01_v_shc
+    siteid: 4
+    role: VOD-Shields
+    region: Carolinas
+    site: charlotte_nce_chrlnc01
+    site_slug: chrlnc01
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor1_preference: 600
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: NorthWest_NCWest_CO_vod_shield
+    abbreviatedName: dnvrco02_v_shc
+    siteid: 3
+    role: VOD-Shields
+    region: Northwest
+    site: centennial_enwdcocd
+    site_slug: enwdcocd
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor1_preference: 600
+    neighbor2: none-assigned
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: Carolinas_Durham_NC_linear_hpc
+    abbreviatedName: drhmncev_l_hpc
+    siteid: 15
+    role: none-assigned
+    region: Carolinas
+    site: durham_drhmncev
+    site_slug: drhmncev
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1_preference: 1000
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2_preference: 750
+    cacheMemoryProfileId: no-profile
+  - name: South_Manchester-CHTR_TN_linear_mid
+    abbreviatedName: mnchtnem_l_mid
+    siteid: 125
+    role: none-assigned
+    region: South
+    site: manchester_mnchtnem
+    site_slug: mnchtnem
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile
+  - name: South_SugarHill-CHTR_GA_linear_mid
+    abbreviatedName: sghlgaao_l_mid
+    siteid: 127
+    role: none-assigned
+    region: South
+    site: sugar hill_sghlgaao
+    site_slug: sghlgaao
+    bandwidthLimitMbps: 1000
+    enableDisklessMode: False
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor1_preference: 600
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+    neighbor2_preference: 500
+    cacheMemoryProfileId: no-profile

@@ -1,0 +1,38 @@
+---
+- name: Pull Config Context Data from Nautbot
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        cdn_config_contexts {
+          name
+          data
+          cdnsites {
+            name
+          }
+        }
+      }
+  register: config_contexts
+
+- name: Pull CDN Sites
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        cdn_sites {
+          name
+          cdn_site_role{
+            name
+          }
+        }
+      }
+  register: cdn_sites
+
+- name: create linear site map
+  template:
+    src: linear_site_map.j2
+    dest: ./tmp/site_maps/linear_site_map

@@ -1,0 +1,9 @@
+origins:
+{% for res in origin_list['results'] %}
+{% for origin in res['json']['origins'] %}
+  - hostname: {{ origin['hostname'] }}
+    originId: {{ origin['originId'] }}
+    contendprovider: {{ res['item']['name'] }}
+    contendproviderId: {{ res['item']['contentProviderId'] }}
+{% endfor %}
+{% endfor %}

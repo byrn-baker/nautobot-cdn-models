@@ -1,0 +1,251 @@
+---
+# - name: Pulling Prod ECDN Data from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: "{{ query_prod_ecdn }}"
+#   register: prod_nb_ecdn_list
+
+# - template:
+#     src: vms.j2
+#     dest: ./tmp/vms.yml
+
+# - name: Pulling Prod ECDN vlan Data from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: "{{ query_prod_ecdn_vlans }}"
+#   register: prod_ecdn_vlans
+
+# - name: dump prod_nb_ecdn_list to yaml
+#   template:
+#     src: prod_ecdn_vlans.j2
+#     dest: ./tmp/prod_ecdn_vlans_list.yml
+
+# - include_vars: ./tmp/prod_ecdn_vlans_list.yml
+# - name: Create site with all parameters
+#   networktocode.nautobot.site:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     status: "active"
+#     physical_address: "{{ item.physical_address }}"
+#     state: present
+#   loop: "{{ sites }}"
+
+# - name: Create ipam role within Nautobot
+#   networktocode.nautobot.ipam_role:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     state: present
+#   loop: "{{ roles }}"
+
+# - name: Create vlan within Nautobot with only required information
+#   networktocode.nautobot.vlan:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     vid: "{{ item.vid }}"
+#     site: "{{ item.site }}"
+#     vlan_role: "{{ item.role }}"
+#     status: "active"
+#     state: present
+#   loop: "{{ vlans }}"
+
+# - name: Creating IPv4 prefix for virtual machines in Nautobot
+#   networktocode.nautobot.prefix:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     family: 4
+#     prefix: "{{ item.prefix }}"
+#     site: "{{ item.site }}"
+#     prefix_role: "{{ item.role }}"
+#     vlan:
+#       name: "{{ item.vlan }}"
+#       site: "{{ item.site }}"
+#     status: active
+#   loop: "{{ prefixes }}"
+
+# - name: Creating cluster types
+#   networktocode.nautobot.cluster_type:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "ecdn"
+#     state: present
+
+# - name: Creating clusters
+#   networktocode.nautobot.cluster:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.1.cluster.name }}"
+#     cluster_type: "{{ item.1.cluster.type.name}}"
+#     state: present
+#   loop: "{{ prod_nb_ecdn_list.data.tenants| subelements('devices', 'skip_missing=True') }}"
+
+# - name: Creating device roles for virtual machines
+#   networktocode.nautobot.device_role:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.1.role.name }}"
+#     color: "FFFFFF"
+#     state: present
+#   loop: "{{ prod_nb_ecdn_list.data.tenants| subelements('devices', 'skip_missing=True') }}"
+
+# - include_vars: ./tmp/vms.yml
+# - name: Creating virtual machines with vpu and memory in Nautobot
+#   networktocode.nautobot.virtual_machine:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     cluster: "{{ item.cluster }}"
+#     vcpus: "10"
+#     memory: "65536"
+#     virtual_machine_role: "{{ item.role }}"
+#     status: "active"
+#     state: present
+#   loop: "{{ virtualmachines }}"
+
+# - name: Creating virtual machines interfaces in Nautobot
+#   networktocode.nautobot.vm_interface:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     virtual_machine: "{{ item.name }}"
+#     name: "eth0"
+#     enabled: "true"
+#     state: present
+#   loop: "{{ virtualmachines }}"
+
+# - name: Assign IPv4 address to virtual machine in Nautobot
+#   networktocode.nautobot.ip_address:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     address: "{{ item.ipv4 }}"
+#     dns_name: "{{ item.name }}"
+#     assigned_object:
+#       name: "eth0"
+#       virtual_machine: "{{ item.name }}"
+#     status: "active"
+#     state: present
+#   loop: "{{ virtualmachines }}"
+
+# - name: Assign IPv6 address to virtual machine in Nautobot
+#   networktocode.nautobot.ip_address:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     address: "{{ item.ipv6 }}"
+#     dns_name: "{{ item.name }}"
+#     assigned_object:
+#       name: "eth0"
+#       virtual_machine: "{{ item.name }}"
+#     status: "active"
+#     state: present
+#   loop: "{{ virtualmachines }}"
+
+# - name: Creating virtual machines with vpu and memory in Nautobot
+#   networktocode.nautobot.virtual_machine:
+#     url: "{{ nb_url }}"
+#     token: "{{ nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     cluster: "{{ item.cluster }}"
+#     vcpus: "10"
+#     memory: "65536"
+#     virtual_machine_role: "{{ item.role }}"
+#     primary_ip4: "{{ item.ipv4 }}"
+#     primary_ip6: "{{ item.ipv6 }}"
+#     status: "active"
+#     state: present
+#   loop: "{{ virtualmachines }}"
+
+- name: Pulling Memory Profiles
+  uri:
+    url: "{{akamai_ecdn_url}}lcdn-services/v1/hypercache/cache-memory-profiles?view=detail&pageNumber=1&pageSize=1000"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    validate_certs: false
+    headers:
+      Accept: "application/json"
+      Authorization: "{{ akamai_ecdn_token }}"
+      validate_certs: false
+  register: memory_profiles
+
+- name: Loading Memory Profiles into Nautobot Dev instance
+  networktocode.nautobot.plugin:
+    url: "{{ beta_nb_url }}"
+    token: "{{ beta_nb_token }}"
+    plugin: akamai-config-manager
+    endpoint: cdnhypercachememoryprofile
+    validate_certs: false
+    identifiers:
+      name: "{{item.name}}"
+      frontEndCacheMemoryPercent: "{{item.frontEndCacheMemoryPercent}}"
+      ramOnlyCacheMemoryPercent: "{{item.ramOnlyCacheMemoryPercent}}"
+      hotCacheMemoryPercent: "{{item.hotCacheMemoryPercent}}"
+      diskIndexMemoryPercent: "{{item.diskIndexMemoryPercent}}"
+      cacheMemoryProfileId: "{{item.cacheMemoryProfileId}}"
+  loop: "{{ memory_profiles.json.cacheMemoryProfiles }}"
+
+
+- name: Pulling Site List
+  uri:
+    url: "{{akamai_ecdn_url}}infrastructure/v1/sites?view=detail&pageNumber=1&pageSize=1000"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    validate_certs: false
+    headers:
+      Accept: "application/json"
+      Authorization: "{{ akamai_ecdn_token }}"
+      validate_certs: false
+  register: site_list
+
+- name: Pulling Site Services
+  uri:
+    url: "{{akamai_ecdn_url}}lcdn-services/v1/sites/{{item.siteId}}"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    validate_certs: false
+    headers:
+      Accept: "application/json"
+      Authorization: "{{ akamai_ecdn_token }}"
+      validate_certs: false
+  register: site_service_list
+  loop: "{{site_list.json.sites}}"
+
+- name: Create Site List
+  template:
+    src: site_list.j2
+    dest: ./tmp/site_list.yml
+
+- include_vars: ./tmp/site_list.yml
+- name: Loading Sites into Nautobot Dev instance
+  networktocode.nautobot.plugin:
+    url: "{{ beta_nb_url }}"
+    token: "{{ beta_nb_token }}"
+    plugin: akamai-config-manager
+    endpoint: cdnsite
+    validate_certs: false
+    identifiers:
+      name: "{{item.name}}"
+      abbreviatedName: "{{item.abbreviatedName}}"
+      siteId: "{{item.siteId}}"
+      bandwidthLimitMbps: "{{item.bandwidthLimitMbps}}"
+      enableDisklessMode: "{{item.enableDisklessMode}}"
+  loop: "{{ sites }}"
+

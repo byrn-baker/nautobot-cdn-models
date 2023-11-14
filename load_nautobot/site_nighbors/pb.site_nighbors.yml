@@ -1,0 +1,11 @@
+- name: "Adding Data to Nautobot Dev"
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+  - include_vars: ../tmp/prod_data/site_neighbors
+  - name: build site neighbor yaml
+    template:
+      src: site_neighbor.j2
+      dest: site_nighbor.yml

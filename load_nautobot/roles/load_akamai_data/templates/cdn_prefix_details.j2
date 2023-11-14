@@ -1,0 +1,39 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+prefix_details:
+{% for res in results %}
+  - prefix: {{ res['json']['prefix'] }}
+    cdnPrefixId: {{ res['json']['cdnPrefixId'] }}
+    contentprovider: {{ res['item']['contentprovider'] }}
+    contentProviderId: {{ res['json']['contentProviderId'] }}
+    {% for cp in nb_content_provider_list['data']['cdn_content_provider_models'] if cp['name'] == res['item']['contentprovider'] %}
+    nb_contentprovider_id: {{ cp['id'] }}
+  {% endfor %}
+  {% if res['json']['dnsTtl'] is defined %}
+    dnsTtl: {{res['json']['dnsTtl']}}
+  {% else %}
+  {% endif %}
+  {% if res['json']['enable'] is defined %}
+    enable: {{res['json']['enable']}}
+  {% else %}
+  {% endif %}
+  {% if res['json']['ipAddressTagId'] is defined %}
+    ipAddressTagId: {{res['json']['ipAddressTagId']}}
+  {% else %}
+  {% endif %}
+  {% if res['json']['keepaliveRequests'] is defined %}
+    keepaliveRequests: {{res['json']['keepaliveRequests']}}
+  {% else %}
+  {% endif %}
+  {% if res['json']['prefixPrioritization'] is defined %}
+    prefixPrioritization: {{res['json']['prefixPrioritization']}}
+  {% else %}
+  {% endif %}
+  {% if res['json']['accessMapId'] is defined %}
+    accessMapId: {{res['json']['accessMapId']}}
+  {% else %}
+  {% endif %}
+  {% if res['json']['siteMapId'] is defined %}
+    siteMapId: {{res['json']['siteMapId']}}
+  {% else %}
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,18 @@
+- name: "Updating site neighbors in prod"
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+  - include_vars: ./tmp/prod_data/site_neighbor.yml
+  - name: Update Tenants
+    networktocode.nautobot.tenant:
+      url: "{{ prod_nb_url }}"
+      token: "{{ prod_nb_token }}"
+      validate_certs: no
+      name: "{{ item.name }}"
+      custom_fields:
+        cf_neighbor_1: "{{ item.neighbor1 }}"
+        cf_neighbor_2: "{% if item.neighbor2 is not defined %}''{% else %}{{ item.neighbor2 }}{% endif %}"
+      state: present
+    loop: "{{ site_neighbors }}"

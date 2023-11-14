@@ -1,0 +1,9 @@
+cdn_prefixes:
+{% for res in results %}
+{% for prefix in res['json']['cdnPrefixes'] %}
+  - prefix: {{ prefix['prefix'] }}
+    cdnPrefixId: {{ prefix['cdnPrefixId'] }}
+    contentprovider: {{ res['item']['name'] }}
+    contentProviderId: {{ res['item']['contentProviderId'] }}
+{% endfor%}
+{% endfor %}

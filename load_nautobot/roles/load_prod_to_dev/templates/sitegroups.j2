@@ -1,0 +1,9 @@
+---
+siteroles:
+{% for siterole in prod_tenant_groups['data']['site_roles'] %}
+  - name: {{ siterole['name'] }}
+{% if siterole['parent'] is not none %}
+    parent: {{ siterole['parent'] }}
+{% endif %}
+    description: {{ siterole['description'] }}
+{% endfor %}

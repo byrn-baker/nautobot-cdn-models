@@ -1,0 +1,7 @@
+---
+siteroles:
+{% for siterole in siteroles['data']['site_roles'] %}
+  - name: {{ siterole['name'] }}
+    description: {{ siterole['description'] }}
+    id: {{ siterole['id'] }}
+{% endfor %}

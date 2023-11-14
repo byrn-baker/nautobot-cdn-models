@@ -1,0 +1,12 @@
+---
+site_neighbors:
+{% set processed_sites = [] %}
+{% for site in site_neighbors %}
+{% if site['SiteA'] not in processed_sites %}
+{% set _ = processed_sites.append(site['SiteA'] )%}
+  - name: {{ site['SiteA'] }}
+    neighbor1: {{ site['SiteB'] }}
+{% elif site['SiteA'] in processed_sites %}
+    neighbor2: {{ site['SiteB'] }}
+{% endif %}
+{% endfor %}

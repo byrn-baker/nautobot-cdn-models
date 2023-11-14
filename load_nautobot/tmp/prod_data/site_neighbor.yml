@@ -1,0 +1,349 @@
+---
+site_neighbors:
+  - name: Carolinas_Amity_NC_linear_hpc
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+  - name: Carolinas_Apex_NC_linear_hpc
+    neighbor1: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2: Carolinas_Charlotte-POP_NC_linear_mid
+  - name: Carolinas_Charlotte_NC_linear_hpc
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+  - name: Carolinas_Charlotte-POP_NC_linear_hpc
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+  - name: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: Carolinas_Charlotte-POP_NC_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: Carolinas_Columbia_SC_linear_hpc
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+  - name: Carolinas_Durham-POP_NC_linear_hpc
+    neighbor1: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2: Carolinas_Charlotte-POP_NC_linear_mid
+  - name: Carolinas_Durham-POP_NC_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: Carolinas_Durham-POP_NC_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: Carolinas_Fayetteville_NC_linear_hpc
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+  - name: Carolinas_Greensboro_NC_linear_hpc
+    neighbor1: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2: Carolinas_Charlotte-POP_NC_linear_mid
+  - name: Carolinas_Leland_NC_linear_hpc
+    neighbor1: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2: Carolinas_Charlotte-POP_NC_linear_mid
+  - name: Carolinas_MyrtleBeach_SC_linear_hpc
+    neighbor1: Carolinas_Charlotte-POP_NC_linear_mid
+    neighbor2: Carolinas_Durham-POP_NC_linear_mid
+  - name: Carolinas_NCEast_NC_vod_shield
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+  - name: Carolinas_SouthernPine_NC_linear_hpc
+    neighbor1: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2: Carolinas_Charlotte-POP_NC_linear_mid
+  - name: Carolinas_Wilmington_NC_linear_hpc
+    neighbor1: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2: Carolinas_Charlotte-POP_NC_linear_mid
+  - name: Carolinas_Winston-Salem_NC_linear_hpc
+    neighbor1: Carolinas_Durham-POP_NC_linear_mid
+    neighbor2: Carolinas_Charlotte-POP_NC_linear_mid
+  - name: Central_Belleville-CHTR_IL_linear_hpc
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: Central_EauClaire-CHTR_WI_linear_hpc
+    neighbor1: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2: Central_EauClaire-CHTR_WI_linear_mid
+  - name: Central_EauClaire-CHTR_WI_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: Central_Kearney-CHTR_NE_linear_hpc
+    neighbor1: Central_EauClaire-CHTR_WI_linear_mid
+    neighbor2: Central_StCloud-CHTR_MN_linear_mid
+  - name: Central_Olivette-CHTR_MO_linear_hpc
+    neighbor1: Central_Olivette-CHTR_MO_linear_mid
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: Central_Olivette-CHTR_MO_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: Central_StCloud-CHTR_MN_linear_hpc
+    neighbor1: Central_StCloud-CHTR_MN_linear_mid
+    neighbor2: Central_EauClaire-CHTR_WI_linear_mid
+  - name: Central_StCloud-CHTR_MN_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: Florida_Orlando-POP_FL_linear_hpc
+    neighbor1: Florida_Orlando-POP_FL_linear_mid
+    neighbor2: Florida_Tampa-POP_FL_linear_mid
+  - name: Florida_Orlando-POP_FL_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: Florida_Tampa-POP_FL_linear_hpc
+    neighbor1: Florida_Tampa-POP_FL_linear_mid
+    neighbor2: Florida_Orlando-POP_FL_linear_mid
+  - name: Florida_Tampa-POP_FL_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: GreatLakes_Allendale-CHTR_MI_linear_hpc
+    neighbor1: GreatLakes_Allendale-CHTR_MI_linear_mid
+    neighbor2: GreatLakes_Saginaw-CHTR_MI_linear_mid
+  - name: GreatLakes_Allendale-CHTR_MI_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: GreatLakes_Saginaw-CHTR_MI_linear_hpc
+    neighbor1: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    neighbor2: GreatLakes_Allendale-CHTR_MI_linear_mid
+  - name: GreatLakes_Saginaw-CHTR_MI_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: MidWest_Chambers_OH_linear_hpc
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+  - name: MidWest_Cleveland-Heights_OH_linear_hpc
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+  - name: MidWest_Cleveland-POP_OH_linear_hpc
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+  - name: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: MidWest_Cleveland-POP_OH_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: MidWest_Columbus-POP_OH_linear_hpc
+    neighbor1: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2: MidWest_Cleveland-POP_OH_linear_mid
+  - name: MidWest_Columbus-POP_OH_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: MidWest_Columbus-POP_OH_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: MidWest_North-Canton_OH_linear_hpc
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+  - name: MidWest_Okolona_KY_linear_hpc
+    neighbor1: MidWest_Columbus-POP_OH_linear_mid
+    neighbor2: MidWest_Cleveland-POP_OH_linear_mid
+  - name: MidWest_Olentangy_OH_linear_hpc
+    neighbor1: MidWest_Cleveland-POP_OH_linear_mid
+    neighbor2: MidWest_Columbus-POP_OH_linear_mid
+  - name: NorthEast_Albany_NY_linear_hpc
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+  - name: NorthEast_Albany-POP_NY_linear_hpc
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+  - name: NorthEast_Albany-POP_NY_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: NorthEast_Albany-POP_NY_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: NorthEast_Henrietta_NY_linear_hpc
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+  - name: NorthEast_Ithaca_NY_linear_hpc
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+  - name: NorthEast_Lackwanna_NY_linear_hpc
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+  - name: NorthEast_Lancaster_NY_linear_hpc
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+  - name: NorthEast_Newtown-CHTR_CT_linear_hpc
+    neighbor1: NorthEast_Newtown-CHTR_CT_linear_mid
+    neighbor2: NorthEast_Oxford-CHTR_MA_linear_mid
+  - name: NorthEast_Newtown-CHTR_CT_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: NorthEast_Oxford-CHTR_MA_linear_hpc
+    neighbor1: NorthEast_Oxford-CHTR_MA_linear_mid
+    neighbor2: NorthEast_Newtown-CHTR_CT_linear_mid
+  - name: NorthEast_Oxford-CHTR_MA_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: NorthEast_Portland_ME_linear_hpc
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+  - name: NorthEast_Rochester_NY_linear_hpc
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+  - name: NorthEast_Rochester-POP_NY_linear_hpc
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+  - name: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: NorthEast_Rochester-POP_NY_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: NorthEast_Sebago_ME_linear_hpc
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+  - name: NorthEast_Syracuse-CourtSt_NY_linear_hpc
+    neighbor1: NorthEast_Rochester-POP_NY_linear_mid
+    neighbor2: NorthEast_Albany-POP_NY_linear_mid
+  - name: NorthEast_Syracuse-Fairlakes_NY_linear_hpc
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+  - name: NorthEast_Vestal_NY_linear_hpc
+    neighbor1: NorthEast_Albany-POP_NY_linear_mid
+    neighbor2: NorthEast_Rochester-POP_NY_linear_mid
+  - name: NorthWest_Denver-CHTR_CO_linear_hpc
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: NorthWest_Missoula-CHTR_MT_linear_hpc
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: NorthWest_Portland-CHTR_OR_linear_hpc
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+  - name: NorthWest_RenoMHE-CHTR_NV_linear_hpc
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+  - name: NorthWest_RenoPRI-CHTR_NV_linear_hpc
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+  - name: NorthWest_SanJose-CHTR_CA_linear_hpc
+    neighbor1: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor2: PacWest_Riverside-CHTR_CA_linear_mid
+  - name: NorthWest_SanJose-CHTR_CA_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: NorthWest_SanLuisObispo-CHTR_CA_linear_hpc
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+  - name: NYC_Manhattan-POP_NY_linear_hpc
+    neighbor1: NYC_Manhattan-POP_NY_linear_mid
+    neighbor2: NYC_Queens-POP_NY_linear_mid
+  - name: NYC_Manhattan-POP_NY_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: NYC_Manhattan-POP_NY_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: NYC_Queens-POP_NY_linear_hpc
+    neighbor1: NYC_Queens-POP_NY_linear_mid
+    neighbor2: NYC_Manhattan-POP_NY_linear_mid
+  - name: NYC_Queens-POP_NY_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: NYC_Queens-POP_NY_vod_hpc
+    neighbor1: Carolinas_NCEast_NC_vod_shield
+    neighbor2: NorthWest_NCWest_CO_vod_shield
+  - name: PacWest_Bowcroft_CA_linear_hpc
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+  - name: PacWest_Cypress_CA_linear_hpc
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+  - name: PacWest_LaMiranda_CA_linear_hpc
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+  - name: PacWest_Lancaster-POP_CA_linear_hpc
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+  - name: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: PacWest_Lancaster-POP_CA_vod_hpc
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+  - name: PacWest_Mililani_HI_linear_hpc
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+  - name: PacWest_Mililani_HI_vod_hpc
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+  - name: PacWest_MontereyPark-CHTR_CA_linear_hpc
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+  - name: PacWest_Ontario_CA_linear_hpc
+    neighbor1: PacWest_Lancaster-POP_CA_linear_mid
+    neighbor2: PacWest_Tustin-POP_CA_linear_mid
+  - name: PacWest_Riverside-CHTR_CA_linear_hpc
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2: NorthWest_SanJose-CHTR_CA_linear_mid
+  - name: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: PacWest_SanDiego_CA_linear_hpc
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+  - name: PacWest_Tustin-POP_CA_linear_hpc
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+  - name: PacWest_Tustin-POP_CA_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: PacWest_Tustin-POP_CA_vod_hpc
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+  - name: PacWest_VanNuys_CA_linear_hpc
+    neighbor1: PacWest_Tustin-POP_CA_linear_mid
+    neighbor2: PacWest_Lancaster-POP_CA_linear_mid
+  - name: South_Manchester-CHTR_TN_linear_hpc
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: South_Slidell-CHTR_LA_linear_hpc
+    neighbor1: South_SugarHill-CHTR_GA_linear_mid
+    neighbor2: South_Manchester-CHTR_TN_linear_mid
+  - name: South_SugarHill-CHTR_GA_linear_hpc
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: South_SugarHill-CHTR_GA_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: South_Manchester-CHTR_TN_linear_mid
+    neighbor1: Carolinas_NCEast_NC_linear_shield
+    neighbor2: NorthWest_NCWest_CO_linear_shield
+  - name: Texas_Austin-DuvalA_TX_linear_hpc
+    neighbor1: Texas_Houston-POP_TX_linear_mid
+    neighbor2: Texas_Dallas-POP_TX_linear_mid
+  - name: Texas_Austin-RDC_TX_linear_hpc
+    neighbor1: Texas_Houston-POP_TX_linear_mid
+    neighbor2: Texas_Dallas-POP_TX_linear_mid
+  - name: Texas_Carrollton_TX_linear_hpc
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+  - name: Texas_Dallas_TX_linear_hpc
+    neighbor1: Texas_Dallas-POP_TX_linear_mid
+    neighbor2: Texas_Houston-POP_TX_linear_mid
+  - name: Texas_Dallas-CHTR_TX_linear_hpc
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2: Central_Olivette-CHTR_MO_linear_mid
+  - name: Texas_Dallas-POP_TX_linear_hpc
+    neighbor1: Texas_Houston-POP_TX_linear_mid
+    neighbor2: Texas_Dallas-POP_TX_linear_mid
+  - name: Texas_Dallas-POP_TX_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: Texas_Dallas-POP_TX_vod_hpc
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+  - name: Texas_FortWorth-CHTR_TX_linear_hpc
+    neighbor1: PacWest_Riverside-CHTR_CA_linear_mid
+    neighbor2: Central_Olivette-CHTR_MO_linear_mid
+  - name: Texas_Houston-POP_TX_linear_hpc
+    neighbor1: Texas_Houston-POP_TX_linear_mid
+    neighbor2: Texas_Dallas-POP_TX_linear_mid
+  - name: Texas_Houston-POP_TX_linear_mid
+    neighbor1: NorthWest_NCWest_CO_linear_shield
+    neighbor2: Carolinas_NCEast_NC_linear_shield
+  - name: Texas_Houston-POP_TX_vod_hpc
+    neighbor1: NorthWest_NCWest_CO_vod_shield
+    neighbor2: Carolinas_NCEast_NC_vod_shield
+  - name: Texas_SanAntonio-LaColonia_TX_linear_hpc
+    neighbor1: Texas_Houston-POP_TX_linear_mid
+    neighbor2: Texas_Dallas-POP_TX_linear_mid
+  - name: Texas_SanAntonio-UrbanLoop_TX_linear_hpc
+    neighbor1: Texas_Houston-POP_TX_linear_mid
+    neighbor2: Texas_Dallas-POP_TX_linear_mid

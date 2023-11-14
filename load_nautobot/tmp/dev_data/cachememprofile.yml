@@ -1,0 +1,50 @@
+cachememprofiles:
+  - name: VOD-Shield
+    frontEndCacheMemoryPercent: 0
+    ramOnlyCacheMemoryPercent: 1
+    hotCacheMemoryPercent: 5
+    diskIndexMemoryPercent: 10
+    cacheMemoryProfileId: 3447
+    id: 7b65a9d1-3698-429a-b7b6-09f3e70a1b40
+  - name: Linear-MidTier
+    frontEndCacheMemoryPercent: 0
+    ramOnlyCacheMemoryPercent: 1
+    hotCacheMemoryPercent: 5
+    diskIndexMemoryPercent: 10
+    cacheMemoryProfileId: 3504
+    id: c386c9bb-16a3-40e3-9b68-c1305afcece1
+  - name: Linear-HPC
+    frontEndCacheMemoryPercent: 0
+    ramOnlyCacheMemoryPercent: 1
+    hotCacheMemoryPercent: 5
+    diskIndexMemoryPercent: 5
+    cacheMemoryProfileId: 2834
+    id: 13eea03e-851c-4f74-b239-f76dffe8f912
+  - name: Linear-HPC-FEC
+    frontEndCacheMemoryPercent: 75
+    ramOnlyCacheMemoryPercent: 0
+    hotCacheMemoryPercent: 5
+    diskIndexMemoryPercent: 10
+    cacheMemoryProfileId: 9167
+    id: 5627900a-66f9-4e2b-b8e8-f90511bd2243
+  - name: VOD-HPC-FEC
+    frontEndCacheMemoryPercent: 25
+    ramOnlyCacheMemoryPercent: 1
+    hotCacheMemoryPercent: 5
+    diskIndexMemoryPercent: 10
+    cacheMemoryProfileId: 9409
+    id: 08ee8e25-9ac9-424b-9aeb-466178a81d85
+  - name: VOD-HPC
+    frontEndCacheMemoryPercent: 0
+    ramOnlyCacheMemoryPercent: 1
+    hotCacheMemoryPercent: 5
+    diskIndexMemoryPercent: 10
+    cacheMemoryProfileId: 5993
+    id: 7168fc19-0151-46f3-a348-e7b0285e3827
+  - name: Linear-Shield
+    frontEndCacheMemoryPercent: 0
+    ramOnlyCacheMemoryPercent: 1
+    hotCacheMemoryPercent: 5
+    diskIndexMemoryPercent: 10
+    cacheMemoryProfileId: 6359
+    id: c7553b79-a664-4f46-b9b6-e59837465355

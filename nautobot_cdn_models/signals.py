@@ -50,7 +50,7 @@ def create_cdnsite_to_device_relationship(sender, apps, **kwargs):
 
     # Ensure that CdnSite to Devices Relationship exists
     Relationship.objects.update_or_create(
-        key="cdnsite-devices",
+        key="cdnsite_devices",
         defaults={
             "label": "CdnSite's Associated Devices",
             "type": RelationshipTypeChoices.TYPE_MANY_TO_MANY,
@@ -71,7 +71,7 @@ def create_cdnsite_to_vm_relationship(sender, apps, **kwargs):
 
     # Ensure that CdnSite to VMs Relationship exists
     Relationship.objects.update_or_create(
-        key="cdnsite-vms",
+        key="cdnsite_vms",
         defaults={
             "label": "CdnSite's Associated VirtualMachines",
             "type": RelationshipTypeChoices.TYPE_MANY_TO_MANY,

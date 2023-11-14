@@ -1,0 +1,403 @@
+---
+# - name: Pulling Memory Profiles
+#   uri:
+#     url: "{{akamai_prod_url}}lcdn-services/v1/hypercache/cache-memory-profiles?view=detail&pageNumber=1&pageSize=1000"
+#     method: GET
+#     return_content: yes
+#     status_code: "200"
+#     validate_certs: false
+#     headers:
+#       Accept: "application/json"
+#       Authorization: "{{ akamai_prod_token }}"
+#       validate_certs: false
+#   register: memory_profiles
+
+# - name: create cachemem yml file
+#   template:
+#     src: cachememprofiles.j2
+#     dest: ./tmp/prod_data/cachememprofile.yml
+
+# - name: Pulling Regions from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         regions {
+#           name
+#           slug
+#         }
+#       }
+#   register: prod_regions
+
+# - name: create regions yml file
+#   template:
+#       src: prod_regions.j2
+#       dest: ./tmp/prod_data/prod_regions.yml
+
+# - name: Pulling sites from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         sites {
+#           name
+#           slug
+#           physical_address
+#           region{
+#             name
+#             slug
+#           }
+#         }
+#       }
+#   register: prod_sites
+
+# - name: create sites yml file
+#   template:
+#       src: prod_sites.j2
+#       dest: ./tmp/prod_data/prod_sites.yml
+
+# - name: Pulling Site Roles from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: "{{ prod_site_roles }}"
+#   register: prod_tenant_groups
+
+# - name: create site groups yml file
+#   template:
+#     src: sitegroups.j2
+#     dest: ./tmp/prod_data/sitegroups.yml
+
+# - name: Pulling CDN Sites from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: "{{ cdn_sites }}"
+#   register: prod_nb_cdn_sites_list
+
+# - name: create sites yml file
+#   template:
+#     src: sites.j2
+#     dest: ./tmp/prod_data/sites.yml
+
+
+# - name: Loading Location Types into Nautobot Dev instance
+#   networktocode.nautobot.location_type:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: False
+#     name: "Akamai Deployment Sites"
+#     nestable: true
+#     content_types:
+#       - "dcim.device"
+#       - "dcim.rack"
+#       - "dcim.rackgroup"
+#       - "ipam.namespace"
+#       - "ipam.prefix"
+#       - "ipam.vlan"
+#       - "ipam.vlangroup"
+#       - "virtualization.cluster"
+#     description: "Organizational structure for Akamai Deployment"
+
+# - include_vars: ./tmp/prod_data/prod_regions.yml
+# - name: Loading Location Types into Nautobot Dev instance
+#   networktocode.nautobot.location:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: False
+#     name: "{{ item.name }}"
+#     location_type:
+#       name: "Akamai Deployment Sites"
+#     status: Active
+#     description: "Based on CBO & ISP regional organization"
+#     state: present
+#   loop: "{{ prod_regions }}"
+
+# - include_vars: ./tmp/prod_data/prod_sites.yml
+# - name: Pulling Locations from Dev Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         locations {
+#           name
+#           id
+#         }
+#       }      
+#   register: dev_parent_list
+
+# - name: Template with the Dev IDs for parent locations
+#   template:
+#     src: dev_locations.j2
+#     dest: ./tmp/dev_data/dev_locations.yml
+
+- include_vars: ./tmp/dev_data/dev_locations.yml
+- name: Loading Location into Nautobot Dev instance
+  networktocode.nautobot.location:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    name: "{{ item.name }}"
+    location_type:
+      name: "Akamai Deployment Sites"
+    # physical_address: "{{ item.physical_address }}"
+    parent_location: "{{ item.region_id }}"
+    description: "{{ item.slug }}"
+    status: Active
+    state: present
+  loop: "{{ dev_locations }}"
+
+
+# - include_vars: ./tmp/prod_data/cachememprofile.yml
+# - name: Loading Memory Profiles into Nautobot Dev instance
+#   networktocode.nautobot.plugin:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     plugin: nautobot-cdn-models
+#     endpoint: hypercachememoryprofile
+#     validate_certs: false
+#     identifiers:
+#       name: "{{item.name}}"
+#       frontEndCacheMemoryPercent: "{{item.frontEndCacheMemoryPercent}}"
+#       ramOnlyCacheMemoryPercent: "{{item.ramOnlyCacheMemoryPercent}}"
+#       hotCacheMemoryPercent: "{{item.hotCacheMemoryPercent}}"
+#       diskIndexMemoryPercent: "{{item.diskIndexMemoryPercent}}"
+#       cacheMemoryProfileId: "{{item.cacheMemoryProfileId}}"
+#   loop: "{{ cachememprofiles }}"
+
+# - include_vars: ./tmp/prod_data/sitegroups.yml
+# - name: dump Site Roles into Dev
+#   networktocode.nautobot.plugin:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     plugin: nautobot-cdn-models
+#     endpoint: siterole
+#     validate_certs: false
+#     identifiers:
+#       name: "{{ item.name }}"
+#       description: "{{ item.description }}"
+#   loop: "{{ siteroles }}"
+
+# - include_vars: ./tmp/prod_data/sites.yml
+# - name: dump Sites into Dev
+#   networktocode.nautobot.plugin:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     plugin: nautobot-cdn-models
+#     endpoint: cdnsite
+#     validate_certs: false
+#     identifiers:
+#       name: "{{ item.name }}"
+#     attrs:
+#       status: active
+#       cdn_site_role: null
+#       region: null
+#       abbreviatedName: "{{ item.siteabrev | default(omit)}}"
+#       enableDisklessMode: "{{ item.diskless }}"
+#       siteId: "{{ item.siteid | default('999') | int }}"
+#   loop: "{{ sites }}"
+
+# - name: Update neighbors for Sites
+#   include_tasks: update_cdn_site.yml
+#   loop: "{{ sites }}"
+
+# - name: Pull down POP site list from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         devices (role: "linear_pop_edge"){
+#           site {
+#             name
+#             slug
+#             physical_address
+#             region {
+#               name
+#               slug
+#             }
+#           }
+#         }
+#       }
+#   register: pop_sites
+
+# - name: Pull down CHUB site list from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         devices (role: "linear_c_hub"){
+#           site {
+#             name
+#             slug
+#             physical_address
+#             region {
+#               name
+#               slug
+#             }
+#           }
+#         }
+#       }
+#   register: chub_sites
+
+# - name: Pull down Shields site list from Prod Nautobot
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         devices (role: "linear_shield_cache"){
+#           site {
+#             name
+#             slug
+#             physical_address
+#             region {
+#               name
+#               slug
+#             }
+#           }
+#         }
+#       }
+#   register: shield_sites
+
+# - name: Template the output of the above
+#   template:
+#     src: sites_regions.j2
+#     dest: ./tmp/prod_data/sites_regions.yml
+
+# - include_vars: ./tmp/prod_data/sites_regions.yml
+# - name: Create region within Nautobot with only required information
+#   networktocode.nautobot.region:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     slug: "{{ item.slug }}"
+#     state: present
+#   loop: "{{ regions }}"
+
+# - name: Dump Existing sites from Prod to Dev
+#   networktocode.nautobot.site:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     slug: "{{ item.slug }}"
+#     region: "{{ item.region.name }}"
+#     physical_address: "{{ item.physical_address }}"
+#     status: active
+#     state: present
+#   loop: "{{ pop_sites }}"
+
+# - name: Dump Existing sites from Prod to Dev
+#   networktocode.nautobot.site:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     slug: "{{ item.slug }}"
+#     region: "{{ item.region.name }}"
+#     physical_address: "{{ item.physical_address }}"
+#     status: active
+#     state: present
+#   loop: "{{ chub_sites }}"
+
+# - name: Dump Existing sites from Prod to Dev
+#   networktocode.nautobot.site:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     slug: "{{ item.slug }}"
+#     region: "{{ item.region.name }}"
+#     physical_address: "{{ item.physical_address }}"
+#     status: active
+#     state: present
+#   loop: "{{ shield_sites }}"
+
+# - name: Pull Prod manufacturers 
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         manufacturers {
+#           name
+#           slug
+#         }
+#       }
+#   register: manufacturers
+# - name: Create manufacturer within Nautobot with only required information
+#   networktocode.nautobot.manufacturer:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     slug: "{{ item.slug }}"
+#     state: present
+#   loop: "{{ manufacturers.data.manufacturers }}"
+
+# - name: Pull Prod device types
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         device_types {
+#           model
+#           slug
+#           manufacturer {
+#             name
+#           }
+#         }
+#       }
+#   register: device_types
+# - name: Create device type within Nautobot with only required information
+#   networktocode.nautobot.device_type:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     slug: "{{ item.slug }}"
+#     model: "{{ item.model }}"
+#     manufacturer: "{{ item.manufacturer.name }}"
+#     state: present
+#   loop: "{{ device_types.data.device_types }}"
+
+# - name: Pull Prod device roles
+#   networktocode.nautobot.query_graphql:
+#     url: "{{ prod_nb_url }}"
+#     token: "{{ prod_nb_token }}"
+#     validate_certs: False
+#     query: |
+#       {
+#         device_roles {
+#           name
+#           slug
+#           color
+#         }
+#       }
+#   register: device_roles
+# - name: Create device role within Nautobot with only required information
+#   networktocode.nautobot.device_role:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     color: "{{ item.color}}"
+#     slug: "{{ item.slug }}"
+#     state: present
+#   loop: "{{ device_roles.data.device_roles }}"

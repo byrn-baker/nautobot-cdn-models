@@ -1,0 +1,640 @@
+changed: false
+msg: All items completed
+results:
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ {\n    \"cdnPrefixId\" : 2,\n    \"prefix\"\
+        \ : \"midtier-deluxe.stvacdn.spectrum.com\"\n  }, {\n    \"cdnPrefixId\" :\
+        \ 5,\n    \"prefix\" : \"pacwest-test.stvacdn.spectrum.com\"\n  }, {\n   \
+        \ \"cdnPrefixId\" : 13,\n    \"prefix\" : \"dluxvod.stvacdn.spectrum.com\"\
+        \n  }, {\n    \"cdnPrefixId\" : 14,\n    \"prefix\" : \"dluxvod-novi.stvacdn.spectrum.com\"\
+        \n  }, {\n    \"cdnPrefixId\" : 19,\n    \"prefix\" : \"vod.stvacdn.spectrum.com\"\
+        \n  } ],\n  \"page\" : {\n    \"pageNumber\" : 1,\n    \"pageSize\" : 100,\n\
+        \    \"totalPages\" : 1,\n    \"totalResults\" : 5\n  }\n}"
+    content_length: '527'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:45 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/2/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 2
+        name: Deluxe VOD
+    json:
+        cdnPrefixes:
+        -   cdnPrefixId: 2
+            prefix: midtier-deluxe.stvacdn.spectrum.com
+        -   cdnPrefixId: 5
+            prefix: pacwest-test.stvacdn.spectrum.com
+        -   cdnPrefixId: 13
+            prefix: dluxvod.stvacdn.spectrum.com
+        -   cdnPrefixId: 14
+            prefix: dluxvod-novi.stvacdn.spectrum.com
+        -   cdnPrefixId: 19
+            prefix: vod.stvacdn.spectrum.com
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 1
+            totalResults: 5
+    msg: OK (527 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/2/cdn-prefixes/
+    vary: Accept
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ {\n    \"cdnPrefixId\" : 3,\n    \"prefix\"\
+        \ : \"midtier-spectre.stvacdn.spectrum.com\"\n  }, {\n    \"cdnPrefixId\"\
+        \ : 17,\n    \"prefix\" : \"spectre.stvacdn.spectrum.com\"\n  }, {\n    \"\
+        cdnPrefixId\" : 18,\n    \"prefix\" : \"spectre-novi.stvacdn.spectrum.com\"\
+        \n  } ],\n  \"page\" : {\n    \"pageNumber\" : 1,\n    \"pageSize\" : 100,\n\
+        \    \"totalPages\" : 1,\n    \"totalResults\" : 3\n  }\n}"
+    content_length: '374'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:46 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/3/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 3
+        name: Spectrum Reach
+    json:
+        cdnPrefixes:
+        -   cdnPrefixId: 3
+            prefix: midtier-spectre.stvacdn.spectrum.com
+        -   cdnPrefixId: 17
+            prefix: spectre.stvacdn.spectrum.com
+        -   cdnPrefixId: 18
+            prefix: spectre-novi.stvacdn.spectrum.com
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 1
+            totalResults: 3
+    msg: OK (374 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/3/cdn-prefixes/
+    vary: Accept
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ {\n    \"cdnPrefixId\" : 4,\n    \"prefix\"\
+        \ : \"midtier-programmers.stvacdn.spectrum.com\"\n  }, {\n    \"cdnPrefixId\"\
+        \ : 15,\n    \"prefix\" : \"prog.stvacdn.spectrum.com\"\n  }, {\n    \"cdnPrefixId\"\
+        \ : 16,\n    \"prefix\" : \"prog-novi.stvacdn.spectrum.com\"\n  } ],\n  \"\
+        page\" : {\n    \"pageNumber\" : 1,\n    \"pageSize\" : 100,\n    \"totalPages\"\
+        \ : 1,\n    \"totalResults\" : 3\n  }\n}"
+    content_length: '372'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:47 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/4/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 4
+        name: Programmer
+    json:
+        cdnPrefixes:
+        -   cdnPrefixId: 4
+            prefix: midtier-programmers.stvacdn.spectrum.com
+        -   cdnPrefixId: 15
+            prefix: prog.stvacdn.spectrum.com
+        -   cdnPrefixId: 16
+            prefix: prog-novi.stvacdn.spectrum.com
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 1
+            totalResults: 3
+    msg: OK (372 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/4/cdn-prefixes/
+    vary: Accept
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ {\n    \"cdnPrefixId\" : 6,\n    \"prefix\"\
+        \ : \"linear.stvacdn.spectrum.com\"\n  }, {\n    \"cdnPrefixId\" : 7,\n  \
+        \  \"prefix\" : \"linear-novi.stvacdn.spectrum.com\"\n  }, {\n    \"cdnPrefixId\"\
+        \ : 20,\n    \"prefix\" : \"cloudtest-linear.stvacdn.spectrum.com\"\n  },\
+        \ {\n    \"cdnPrefixId\" : 21,\n    \"prefix\" : \"origin.stvacdn.spectrum.com\"\
+        \n  }, {\n    \"cdnPrefixId\" : 24,\n    \"prefix\" : \"dts.stvacdn.spectrum.com\"\
+        \n  } ],\n  \"page\" : {\n    \"pageNumber\" : 1,\n    \"pageSize\" : 100,\n\
+        \    \"totalPages\" : 1,\n    \"totalResults\" : 5\n  }\n}"
+    content_length: '521'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:48 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/5/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 5
+        name: HaloLIVE
+    json:
+        cdnPrefixes:
+        -   cdnPrefixId: 6
+            prefix: linear.stvacdn.spectrum.com
+        -   cdnPrefixId: 7
+            prefix: linear-novi.stvacdn.spectrum.com
+        -   cdnPrefixId: 20
+            prefix: cloudtest-linear.stvacdn.spectrum.com
+        -   cdnPrefixId: 21
+            prefix: origin.stvacdn.spectrum.com
+        -   cdnPrefixId: 24
+            prefix: dts.stvacdn.spectrum.com
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 1
+            totalResults: 5
+    msg: OK (521 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/5/cdn-prefixes/
+    vary: Accept
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ {\n    \"cdnPrefixId\" : 12,\n    \"prefix\"\
+        \ : \"cdvr.stvacdn.spectrum.com\"\n  } ],\n  \"page\" : {\n    \"pageNumber\"\
+        \ : 1,\n    \"pageSize\" : 100,\n    \"totalPages\" : 1,\n    \"totalResults\"\
+        \ : 1\n  }\n}"
+    content_length: '205'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:49 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/6/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 6
+        name: TelurioDASH
+    json:
+        cdnPrefixes:
+        -   cdnPrefixId: 12
+            prefix: cdvr.stvacdn.spectrum.com
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 1
+            totalResults: 1
+    msg: OK (205 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/6/cdn-prefixes/
+    vary: Accept
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ {\n    \"cdnPrefixId\" : 10,\n    \"prefix\"\
+        \ : \"linear-test.stvacdn.spectrum.com\"\n  }, {\n    \"cdnPrefixId\" : 11,\n\
+        \    \"prefix\" : \"linearnovi.stvacdn.spectrum.com\"\n  } ],\n  \"page\"\
+        \ : {\n    \"pageNumber\" : 1,\n    \"pageSize\" : 100,\n    \"totalPages\"\
+        \ : 1,\n    \"totalResults\" : 2\n  }\n}"
+    content_length: '292'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:49 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/7/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 7
+        name: GeminiHalo
+    json:
+        cdnPrefixes:
+        -   cdnPrefixId: 10
+            prefix: linear-test.stvacdn.spectrum.com
+        -   cdnPrefixId: 11
+            prefix: linearnovi.stvacdn.spectrum.com
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 1
+            totalResults: 2
+    msg: OK (292 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/7/cdn-prefixes/
+    vary: Accept
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ ],\n  \"page\" : {\n    \"pageNumber\" : 1,\n\
+        \    \"pageSize\" : 100,\n    \"totalPages\" : 0,\n    \"totalResults\" :\
+        \ 0\n  }\n}"
+    content_length: '132'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:50 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/8/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 8
+        name: AllVOD
+    json:
+        cdnPrefixes: []
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 0
+            totalResults: 0
+    msg: OK (132 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/8/cdn-prefixes/
+    vary: Accept
+-   ansible_loop_var: item
+    changed: false
+    connection: close
+    content: "{\n  \"cdnPrefixes\" : [ {\n    \"cdnPrefixId\" : 22,\n    \"prefix\"\
+        \ : \"cos.stvacdn.spectrum.com\"\n  } ],\n  \"page\" : {\n    \"pageNumber\"\
+        \ : 1,\n    \"pageSize\" : 100,\n    \"totalPages\" : 1,\n    \"totalResults\"\
+        \ : 1\n  }\n}"
+    content_length: '204'
+    content_type: application/json
+    cookies: {}
+    cookies_string: ''
+    date: Wed, 31 May 2023 18:32:51 GMT
+    elapsed: 0
+    failed: false
+    invocation:
+        module_args:
+            attributes: null
+            body: null
+            body_format: raw
+            ca_path: null
+            client_cert: null
+            client_key: null
+            creates: null
+            dest: null
+            follow_redirects: safe
+            force: false
+            force_basic_auth: false
+            group: null
+            headers:
+                Accept: application/json
+                Authorization: Bearer eyJhbGciOiJSUzI1NiJ9.ewogICJzY29wZSIgOiBbICJjb2JsaXR6LmNwIiwgImNvYmxpdHoubnNwIiwgImNvYmxpdHouY28iIF0sCiAgImp0aSIgOiAiMjRmMzhjNzYtMmQ1ZC00ODRlLTk3ZjEtMDVlMDhmNmRhYjg5IiwKICAidXNlcl9uYW1lIiA6ICJjb0BzdHZhY2RuLnNwZWN0cnVtLmNvbSIsCiAgImNsaWVudF9pZCIgOiAiMDg2ZmFhYzQtYWYzMC00NzkyLWI3YzItNTRjOGI0MmE0NGFhIiwKICAiZ3JhbnRfdHlwZSIgOiAicGFzc3dvcmQiLAogICJleHAiIDogMTk1MDYzODQyOSwKICAiaWF0IiA6IDE2MzUyNzg0MjksCiAgImlzcyIgOiAibGNkbi9vYXV0aC90b2tlbiIsCiAgImxjZG4uZ3JvdXBzIiA6IFsgImNvYmxpdHoub2JzIiwgImNvYmxpdHouY3AiLCAiY29ibGl0ei5uc3AiLCAiY29ibGl0ei5jbyIgXSwKICAibGNkbi5rZXlJZCIgOiAxLAogICJyb2xlcyIgOiBbICJhZG1pbiIgXQp9.IKNTaNmR2mezgAouas9mWdWHeH0eC9382iZXfl_1yT8oXadMtZry2YWLrJckmDZKM16jMIk7hsVUSCB83LUc0gb2_ULcuAkg7OjDb3g8Ak-LxxF3TT6zLrHrPgADEOMTGCQiO0pEKkdreuV8zqh73gKMWrRPf5hl3Zdl-j9l10DmUxLsARufBdijnRLFrRlQTVDkDSTytBugXePb0EJFl8xVeMIshHhP-M4A_wSSf8cn3dARJqqR8i4d1OIxIBBaODplZ8H_VIuqwlm669QmpBfyWecVnkOV8ktQQCc0lrrh1KstX9qNlpvBlBAGWy80Ci-ukKtoVllDE_9yICppmw
+                validate_certs: false
+            http_agent: ansible-httpget
+            method: GET
+            mode: null
+            owner: null
+            remote_src: false
+            removes: null
+            return_content: true
+            selevel: null
+            serole: null
+            setype: null
+            seuser: null
+            src: null
+            status_code:
+            - 200
+            timeout: 30
+            unix_socket: null
+            unredirected_headers: []
+            unsafe_writes: false
+            url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/9/cdn-prefixes/
+            url_password: null
+            url_username: null
+            use_gssapi: false
+            use_proxy: true
+            validate_certs: false
+    item:
+        contentProviderId: 9
+        name: cdvrcos
+    json:
+        cdnPrefixes:
+        -   cdnPrefixId: 22
+            prefix: cos.stvacdn.spectrum.com
+        page:
+            pageNumber: 1
+            pageSize: 100
+            totalPages: 1
+            totalResults: 1
+    msg: OK (204 bytes)
+    redirected: false
+    server: Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 mod_wsgi/3.4
+        Python/2.7.5 Phusion_Passenger/4.0.53
+    status: 200
+    url: https://dnvrco02-ak-amv0001.spectrum.com/api/content-delivery/v1/content-providers/9/cdn-prefixes/
+    vary: Accept
+skipped: false

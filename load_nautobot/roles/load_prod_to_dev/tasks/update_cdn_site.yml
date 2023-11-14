@@ -1,0 +1,74 @@
+---
+- name: Get hyper_cache_memory_profiles
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        hyper_cache_memory_profiles (name: "{{item.cachemem}}") {
+          name
+          id
+        }
+      }
+  register: hyper_cache_memory_profile_id
+
+- name: lookup role IDs
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        site_roles (name: "{{ item.role }}"){
+          name
+          id
+        }
+      }
+  register: role_id
+
+- name: Get CDNSITE ID for {{ item.neighbor1 }}
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        cdn_sites (name: "{{ item.neighbor1 }}"){
+          name
+          id
+        }
+      }
+  register: neighbor1_id
+
+- name: Get CDNSITE ID for {{ item.neighbor2 }}
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        cdn_sites (name: "{{ item.neighbor2 }}"){
+          name
+          id
+        }
+      }
+  register: neighbor2_id
+
+- name: Updating Dev Site for {{ item.name }}
+  networktocode.nautobot.plugin:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    plugin: nautobot-cdn-models
+    endpoint: cdnsite
+    validate_certs: false
+    identifiers:
+      name: "{{ item.name }}"
+    attrs:
+      cdn_site_role: "{{ role_id.data.site_roles.0.id | default(omit)}}"
+      region: null
+      neighbor1: "{{ neighbor1_id.data.cdn_sites.0.id | default(omit)}}"
+      neighbor1_preference: 1000
+      neighbor2: "{{ neighbor2_id.data.cdn_sites.0.id | default(omit)}}"
+      neighbor2_preference: 750
+      cacheMemoryProfileId: "{{ hyper_cache_memory_profile_id.data.hyper_cache_memory_profiles.0.id | default(omit)}}"

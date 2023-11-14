@@ -78,6 +78,7 @@ class SiteRole(TreeModel, OrganizationalModel):
 
 
 @extras_features(
+    "locations",
     "custom_links",
     "custom_validators",
     "export_templates",

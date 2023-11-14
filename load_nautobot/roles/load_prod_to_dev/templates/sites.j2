@@ -1,0 +1,41 @@
+sites:
+{% for site in prod_nb_cdn_sites_list['data']['cdn_sites'] %}
+  - name: {{ site['name'] }}
+    abbreviatedName: {{site['abbreviatedName']}}
+    siteid: {{site['siteId']}}
+{% if site['cdn_site_role'] is not none and site['cdn_site_role']['name'] is not none %}
+    role: {{ site['cdn_site_role']['name'] }}
+{% else %}
+    role: none-assigned
+{% endif %}
+{% if site['region'] is not none and site['region']['name'] is not none %}
+    region: {{ site['region']['name'] }}
+{% else %}
+    region: none-assigned
+{% endif %}
+{% if site['site'] is not none and site['site']['name'] is not none %}
+    site: {{ site['site']['name'] }}
+    site_slug: {{ site['site']['slug'] }}
+{% else %}
+    site: none-assigned
+{% endif %}
+    bandwidthLimitMbps: {{ site['bandwidthLimitMbps'] }}
+    enableDisklessMode: {{site['enableDisklessMode']}}
+{% if site['neighbor1'] is not none and site['neighbor1']['name'] is not none %}
+    neighbor1: {{ site['neighbor1']['name'] }}
+{% else %}
+    neighbor1: none-assigned
+{% endif %}
+    neighbor1_preference: {{ site['neighbor1_preference'] }}
+{% if site['neighbor2'] is not none and site['neighbor2']['name'] is not none %}
+    neighbor2: {{ site['neighbor2']['name'] }}
+{% else %}
+    neighbor2: none-assigned
+{% endif %}
+    neighbor2_preference: {{ site['neighbor2_preference'] }}
+{% if site['cacheMemoryProfileId'] is not none and site['cacheMemoryProfileId']['name'] is none %}
+    cacheMemoryProfileId: {{site['cacheMemoryProfileId']['name'] }}
+{% else %}
+    cacheMemoryProfileId: no-profile
+{% endif %}
+{% endfor %}

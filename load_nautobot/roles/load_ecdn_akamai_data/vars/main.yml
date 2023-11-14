@@ -1,0 +1,67 @@
+query_prod_ecdn: |
+  {
+  tenants(name__ic: "enterprise") {
+    name
+    id
+    group {
+      name
+      id
+    }
+      cf_cache_memory_profile_id
+      cf_cache_memory_profile_name
+      cf_clli_code
+      cf_diskless_mode
+      cf_neighbor_1
+      cf_neighbor_2
+      cf_site_id
+      cpf_site_abbreviated_name
+      devices: virtual_machines {
+        name
+        id
+        cluster {
+          name
+          type {
+            name
+          }
+        }
+        _custom_field_data
+        status {
+        name
+        }
+        role {
+          name
+        }
+        tenant {
+          name
+        }
+        interfaces {
+          name
+          ip_addresses {
+            address
+          }
+        }
+        config_context
+      }
+    }
+  }
+
+query_prod_ecdn_vlans: |
+  {
+    vlans  (role_id:"ca490c1d-d27a-46a9-861c-0ff4af9fe328"){
+      name
+      vid
+      role {
+        name
+      }
+      prefixes {
+        prefix
+        role{
+          name
+        }
+      }
+      site {
+        name
+        physical_address
+      }
+    }
+  }

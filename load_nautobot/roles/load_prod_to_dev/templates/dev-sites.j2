@@ -1,0 +1,45 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+dev_sites:
+{% for site in sites['data']['cdn_sites'] %}
+  - name: {{ site['name'] }}
+    site_id: {{ site['id'] }}
+    {% if site['abbreviatedName'] == "" %}
+    abbreviatedName: null
+    {% else %}
+    abbreviatedName: {{ site['abbreviatedName'] }}
+    {% endif %}
+    slug: {{ site['slug'] }}
+    {% if site['cdn_site_role']['name'] is defined %}
+    cdn_site_role: {{ site['cdn_site_role']['name'] }}
+    cdn_site_role_id: {{ site['cdn_site_role']['id'] }}
+    {% endif %}
+    {% if site['region']['name'] is defined %}
+    region: {{ site['region']['name'] }}
+    region_id: {{ site['region']['id'] }}
+    {% endif %}
+    {% if site['location']['name'] is defined %}
+    location: {{ site['location']['name'] }}
+    location_id: {{ site['location']['id'] }}
+    {% endif %}
+    bandwidthLimitMbps: {{ site['bandwidthLimitMbps'] }}
+    enableDisklessMode: {{ site['enableDisklessMode'] }}
+    {% if site['neighbor1']['name'] is defined %}
+    neighbor1: {{ site['neighbor1']['name'] }}
+    neighbor1_id: {{ site['neighbor1']['id'] }}
+    neighbor1_preference: {{ site['neighbor1_preference'] }}
+    {% endif %}
+    {% if site['neighbor2']['name'] is defined %}
+    neighbor2: {{ site['neighbor2']['name'] }}
+    neighbor2_id: {{ site['neighbor2']['id'] }}
+    neighbor2_preference: {{ site['neighbor2_preference'] }}
+    {% endif %}
+    {% if site['failover_site']['name'] is defined %}
+    failover_site: {{ site['failover_site']['name'] }}
+    failover_site_id: {{ site['failover_site']['id'] }}
+    {% endif %}
+    {% if site['cacheMemoryProfileId']['name'] is defined %}
+    cacheMemoryProfile: {{ site['cacheMemoryProfileId']['name'] }}
+    cacheMemoryProfileId: {{ site['cacheMemoryProfileId']['id'] }}
+    {% endif %}
+    siteId: {{ site['siteId'] }}
+{% endfor %}

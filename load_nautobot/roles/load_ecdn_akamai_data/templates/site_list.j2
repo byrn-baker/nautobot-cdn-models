@@ -1,0 +1,12 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+sites:
+{% for res in site_service_list['results'] %}
+  - name: {{ res['json']['name'] }}
+    abbreviatedName: {{ res['json']['abbreviatedName'] }}
+    siteId: {{ res['json']['siteId'] }}
+    bandwidthLimitMbps: {{ res['json']['bandwidthLimitMbps'] }}
+    enableDisklessMode: {{ res['json']['enableDisklessMode'] }}
+    {% if res['json']['cacheMemoryProfileId'] is defined %}
+    cacheMemoryProfileId: {{ res['json']['cacheMemoryProfileId'] }}
+    {% endif %}
+{% endfor %}

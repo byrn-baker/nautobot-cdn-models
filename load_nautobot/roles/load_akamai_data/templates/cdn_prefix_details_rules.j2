@@ -1,0 +1,36 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+cdn_prefixes:
+{% for result in results %}
+  - prefix: {{ result.item.prefix }}
+    cdnPrefixId: {{ result.item.cdnPrefixId }}
+{% for prefix in nb_prefix_list['data']['cdn_prefix_models'] if prefix['name'] == result['item']['prefix'] %}
+    nb_prefix_id: {{ prefix['id'] }}
+    nb_slug: {{ prefix['slug'] }}
+{% endfor %}
+    contentprovider: {{ result.item.contentprovider }}
+    contentProviderId: {{ result.item.contentProviderId }}
+    defaultBehaviors:
+  {% for behavior in result.json.defaultBehaviors %}
+      - name: {{ behavior.name }}
+        options:
+      {% for key, value in behavior.options.items() %}
+        {{ key }}: {{ value }}
+      {% endfor %}
+  {% endfor %}
+    {% if result.json.children %}
+    children:
+      {% for child in result.json.children %}
+      - name: {{ child.name }}
+        behaviors:
+        {% for behavior in child.behaviors %}
+          - name: {{ behavior.name }}
+            options:
+            {% for key, value in behavior.options.items() %}
+              {{ key }}: {{ value }}
+            {% endfor %}
+        {% endfor %}
+      {% endfor %}
+      {% else %}
+    children: []
+      {% endif %}
+{% endfor %}

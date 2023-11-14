@@ -1,0 +1,7 @@
+{
+  "origin_details":[
+{% for origin in origin_detail_list['results'] %}
+{{ origin['json'] | to_nice_json(indent=2) }},
+{% endfor %}
+  ]
+}

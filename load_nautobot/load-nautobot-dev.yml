@@ -1,0 +1,12 @@
+- name: "Adding Data to Nautobot Dev"
+  hosts: localhost
+  connection: local
+  gather_facts: False
+
+
+  roles:
+    # - { role: load_prod_akamai_data }
+    # - { role: load_ecdn_akamai_data }
+    # - { role: content_providers }
+    - { role: load_prod_to_dev }
+    # - { role: phase6_adds }

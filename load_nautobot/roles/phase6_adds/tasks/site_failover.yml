@@ -1,0 +1,73 @@
+---
+- name: Get hyper_cache_memory_profiles
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        hyper_cache_memory_profiles {
+          name
+          id
+        }
+      }
+  register: hyper_cache_memory_profile
+  
+- name: Get CDNSITE ID for {{ cf_neighbor_1 }}
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        cdn_sites (name: "{{ item.cf_neighbor_1 }}"){
+          name
+          id
+        }
+      }
+  register: neighbor1_id
+
+- name: Get CDNSITE ID for {{ cf_neighbor_2 }}
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        cdn_sites (name: "{{ item.cf_neighbor_2 }}"){
+          name
+          id
+        }
+      }
+  register: neighbor2_id
+
+- name: Get CDNSITE ID for {{ item.failoversite }}
+  networktocode.nautobot.query_graphql:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    validate_certs: False
+    query: |
+      {
+        cdn_sites (name: "{{ item.failoversite }}"){
+          name
+          id
+        }
+      }
+  register: failoversite_id
+
+- name: Update the failover site {{ item.name }}
+  networktocode.nautobot.plugin:
+    url: "{{ dev_nb_url }}"
+    token: "{{ dev_nb_token }}"
+    plugin: nautobot-cdn-models
+    endpoint: cdnsite
+    validate_certs: false
+    identifiers:
+      name: "{{ item.name }}"
+    attrs:
+      neighbor1: "{{ neighbor1_id.data.cdn_sites.0.id }}"
+      neighbor2: "{{ neighbor2_id.data.cdn_sites.0.id }}"
+      failover_site: "{{ failoversite_id.data.cdn_sites.0.id }}"
+      cacheMemoryProfileId:
+        name: Linear-HPC-FEC
+    state: present

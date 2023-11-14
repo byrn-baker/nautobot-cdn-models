@@ -1,0 +1,185 @@
+# - set_fact:
+#     prefix_roles:
+#       - name: akamai_cache
+#       - name: idrac
+# - name: Create prefix roles
+#   networktocode.nautobot.ipam_role:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     state: present
+#   loop: "{{ prefix_roles }}"
+
+# - include_vars: ./tmp/Akamai_Phase6_Adds/phase6-prefixes.yml
+# - name: adding new Prefixes
+#   networktocode.nautobot.prefix:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     family: "{% if '.' in item.1.ip %}4{% elif ':' in item.1.ip %}6{% endif %}"
+#     prefix: "{{ item.1.ip }}"
+#     site: 
+#       slug: "{{ item.0.site }}"
+#     prefix_role: "{% if '/31' in item.1.ip %}akamai_cache{% elif '/127' in item.1.ip %}akamai_cache{% elif '/28' in item.1.ip %}idrac{% elif '/27' in item.1.ip %}idrac{% endif %}"
+#     status: active
+#     state: present  
+#   loop: "{{ akamai_prefixes | subelements('ips', 'skip_missing=True') }}"
+
+# - include_vars: ./tmp/Akamai_Phase6_Adds/phase6-sites.yml
+# - name: dump Sites into Dev
+#   networktocode.nautobot.plugin:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     plugin: nautobot-cdn-models
+#     endpoint: cdnsite
+#     validate_certs: false
+#     identifiers:
+#       name: "{{ item.name }}"
+#     attrs:
+#       status: planned
+#       cdn_site_role:
+#         name: "{{ item.group }}"
+#       region: null
+#       abbreviatedName: "{{ item.siteabrev | default()}}"
+#       enableDisklessMode: "{{ item.cf_diskless_mode }}"
+#       # siteId: "{{ item.siteid | default() }}"
+#   loop: "{{ new_akamai_sites }}"
+
+# - name: Build neighbor and Site Failover associations
+#   include_tasks: site_failover.yml
+#   loop: "{{ new_akamai_sites }}"
+
+- include_vars: ./tmp/Akamai_Phase6_Adds/phase6-nodes.yml
+# - name: adding new Nodes
+#   networktocode.nautobot.device:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     device_type: poweredge_r6515
+#     device_role: "{% if '-CHTR_' in item.tenant %}linear_pop_edge{% else %}linear_c_hub{% endif %}"
+#     site: "{{ item.site }}"
+#     # tenant: "{{ item.tenant }}"
+#     status: "Planned"
+#     state: present
+#   loop: "{{ nodes }}"
+
+# - name: Creatting lag_mgmt0 interfaces
+#   networktocode.nautobot.device_interface:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     device: "{{ item.name }}"
+#     name: "lag_mgmt0"
+#     type: "lag"
+#     enabled: true
+#     mtu: "1500"
+#     mgmt_only: "false"  
+#     state: present
+#   loop: "{{ nodes }}"
+
+# - name: Add First Ethernet interfaces
+#   networktocode.nautobot.device_interface:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     device: "{{ item.name }}"
+#     name: "eth0"
+#     type: 100gbase-x-qsfp28
+#     lag:
+#       name: "lag_mgmt0"
+#     enabled: true
+#     mtu: "1500"
+#     mgmt_only: "false"  
+#     state: present
+#   loop: "{{ nodes }}"
+
+# - name: Add Second Ethernet interfaces
+#   networktocode.nautobot.device_interface:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     device: "{{ item.name }}"
+#     name: "eth1"
+#     type: 100gbase-x-qsfp28
+#     lag:
+#       name: "lag_mgmt0"
+#     enabled: true
+#     mtu: "1500"
+#     mgmt_only: "false"  
+#     state: present
+#   loop: "{{ nodes }}"
+
+# - name: Add iDRAC Ethernet interfaces
+#   networktocode.nautobot.device_interface:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     device: "{{ item.name }}"
+#     name: "iDRAC"
+#     type: 1000base-t
+#     mtu: "1500"
+#     mgmt_only: "true"  
+#     state: present
+#   loop: "{{ nodes }}"
+
+# - name: adding IPv4 to lag interface
+#   networktocode.nautobot.ip_address:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     address: "{{ item.ipv4 | ansible.utils.ipaddr('network/prefix') | ansible.utils.ipaddr('1') }}"
+#     dns_name: "{{ item.name }}"
+#     status: "Reserved"
+#     assigned_object:
+#       name: "lag_mgmt0"
+#       device: "{{ item.name }}"
+#     state: present
+#   loop: "{{ nodes }}"
+# - name: adding IPv6 to lag interface
+#   networktocode.nautobot.ip_address:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     address: "{{ item.ipv6 | ansible.utils.ipaddr('network/prefix') | ansible.utils.ipaddr('1') }}"
+#     dns_name: "{{ item.name }}"
+#     status: "Reserved"
+#     assigned_object:
+#       name: "lag_mgmt0"
+#       device: "{{ item.name }}"
+#     state: present
+#   loop: "{{ nodes }}"
+
+# - name: adding IPv4 to idrac interface
+#   networktocode.nautobot.ip_address:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     address: "{{ item.idrac }}"
+#     dns_name: "{{ item.name }}"
+#     status: "Reserved"
+#     assigned_object:
+#       name: "iDRAC"
+#       device: "{{ item.name }}"
+#     state: present
+#   loop: "{{ nodes }}"
+
+# - name: adding primary IPs to new Nodes
+#   networktocode.nautobot.device:
+#     url: "{{ dev_nb_url }}"
+#     token: "{{ dev_nb_token }}"
+#     validate_certs: no
+#     name: "{{ item.name }}"
+#     device_type: poweredge_r6515
+#     device_role: "{% if 'POP' in item.site %}linear_pop_edge{% else %}linear_c_hub{% endif %}"
+#     site: "{{ item.site }}"
+#     primary_ip4: "{{ item.ipv4 | ansible.utils.ipaddr('network/prefix') | ansible.utils.ipaddr('1') }}"
+#     primary_ip6: "{{ item.ipv6 | ansible.utils.ipaddr('network/prefix') | ansible.utils.ipaddr('1') }}"
+#     status: "Planned"
+#     state: present
+#   loop: "{{ nodes }}"
+
+- name: Build Device to Site associations
+  include_tasks: device_site_assoc.yml
+  loop: "{{ nodes }}"

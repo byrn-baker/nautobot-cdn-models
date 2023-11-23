@@ -1,4 +1,4 @@
-{% extends 'generic/object_detail.html' %}
+{% extends 'generic/object_retrieve.html' %}
 {% load helpers %}
 
 {% block content_left_page %}
@@ -61,10 +61,10 @@
             <tr>
                 <td>Site</td>
                 <td>
-                    {% if object.location %}
-                        {{ object.location|hyperlinked_object }} /
+                    {% if object.site.region %}
+                        {{ object.site.region|hyperlinked_object }} /
                     {% endif %}
-                    {{ object.location|hyperlinked_object }}
+                    {{ object.site|hyperlinked_object }}
                 </td>
             </tr>
         </table>
@@ -86,9 +86,9 @@
 {% endblock content_right_page %}
 
 {% block extra_nav_tabs %}
-    {% if perms.view_redirectmapcontext %}
-        <li role="presentation"{% if active_tab == 'cdn-redirect-map-context' %} class="active"{% endif %}>
-            <a href="{% url 'plugins:nautobot_cdn_models:cdnsite_redirectmapcontext' pk=object.pk %}">CDN Redirect Map Context</a>
+    {% if perms.view_cdnconfigcontext %}
+        <li role="presentation"{% if active_tab == 'cdn-config-context' %} class="active"{% endif %}>
+            <a href="{% url 'plugins:nautobot_cdn_models:cdnsite_cdnconfigcontext' pk=object.pk %}">CDN Config Context</a>
         </li>
     {% endif %}
 {% endblock extra_nav_tabs %}

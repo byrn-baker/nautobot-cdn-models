@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <td>Schema</td>
-                        <td>{{ object.config_context_schema|hyperlinked_object }}</td>
+                        <td>{{ object.schema|hyperlinked_object }}</td>
                     </tr>
                     <tr>
                         <td>Active</td>
@@ -48,12 +48,12 @@
                 </div>
                 <table class="table table-hover panel-body attr-table">
                     <tr>
-                        <td>Locations</td>
+                        <td>Regions</td>
                         <td>
-                            {% if object.locations.all %}
+                            {% if object.regions.all %}
                                 <ul>
-                                    {% for location in object.locations.all %}
-                                        <li>{{ location|hyperlinked_object }}</li>
+                                    {% for region in object.regions.all %}
+                                        <li>{{ region|hyperlinked_object }}</li>
                                     {% endfor %}
                                 </ul>
                             {% else %}
@@ -67,6 +67,20 @@
                             {% if object.cdnsites.all %}
                                 <ul>
                                     {% for site in object.cdnsites.all %}
+                                        <li>{{ site|hyperlinked_object }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">None</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Failover Sites</td>
+                        <td>
+                            {% if object.failover_site.all %}
+                                <ul>
+                                    {% for site in object.failover_site.all %}
                                         <li>{{ site|hyperlinked_object }}</li>
                                     {% endfor %}
                                 </ul>

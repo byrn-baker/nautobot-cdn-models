@@ -1,109 +1,110 @@
 from collections import defaultdict
 import logging
 import os
-import re
-from urllib.parse import quote
+
+
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.db import transaction
 import yaml
 
-from nautobot.core.utils.git import GitRepo
-from nautobot.dcim.models import Location
+from nautobot.dcim.models import Location, Region, Site
 from nautobot.extras.choices import (
     LogLevelChoices,
-    SecretsGroupAccessTypeChoices,
-    SecretsGroupSecretTypeChoices,
 )
 from nautobot.extras.models import (
-    ConfigContext,
     ConfigContextSchema,
     GitRepository,
-    JobResult,
     Tag,
 )
 from nautobot.extras.registry import DatasourceContent, register_datasource_contents
 
-from .models import CdnSite, SiteRole, RedirectMapContext
+from .models import CdnSite, SiteRole, CdnConfigContext
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("nautobot.datasources.git")
 
-    
-def refresh_git_redirectmap_config_contexts(repository_record, job_result, delete=False):
-    logger.debug("refresh_git_redirectmap_config_contexts called")
-    """Callback function for GitRepository updates - refresh all RedirectMapContext records managed by this repository."""
-    logging.info(f"Provided contents: {repository_record.provided_contents}")
-    logging.info(f"Delete: {delete}")
-    if "nautobot_cdn_models.redirectmapcontext" in repository_record.provided_contents and not delete:
-        update_git_redirectmap_config_contexts(repository_record, job_result)
+def refresh_git_cdn_config_contexts(repository_record, job_result, delete=False):
+    """Callback function for GitRepository updates - refresh all ConfigContext records managed by this repository."""
+    if "extras.configcontext" in repository_record.provided_contents and not delete:
+        update_git_cdn_config_contexts(repository_record, job_result)
     else:
-        delete_git_redirectmap_config_contexts(repository_record, job_result)
+        delete_git_cdn_config_contexts(repository_record, job_result)
 
 
-def update_git_redirectmap_config_contexts(repository_record, job_result):
+def update_git_cdn_config_contexts(repository_record, job_result):
     """Refresh any config contexts provided by this Git repository."""
-    config_context_path = os.path.join(repository_record.filesystem_path, "redirectmap_contexts")
-    if not os.path.isdir(config_context_path):
+    cdn_config_context_path = os.path.join(repository_record.filesystem_path, "cdn_config_contexts")
+    if not os.path.isdir(cdn_config_context_path):
         return
 
-    managed_redirectmap_config_contexts = set()
-    managed_local_redirectmap_config_contexts = defaultdict(set)
+    managed_cdn_config_contexts = set()
+    managed_local_cdn_config_contexts = defaultdict(set)
 
-    # First, handle the "flat file" case - data files in the root config_context_path,
+    # First, handle the "flat file" case - data files in the root cdn_config_context_path,
     # whose metadata is expressed purely within the contents of the file:
-    for file_name in os.listdir(config_context_path):
-        if not os.path.isfile(os.path.join(config_context_path, file_name)):
+    for file_name in os.listdir(cdn_config_context_path):
+        if not os.path.isfile(os.path.join(cdn_config_context_path, file_name)):
             continue
-        msg = f"Loading redirect map context from `{file_name}`"
-        logger.info(msg)
-        job_result.log(msg, grouping="redirect map contexts")
+        job_result.log(
+            f"Loading config context from `{file_name}`",
+            grouping="cdn config contexts",
+            logger=logger,
+        )
         try:
-            with open(os.path.join(config_context_path, file_name), "r") as fd:
+            with open(os.path.join(cdn_config_context_path, file_name), "r") as fd:
                 # The data file can be either JSON or YAML; since YAML is a superset of JSON, we can load it regardless
                 context_data = yaml.safe_load(fd)
 
             # A file can contain one config context dict or a list thereof
             if isinstance(context_data, dict):
-                context_name = import_redirectmap_context(context_data, repository_record, job_result)
-                managed_redirectmap_config_contexts.add(context_name)
+                context_name = import_cdn_config_context(context_data, repository_record, job_result, logger)
+                managed_cdn_config_contexts.add(context_name)
             elif isinstance(context_data, list):
                 for context_data_entry in context_data:
-                    context_name = import_redirectmap_context(context_data_entry, repository_record, job_result)
-                    managed_redirectmap_config_contexts.add(context_name)
+                    context_name = import_cdn_config_context(context_data_entry, repository_record, job_result, logger)
+                    managed_cdn_config_contexts.add(context_name)
             else:
                 raise RuntimeError("data must be a dict or list of dicts")
 
         except Exception as exc:
-            msg = f"Error in loading redirect map context data from `{file_name}`: {exc}"
-            logger.error(msg)
-            job_result.log(msg, level_choice=LogLevelChoices.LOG_ERROR, grouping="redirect mpa contexts")
+            job_result.log(
+                f"Error in loading config context data from `{file_name}`: {exc}",
+                level_choice=LogLevelChoices.LOG_FAILURE,
+                grouping="cdn config contexts",
+                logger=logger,
+            )
+            job_result.save()
 
-    # Next, handle the "filter/name" directory structure case - files in <filter_type>/<name>.(json|yaml)
+    # Next, handle the "filter/slug directory structure case - files in <filter_type>/<slug>.(json|yaml)
     for filter_type in (
+        "regions",
         "locations",
         "cdn_site_roles",
         "cdnsites",
+        "failover_site",
         "tags",
-        "dynamic_groups",
     ):
         if os.path.isdir(os.path.join(repository_record.filesystem_path, filter_type)):
-            msg = (
-                f'Found "{filter_type}" directory in the repository root. If this is meant to contain redirect map contexts, '
-                "it should be moved into a `redirectmap_contexts/` subdirectory."
+            job_result.log(
+                f'Found "{filter_type}" directory in the repository root. If this is meant to contain config contexts, '
+                "it should be moved into a `cdn_config_contexts/` subdirectory.",
+                level_choice=LogLevelChoices.LOG_WARNING,
+                grouping="cdn config contexts",
+                logger=logger,
             )
-            logger.warning(msg)
-            job_result.log(msg, level_choice=LogLevelChoices.LOG_WARNING, grouping="redirect map contexts")
 
-        dir_path = os.path.join(config_context_path, filter_type)
+        dir_path = os.path.join(cdn_config_context_path, filter_type)
         if not os.path.isdir(dir_path):
             continue
 
         for file_name in os.listdir(dir_path):
-            name = os.path.splitext(file_name)[0]
-            msg = f'Loading config context, filter `{filter_type} = [name: "{name}"]`, from `{filter_type}/{file_name}`'
-            logger.info(msg)
-            job_result.log(msg, grouping="redirect map contexts")
+            slug = os.path.splitext(file_name)[0]
+            job_result.log(
+                f'Loading config context, filter `{filter_type} = [slug: "{slug}"]`, from `{filter_type}/{file_name}`',
+                grouping="cdn config contexts",
+                logger=logger,
+            )
             try:
                 with open(os.path.join(dir_path, file_name), "r") as fd:
                     # Data file can be either JSON or YAML; since YAML is a superset of JSON, we can load it regardless
@@ -112,72 +113,82 @@ def update_git_redirectmap_config_contexts(repository_record, job_result):
                 # Unlike the above case, these files always contain just a single config context record
 
                 # Add the implied filter to the context metadata
-                if filter_type == "device_types":
-                    context_data.setdefault("_metadata", {}).setdefault(filter_type, []).append({"model": name})
-                else:
-                    context_data.setdefault("_metadata", {}).setdefault(filter_type, []).append({"name": name})
+                context_data.setdefault("_metadata", {}).setdefault(filter_type, []).append({"slug": slug})
 
-                context_name = import_redirectmap_context(context_data, repository_record, job_result)
-                managed_redirectmap_config_contexts.add(context_name)
+                context_name = import_cdn_config_context(context_data, repository_record, job_result, logger)
+                managed_cdn_config_contexts.add(context_name)
             except Exception as exc:
-                msg = f"Error in loading config context data from `{file_name}`: {exc}"
-                logger.error(msg)
-                job_result.log(msg, level_choice=LogLevelChoices.LOG_ERROR, grouping="redirect map contexts")
+                job_result.log(
+                    f"Error in loading config context data from `{file_name}`: {exc}",
+                    level_choice=LogLevelChoices.LOG_FAILURE,
+                    grouping="cdn config contexts",
+                    logger=logger,
+                )
+                job_result.save()
 
     # Finally, handle cdnsite-specific "local" context in (cdnsite)/<name>.(json|yaml)
     for local_type in ("cdnsites", "cdn_site_roles"):
         if os.path.isdir(os.path.join(repository_record.filesystem_path, local_type)):
-            msg = (
+            job_result.log(
                 f'Found "{local_type}" directory in the repository root. If this is meant to contain config contexts, '
-                "it should be moved into a `redirectmap_contexts/` subdirectory."
+                "it should be moved into a `cdn_config_contexts/` subdirectory.",
+                level_choice=LogLevelChoices.LOG_WARNING,
+                grouping="cdn config contexts",
+                logger=logger,
             )
-            logger.warning(msg)
-            job_result.log(msg, level_choice=LogLevelChoices.LOG_WARNING, grouping="redirect map contexts")
 
-        dir_path = os.path.join(config_context_path, local_type)
+        dir_path = os.path.join(cdn_config_context_path, local_type)
         if not os.path.isdir(dir_path):
             continue
 
         for file_name in os.listdir(dir_path):
             cdnsite_name = os.path.splitext(file_name)[0]
-            msg = f"Loading local config context for `{cdnsite_name}` from `{local_type}/{file_name}`"
-            logger.info(msg)
-            job_result.log(msg, grouping="local config contexts")
+            job_result.log(
+                f"Loading local config context for `{cdnsite_name}` from `{local_type}/{file_name}`",
+                grouping="local config contexts",
+                logger=logger,
+            )
             try:
                 with open(os.path.join(dir_path, file_name), "r") as fd:
                     context_data = yaml.safe_load(fd)
 
-                import_local_redirectmap_context(
+                import_local_cdn_config_context(
                     local_type,
                     cdnsite_name,
                     context_data,
                     repository_record,
+                    job_result,
+                    logger,
                 )
-                managed_local_redirectmap_config_contexts[local_type].add(cdnsite_name)
+                managed_local_cdn_config_contexts[local_type].add(cdnsite_name)
             except Exception as exc:
-                msg = f"Error in loading local config context from `{local_type}/{file_name}`: {exc}"
-                logger.error(msg)
-                job_result.log(msg, level_choice=LogLevelChoices.LOG_ERROR, grouping="local config contexts")
+                job_result.log(
+                    f"Error in loading local config context from `{local_type}/{file_name}`: {exc}",
+                    level_choice=LogLevelChoices.LOG_FAILURE,
+                    grouping="local config contexts",
+                    logger=logger,
+                )
+                job_result.save()
 
     # Delete any prior contexts that are owned by this repository but were not created/updated above
-    delete_git_redirectmap_config_contexts(
+    delete_git_cdn_config_contexts(
         repository_record,
         job_result,
-        preserve=managed_redirectmap_config_contexts,
-        preserve_local=managed_local_redirectmap_config_contexts,
+        preserve=managed_cdn_config_contexts,
+        preserve_local=managed_local_cdn_config_contexts,
     )
 
 
-def import_redirectmap_context(context_data, repository_record, job_result):
+def import_cdn_config_context(context_data, repository_record, job_result, logger):  # pylint: disable=redefined-outer-name
     """
-    Parse a given dictionary of data to create/update a RedirectMapContext record.
+    Parse a given dictionary of data to create/update a ConfigContext record.
 
     The dictionary is expected to have a key "_metadata" which defines properties on the ConfigContext record itself
     (name, weight, description, etc.), while all other keys in the dictionary will go into the record's "data" field.
 
     Note that we don't use extras.api.serializers.ConfigContextSerializer, despite superficial similarities;
-    the reason is that the serializer only allows us to identify related objects (Locations, Role, etc.)
-    by their database primary keys, whereas here we need to be able to look them up by other values such as name.
+    the reason is that the serializer only allows us to identify related objects (Region, Site, DeviceRole, etc.)
+    by their database primary keys, whereas here we need to be able to look them up by other values such as slug.
     """
     git_repository_content_type = ContentType.objects.get_for_model(GitRepository)
 
@@ -195,20 +206,14 @@ def import_redirectmap_context(context_data, repository_record, job_result):
     context_metadata.setdefault("description", "")
     context_metadata.setdefault("is_active", True)
 
-    # Context Metadata `schema` has been updated to `config_context_schema`,
-    # but for backwards compatibility `schema` is still supported.
-    if "schema" in context_metadata and "config_context_schema" not in context_metadata:
-        msg = "`schema` is deprecated in `_metadata`, please use `config_context_schema` instead."
-        logger.warning(f"{msg}")
-        job_result.log(msg, level_choice=LogLevelChoices.LOG_WARNING, grouping="config context")
-        context_metadata["config_context_schema"] = context_metadata.pop("schema")
-
     # Translate relationship queries/filters to lists of related objects
     relations = {}
     for key, model_class in [
+        ("regions", Region),
         ("locations", Location),
         ("cdn_site_roles", SiteRole),
         ("cdnsites", CdnSite),
+        ("failover_site", CdnSite),
         ("tags", Tag),
     ]:
         relations[key] = []
@@ -237,13 +242,13 @@ def import_redirectmap_context(context_data, repository_record, job_result):
         modified = False
         save_needed = False
         try:
-            context_record = RedirectMapContext.objects.get(
+            context_record = CdnConfigContext.objects.get(
                 name=context_metadata.get("name"),
                 owner_content_type=git_repository_content_type,
                 owner_object_id=repository_record.pk,
             )
-        except RedirectMapContext.DoesNotExist:
-            context_record = RedirectMapContext(
+        except CdnConfigContext.DoesNotExist:
+            context_record = CdnConfigContext(
                 name=context_metadata.get("name"),
                 owner_content_type=git_repository_content_type,
                 owner_object_id=repository_record.pk,
@@ -260,21 +265,23 @@ def import_redirectmap_context(context_data, repository_record, job_result):
         data = context_data.copy()
         del data["_metadata"]
 
-        if context_metadata.get("config_context_schema"):
-            if getattr(context_record.config_context_schema, "name", None) != context_metadata["config_context_schema"]:
+        if context_metadata.get("schema"):
+            if getattr(context_record.schema, "name", None) != context_metadata["schema"]:
                 try:
-                    schema = ConfigContextSchema.objects.get(name=context_metadata["config_context_schema"])
-                    context_record.config_context_schema = schema
+                    schema = ConfigContextSchema.objects.get(name=context_metadata["schema"])
+                    context_record.schema = schema
                     modified = True
                 except ConfigContextSchema.DoesNotExist:
-                    msg = f"ConfigContextSchema {context_metadata['config_context_schema']} does not exist."
-                    logger.error(msg)
                     job_result.log(
-                        msg, obj=context_record, level_choice=LogLevelChoices.LOG_ERROR, grouping="redirect map contexts"
+                        f"ConfigContextSchema {context_metadata['schema']} does not exist.",
+                        obj=context_record,
+                        level_choice=LogLevelChoices.LOG_FAILURE,
+                        grouping="cdn config contexts",
+                        logger=logger,
                     )
         else:
-            if context_record.config_context_schema is not None:
-                context_record.config_context_schema = None
+            if context_record.schema is not None:
+                context_record.schema = None
                 modified = True
 
         if context_record.data != data:
@@ -299,27 +306,41 @@ def import_redirectmap_context(context_data, repository_record, job_result):
             context_record.save()
 
     if created:
-        msg = "Successfully created redirect map context"
-        logger.info(f"{msg}")
-        job_result.log(msg, obj=context_record, level_choice=LogLevelChoices.LOG_INFO, grouping="redirect map contexts")
+        job_result.log(
+            "Successfully created config context",
+            obj=context_record,
+            level_choice=LogLevelChoices.LOG_SUCCESS,
+            grouping="cdn config contexts",
+            logger=logger,
+        )
     elif modified:
-        msg = "Successfully refreshed redirect map context"
-        logger.info(f"{msg}")
-        job_result.log(msg, obj=context_record, level_choice=LogLevelChoices.LOG_INFO, grouping="redirect map contexts")
+        job_result.log(
+            "Successfully refreshed config context",
+            obj=context_record,
+            level_choice=LogLevelChoices.LOG_SUCCESS,
+            grouping="cdn config contexts",
+            logger=logger,
+        )
     else:
-        msg = "No change to redirect map context"
-        logger.info(f"{msg}")
-        job_result.log(msg, obj=context_record, level_choice=LogLevelChoices.LOG_INFO, grouping="redirect map contexts")
+        job_result.log(
+            "No change to config context",
+            obj=context_record,
+            level_choice=LogLevelChoices.LOG_INFO,
+            grouping="cdn config contexts",
+            logger=logger,
+        )
 
     return context_record.name if context_record else None
 
 
-def import_local_redirectmap_context(local_type, cdnsite_name, context_data, repository_record):
+def import_local_cdn_config_context(
+    local_type, cdnsite_name, context_data, repository_record, job_result, logger  # pylint: disable=redefined-outer-name
+):
     """
     Create/update the local config context data associated with a Device or VirtualMachine.
     """
     try:
-        if local_type == "cdnsites":
+        if local_type == "devices":
             record = CdnSite.objects.get(name=cdnsite_name)
     except MultipleObjectsReturned:
         # Possible for Device as name is not guaranteed globally unique
@@ -328,75 +349,87 @@ def import_local_redirectmap_context(local_type, cdnsite_name, context_data, rep
     except ObjectDoesNotExist:
         raise RuntimeError("record not found!")
 
-    if (
-        record.local_redirectmap_context_data_owner is not None
-        and record.local_redirectmap_context_data_owner != repository_record
-    ):
-        logger.error(
-            "DATA CONFLICT: Local context data is owned by another owner, %s",
-            record.local_redirectmap_context_data_owner,
-            extra={"object": record, "grouping": "local config contexts"},
+    if record.local_context_data_owner is not None and record.local_context_data_owner != repository_record:
+        job_result.log(
+            f"DATA CONFLICT: Local context data is owned by another owner, {record.local_context_data_owner}",
+            obj=record,
+            level_choice=LogLevelChoices.LOG_FAILURE,
+            grouping="local config contexts",
+            logger=logger,
         )
         return
 
-    if record.local_redirectmap_context_data == context_data and record.local_redirectmap_context_data_owner == repository_record:
-        logger.info("No change to local config context", extra={"object": record, "grouping": "local config contexts"})
+    if record.local_context_data == context_data and record.local_context_data_owner == repository_record:
+        job_result.log(
+            "No change to local config context",
+            obj=record,
+            level_choice=LogLevelChoices.LOG_INFO,
+            grouping="local config contexts",
+            logger=logger,
+        )
         return
 
-    record.local_redirectmap_context_data = context_data
-    record.local_redirectmap_context_data_owner = repository_record
+    record.local_context_data = context_data
+    record.local_context_data_owner = repository_record
     record.clean()
     record.save()
-    logger.info(
-        "Successfully updated local config context", extra={"object": record, "grouping": "local config contexts"}
+    job_result.log(
+        "Successfully updated local config context",
+        obj=record,
+        level_choice=LogLevelChoices.LOG_SUCCESS,
+        grouping="local config contexts",
+        logger=logger,
     )
 
 
-def delete_git_redirectmap_config_contexts(repository_record, job_result, preserve=(), preserve_local=None):
-    """Delete redirect map contexts owned by this Git repository that are not in the preserve list (if any)."""
+def delete_git_cdn_config_contexts(repository_record, job_result, preserve=(), preserve_local=None):
+    """Delete config contexts owned by this Git repository that are not in the preserve list (if any)."""
     if not preserve_local:
         preserve_local = defaultdict(set)
 
     git_repository_content_type = ContentType.objects.get_for_model(GitRepository)
-    for context_record in RedirectMapContext.objects.filter(
+    for context_record in CdnConfigContext.objects.filter(
         owner_content_type=git_repository_content_type,
         owner_object_id=repository_record.pk,
     ):
         if context_record.name not in preserve:
             context_record.delete()
-            msg = f"Deleted redirect map context {context_record}"
-            logger.warning(msg)
-            job_result.log(msg, level_choice=LogLevelChoices.LOG_WARNING, grouping="redirect map contexts")
+            job_result.log(
+                f"Deleted config context {context_record}",
+                level_choice=LogLevelChoices.LOG_WARNING,
+                grouping="cdn config contexts",
+                logger=logger,
+            )
 
     for grouping, model in (
         ("cdnsites", CdnSite),
     ):
         for record in model.objects.filter(
-            local_redirectmap_context_data_owner_content_type=git_repository_content_type,
-            local_redirectmap_context_data_owner_object_id=repository_record.pk,
+            local_context_data_owner_content_type=git_repository_content_type,
+            local_context_data_owner_object_id=repository_record.pk,
         ):
             if record.name not in preserve_local[grouping]:
-                record.local_redirectmap_context_data = None
-                record.local_redirectmap_context_data_owner = None
+                record.local_context_data = None
+                record.local_context_data_owner = None
                 record.clean()
                 record.save()
-                msg = "Deleted local config context"
-                logger.warning(msg)
                 job_result.log(
-                    msg, obj=record, level_choice=LogLevelChoices.LOG_WARNING, grouping="local redirect map contexts"
+                    "Deleted local config context",
+                    obj=record,
+                    level_choice=LogLevelChoices.LOG_WARNING,
+                    grouping="local config contexts",
+                    logger=logger,
                 )
-                
-# Register built-in callbacks for data types potentially provided by a GitRepository
 register_datasource_contents(
     [
         (
             "extras.gitrepository",
             DatasourceContent(
-                name="redirect map contexts",
-                content_identifier="nautobot_cdn_models.redirectmapcontext",
+                name="cdn config contexts",
+                content_identifier="nautobot_cdn_models.cdnconfigcontext",
                 icon="mdi-code-json",
                 weight=500,
-                callback=refresh_git_redirectmap_config_contexts,
+                callback=refresh_git_cdn_config_contexts,
             ),
         )
     ]

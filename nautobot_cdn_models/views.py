@@ -1,87 +1,54 @@
+from jsonschema.validators import Draft7Validator
 from django_tables2 import RequestConfig
 from deepmerge import Merger
-from jsonschema.validators import Draft7Validator
-from django.urls import reverse
 
-from django.contrib import messages
-from django.http import HttpResponseForbidden
-from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import View
 
-from nautobot.extras.utils import get_worker_count
-from nautobot.core.views import generic, mixins as view_mixins
-from nautobot.core.models.querysets import count_related
-from nautobot.core.views.paginator import EnhancedPaginator, get_paginate_count
-from nautobot.core.tables import ButtonsColumn
-from nautobot.dcim.models import Device
+from nautobot.core.views import mixins as view_mixins
+from nautobot.core.views import generic
 from nautobot.extras.views import ObjectChangeLogView
+from nautobot.extras.models import RelationshipAssociation
+from nautobot.utilities.tables import ButtonsColumn
+from nautobot.utilities.paginator import EnhancedPaginator, get_paginate_count
 
-from nautobot.extras.models import RelationshipAssociation, JobResult
-from nautobot.extras.choices import JobResultStatusChoices
 from nautobot.extras.tables import RelationshipAssociationTable
-from nautobot.extras.datasources import (
-    enqueue_git_repository_diff_origin_and_local,
-    enqueue_pull_git_repository_and_refresh_data,
-    get_datasource_contents,
+
+from .models import (
+    HyperCacheMemoryProfile,
+    SiteRole,
+    CdnSite,
+    CdnConfigContext,
+    ServiceProvider,
+    ContentProvider,
+    Origin
 )
 
-from . import filters, tables, forms
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
+from . import ( 
+    filters, 
+    forms, 
+    tables,
+)
+from .api import serializers
 
-
-## HyperCache Memory Profiles
-class HyperCacheMemoryProfileListView(generic.ObjectListView):
+class HyperCacheMemoryProfileUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
     queryset = HyperCacheMemoryProfile.objects.all()
-    filterset = filters.HyperCacheMemoryProfileFilterSet
-    table = tables.HyperCacheMemoryProfileTable
-    use_new_ui = True
-
-
-class HyperCacheMemoryProfileView(generic.ObjectView):
-    queryset = HyperCacheMemoryProfile.objects.all()
-
-
-class HyperCacheMemoryProfileEditView(generic.ObjectEditView):
-    queryset = HyperCacheMemoryProfile.objects.all()
-    model_form = forms.HyperCacheMemoryProfileForm
-
-
-class HyperCacheMemoryProfileDeleteView(generic.ObjectDeleteView):
-    queryset = HyperCacheMemoryProfile.objects.all()
-
-
-class HyperCacheMemoryProfileBulkImportView(generic.BulkImportView):
-    queryset = HyperCacheMemoryProfile.objects.all()
-    table = tables.HyperCacheMemoryProfileTable
-
-class HyperCacheMemoryProfileBulkEditView(generic.BulkEditView):
-    queryset = HyperCacheMemoryProfile.objects.all()
-    filterset = filters.HyperCacheMemoryProfileFilterSet
-    table = tables.HyperCacheMemoryProfileTable
-    form = forms.HyperCacheMemoryProfileBulkEditForm
-
-
-class HyperCacheMemoryProfileBulkDeleteView(generic.BulkDeleteView):
-    queryset = HyperCacheMemoryProfile.objects.all()
-    table = tables.HyperCacheMemoryProfileTable
-    filterset = filters.HyperCacheMemoryProfileFilterSet
-
-## CDN Site Roles ##
-class SiteRoleListView(generic.ObjectListView):
-    queryset = SiteRole.objects.annotate(cdnsite_count=count_related(CdnSite, "cdn_site_role"))
-    filterset = filters.SiteRoleFilterSet
-    table = tables.SiteRoleTable
-    use_new_ui = True
-
-
+    table_class = tables.HyperCacheMemoryProfileTable
+    form_class = forms.HyperCacheMemoryProfileForm
+    filterset_class = filters.HyperCacheMemoryProfileFilterSet
+    filterset_form_class = forms.HyperCacheMemoryProfileFilterForm
+    serializer_class = serializers.HyperCacheMemoryProfileSerializer
+    action_buttons = ("add",)
+    lookup_field = "pk"
+  
 class SiteRoleView(generic.ObjectView):
     queryset = SiteRole.objects.all()
-
     def get_extra_context(self, request, instance):
-        # CdnSite
-        cdnsites = CdnSite.objects.restrict(request.user, "view").filter(
-            cdn_site_role__in=instance.descendants(include_self=True)
-        )
+        cdnsites = CdnSite.objects.all().filter(cdn_site_role__in=instance.get_descendants(include_self=True))
 
         cdnsite_table = tables.CdnSiteTable(cdnsites)
         cdnsite_table.columns.hide("cdn_site_role")
@@ -93,9 +60,14 @@ class SiteRoleView(generic.ObjectView):
         RequestConfig(request, paginate).configure(cdnsite_table)
 
         return {
-            "cdnsite_table": cdnsite_table,
+            "cdnsite_table": cdnsite_table
         }
-
+class SiteRoleListView(generic.ObjectListView):
+    queryset = SiteRole.objects.add_related_count(
+        SiteRole.objects.all(), CdnSite, "cdn_site_role", "cdnsite_count", cumulative=True
+    )
+    filterset = filters.SiteRoleFilterSet
+    table = tables.SiteRoleTable
 
 class SiteRoleEditView(generic.ObjectEditView):
     queryset = SiteRole.objects.all()
@@ -105,48 +77,41 @@ class SiteRoleEditView(generic.ObjectEditView):
 class SiteRoleDeleteView(generic.ObjectDeleteView):
     queryset = SiteRole.objects.all()
 
-
 class SiteRoleBulkImportView(generic.BulkImportView):
     queryset = SiteRole.objects.all()
+    model_form = forms.SiteRoleCSVForm
     table = tables.SiteRoleTable
-
 
 class SiteRoleBulkDeleteView(generic.BulkDeleteView):
-    queryset = SiteRole.objects.annotate(cdnsite_count=count_related(CdnSite, "cdn_site_role"))
+    queryset = SiteRole.objects.add_related_count(
+        SiteRole.objects.all(), CdnSite, "cdn_site_role", "cdnsite_count", cumulative=True
+    )
     table = tables.SiteRoleTable
-    filterset = filters.SiteRoleFilterSet
 
-## CDN SITES ##
+class CdnSiteUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
+    queryset = CdnSite.objects.all()
+    table_class = tables.CdnSiteTable
+    form_class = forms.CdnSiteForm
+    filterset_class = filters.CdnSiteFilterSet
+    filterset_form_class = forms.CdnSiteFilterForm
+    serializer_class = serializers.CdnSiteSerializer
+    action_buttons = ("add",)
+
 class CdnSiteListView(generic.ObjectListView):
-    queryset = CdnSite.objects.select_related("cdn_site_role")
+    queryset = CdnSite.objects.all()
     filterset = filters.CdnSiteFilterSet
     filterset_form = forms.CdnSiteFilterForm
     table = tables.CdnSiteTable
-    use_new_ui = True
 
 
 class CdnSiteView(generic.ObjectView):
-    queryset = CdnSite.objects.select_related("cdn_site_role")
-
-    # def get_extra_context(self, request, instance):
-    #     stats = {
-    #         # TODO: Should we include child locations of the filtered locations in the location_count below?
-    #         "location_count": Location.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
-    #         "rack_count": Rack.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
-    #         "rackreservation_count": RackReservation.objects.restrict(request.user, "view")
-    #         .filter(cdnsites=instance)
-    #         .count(),
-    #         "device_count": Device.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
-    #         "prefix_count": Prefix.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
-    #         "ipaddress_count": IPAddress.objects.restrict(request.user, "view").filter(cdnsites=instance).count(),
-    #         "virtualmachine_count": VirtualMachine.objects.restrict(request.user, "view")
-    #         .filter(cdnsites=instance)
-    #         .count(),
-    #     }
-
-    #     return {
-    #         "stats": stats,
-    #     }
+    queryset = CdnSite.objects.select_related("region", "cdn_site_role", "status")
     def get_extra_context(self, request, instance):
         stats = {
             "device_count": RelationshipAssociation.objects.all().filter(destination_id=instance.id).count()
@@ -170,57 +135,61 @@ class CdnSiteView(generic.ObjectView):
         return {
             "relation_table": relation_table
         }
-
-
+    
 class CdnSiteEditView(generic.ObjectEditView):
     queryset = CdnSite.objects.all()
     model_form = forms.CdnSiteForm
     template_name = "nautobot_cdn_models/cdnsite_edit.html"
 
-
 class CdnSiteDeleteView(generic.ObjectDeleteView):
     queryset = CdnSite.objects.all()
 
-
 class CdnSiteBulkImportView(generic.BulkImportView):
     queryset = CdnSite.objects.all()
+    model_form = forms.CdnSiteCSVForm
     table = tables.CdnSiteTable
 
-
 class CdnSiteBulkEditView(generic.BulkEditView):
-    queryset = CdnSite.objects.select_related("cdn_site_role")
+    queryset = CdnSite.objects.select_related("region", "cdn_site_role")
     filterset = filters.CdnSiteFilterSet
     table = tables.CdnSiteTable
     form = forms.CdnSiteBulkEditForm
 
-
 class CdnSiteBulkDeleteView(generic.BulkDeleteView):
-    queryset = CdnSite.objects.select_related("cdn_site_role")
+    queryset = CdnSite.objects.select_related("region", "cdn_site_role")
     filterset = filters.CdnSiteFilterSet
     table = tables.CdnSiteTable
 
 class CdnSiteChangeLogView(ObjectChangeLogView):
     base_template = "nautobot_akamai_models/cdnsite.html"
-    
-class RedirectMapContextListView(generic.ObjectListView):
-    queryset = RedirectMapContext.objects.all()
-    filterset = filters.RedirectMapContextFilterSet
-    filterset_form = forms.RedirectMapContextFilterForm
-    table = tables.RedirectMapContextTable
+
+#
+# Config contexts
+#
+
+# TODO(Glenn): disallow (or at least warn) user from manually editing config contexts that
+# have an associated owner, such as a Git repository
+
+
+class CdnConfigContextListView(generic.ObjectListView):
+    queryset = CdnConfigContext.objects.all()
+    filterset = filters.CdnConfigContextFilterSet
+    filterset_form = forms.CdnConfigContextFilterForm
+    table = tables.CdnConfigContextTable
     action_buttons = ("add",)
 
 
-class RedirectMapContextView(generic.ObjectView):
-    queryset = RedirectMapContext.objects.all()
+class CdnConfigContextView(generic.ObjectView):
+    queryset = CdnConfigContext.objects.all()
 
     def get_extra_context(self, request, instance):
         # Determine user's preferred output format
         if request.GET.get("format") in ["json", "yaml"]:
             format_ = request.GET.get("format")
             if request.user.is_authenticated:
-                request.user.set_config("redirectmapcontext.format", format_, commit=True)
+                request.user.set_config("cdnconfigcontext.format", format_, commit=True)
         elif request.user.is_authenticated:
-            format_ = request.user.get_config("redirectmapcontext.format", "json")
+            format_ = request.user.get_config("cdnconfigcontext.format", "json")
         else:
             format_ = "json"
 
@@ -229,26 +198,26 @@ class RedirectMapContextView(generic.ObjectView):
         }
 
     
-class RedirectMapContextEditView(generic.ObjectEditView):
-    queryset = RedirectMapContext.objects.all()
-    model_form = forms.RedirectMapContextForm
-    template_name = "nautobot_cdn_models/redirectmapcontext_edit.html"
+class CdnConfigContextEditView(generic.ObjectEditView):
+    queryset = CdnConfigContext.objects.all()
+    model_form = forms.CdnConfigContextForm
+    template_name = "nautobot_cdn_models/cdnconfigcontext_edit.html"
 
 
-class RedirectMapContextBulkEditView(generic.BulkEditView):
-    queryset = RedirectMapContext.objects.all()
-    filterset = filters.RedirectMapContextFilterSet
-    table = tables.RedirectMapContextTable
-    form = forms.RedirectMapContextBulkEditForm
+class CdnConfigContextBulkEditView(generic.BulkEditView):
+    queryset = CdnConfigContext.objects.all()
+    filterset = filters.CdnConfigContextFilterSet
+    table = tables.CdnConfigContextTable
+    form = forms.CdnConfigContextBulkEditForm
 
 
-class RedirectMapContextDeleteView(generic.ObjectDeleteView):
-    queryset = RedirectMapContext.objects.all()
+class CdnConfigContextDeleteView(generic.ObjectDeleteView):
+    queryset = CdnConfigContext.objects.all()
 
 
-class RedirectMapContextBulkDeleteView(generic.BulkDeleteView):
-    queryset = RedirectMapContext.objects.all()
-    table = tables.RedirectMapContextTable
+class CdnConfigContextBulkDeleteView(generic.BulkDeleteView):
+    queryset = CdnConfigContext.objects.all()
+    table = tables.CdnConfigContextTable
 
 
 # define a merger with a custom list merge strategy
@@ -262,12 +231,12 @@ list_merger = Merger(
     ["override"]
 )
 
-class ObjectRedirectMapContextView(generic.ObjectView):
+class ObjectCdnConfigContextView(generic.ObjectView):
     base_template = None
-    template_name = "nautobot_cdn_models/object_redirectmapcontext.html"
+    template_name = "nautobot_cdn_models/object_cdnconfigcontext.html"
 
     def get_extra_context(self, request, instance):
-        source_contexts = RedirectMapContext.objects.restrict(request.user, "view").get_for_object(instance)
+        source_contexts = CdnConfigContext.objects.restrict(request.user, "view").get_for_object(instance)
         # Merge the context data
         merged_data = {}
         for context in source_contexts:
@@ -277,9 +246,9 @@ class ObjectRedirectMapContextView(generic.ObjectView):
         if request.GET.get("format") in ["json", "yaml"]:
             format_ = request.GET.get("format")
             if request.user.is_authenticated:
-                request.user.set_config("redirectmapcontext.format", format_, commit=True)
+                request.user.set_config("cdnconfigcontext.format", format_, commit=True)
         elif request.user.is_authenticated:
-            format_ = request.user.get_config("redirectmapcontext.format", "json")
+            format_ = request.user.get_config("cdnconfigcontext.format", "json")
         else:
             format_ = "json"
 
@@ -291,7 +260,59 @@ class ObjectRedirectMapContextView(generic.ObjectView):
             "active_tab": "config-context",
         }
 
-class CdnSiteRedirectMapContextView(ObjectRedirectMapContextView):
+class CdnSiteConfigContextView(ObjectCdnConfigContextView):
     queryset = CdnSite.objects.annotate_config_context_data()
     base_template = "nautobot_akamai_models/cdnsite.html"
-       
+
+
+#
+# Content Delivery
+#
+
+class ServiceProviderUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
+    queryset = ServiceProvider.objects.all()
+    table_class = tables.ServiceProviderTable
+    form_class = forms.ServiceProviderForm
+    filterset_class = filters.ServiceProviderFilterSet
+    filterset_form_class = forms.ServiceProviderFilterForm
+    serializer_class = serializers.ServiceProviderSerializer
+    action_buttons = ("add",)
+    lookup_field = "pk"
+
+class ContentProviderUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
+    queryset = ContentProvider.objects.all()
+    table_class = tables.ContentProviderTable
+    form_class = forms.ContentProviderForm
+    filterset_class = filters.ContentProviderFilterSet
+    filterset_form_class = forms.ContentProviderFilterForm
+    serializer_class = serializers.ContentProviderSerializer
+    action_buttons = ("add",)
+    lookup_field = "pk"
+
+class OriginUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
+    queryset = Origin.objects.all()
+    table_class = tables.OriginTable
+    form_class = forms.OriginForm
+    filterset_class = filters.OriginFilterSet
+    filterset_form_class = forms.OriginFilterForm
+    serializer_class = serializers.OriginSerializer
+    action_buttons = ("add",)
+    lookup_field = "pk"

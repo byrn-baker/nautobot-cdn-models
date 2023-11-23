@@ -1,8 +1,8 @@
-{% extends 'generic/object_detail.html' %}
+{% extends 'generic/object_retrieve.html' %}
 {% load helpers %}
 {% load static %}
 
-{% block title %}{{ block.super }} - Redirect Map Context{% endblock %}
+{% block title %}{{ block.super }} - Cdn Config Context{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -23,14 +23,14 @@
                     <strong>Local Context</strong>
                 </div>
                 <div class="panel-body">
-                    {% if object.local_redirectmap_context_data %}
-                        {% if object.local_redirectmap_context_schema %}
-                            <span>Schema {{ object.local_redirectmap_context_schema|hyperlinked_object }}</span>
+                    {% if object.local_context_data %}
+                        {% if object.local_context_schema %}
+                            <span>Schema {{ object.local_context_schema|hyperlinked_object }}</span>
                         {% endif %}
-                        {% if object.local_redirectmap_context_data_owner %}
-                            Owned by <strong>{{ object.local_redirectmap_context_data_owner|hyperlinked_object }}</strong>
+                        {% if object.local_context_data_owner %}
+                            Owned by <strong>{{ object.local_context_data_owner|hyperlinked_object }}</strong>
                         {% endif %}
-                        {% include 'nautobot_cdn_models/json_data.html' with data=object.local_redirectmap_context_data format=format %}
+                        {% include 'nautobot_cdn_models/json_data.html' with data=object.local_context_data format=format %}
                     {% else %}
                         <span class="text-muted">None</span>
                     {% endif %}

@@ -6,7 +6,7 @@ from nautobot.core.api.filter_backends import NautobotFilterBackend
 from nautobot.core.api.views import (
     ModelViewSet,
 )
-from nautobot.extras.api.views import NautobotModelViewSet
+from nautobot.extras.api.views import NautobotModelViewSet, NotesViewSetMixin
 
 from .. import models, filters
 from . import serializers
@@ -32,7 +32,7 @@ class CdnSiteViewSet(NautobotModelViewSet):
 #
 
 
-class RedirectMapContextFilterBackend(NautobotFilterBackend):
+class CdnConfigContextFilterBackend(NautobotFilterBackend):
     """
     Used by views that work with config context models (device and virtual machine).
 
@@ -48,14 +48,14 @@ class RedirectMapContextFilterBackend(NautobotFilterBackend):
         return kwargs
 
 
-class RedirectMapContextQuerySetMixin:
+class CdnConfigContextQuerySetMixin:
     """
     Used by views that work with config context models (device and virtual machine).
     Provides a get_queryset() method which deals with adding the config context
     data annotation or not.
     """
 
-    filter_backends = [RedirectMapContextFilterBackend]
+    filter_backends = [CdnConfigContextFilterBackend]
 
     def get_queryset(self):
         """
@@ -68,16 +68,36 @@ class RedirectMapContextQuerySetMixin:
         """
         queryset = super().get_queryset()
         request = self.get_serializer_context()["request"]
-        if self.brief or (request is not None and "redirect_map_context" in request.query_params.get("exclude", [])):
+        if self.brief or (request is not None and "cdnconfig_context" in request.query_params.get("exclude", [])):
             return queryset
         return queryset.annotate_config_context_data()
 
 
-class RedirectMapContextViewSet(ModelViewSet):
-    queryset = models.RedirectMapContext.objects.prefetch_related(
+class CdnConfigContextViewSet(ModelViewSet, NotesViewSetMixin):
+    queryset = models.CdnConfigContext.objects.prefetch_related(
         "regions",
         "cdnsites",
         "cdn_site_roles",
+        "failover_site",
     )
-    serializer_class = serializers.RedirectMapContextSerializer
-    filterset_class = filters.RedirectMapContextFilterSet
+    serializer_class = serializers.CdnConfigContextSerializer
+    filterset_class = filters.CdnConfigContextFilterSet
+
+
+#
+# Content Delivery
+#
+
+class ServiceProviderViewSet(NautobotModelViewSet):
+    queryset = models.ServiceProvider.objects.all()
+    serializer_class = serializers.ServiceProviderSerializer
+    filter_class = filters.ServiceProviderFilterSet
+    
+class ContentProviderViewSet(NautobotModelViewSet):
+    queryset = models.ContentProvider.objects.all()
+    serializer_class = serializers.ContentProviderSerializer
+    filter_class = filters.ContentProviderFilterSet
+class OriginViewSet(NautobotModelViewSet):
+    queryset = models.Origin.objects.all()
+    serializer_class = serializers.OriginSerializer
+    filter_class = filters.OriginFilterSet

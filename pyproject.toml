@@ -14,21 +14,57 @@ packages = [
     { include = "nautobot_cdn_models" },
 ]
 
-[[tool.poetry.source]]
-name = "pypi-repo"
-url = "https://pypi.org/simple"
-default = true
-
 [tool.poetry.dependencies]
-python = "^3.8"
+# Used for local development
+nautobot = "1.6.6"
+python = ">=3.8,<3.12"
+
+[tool.poetry.dev-dependencies]
+bandit = "*"
+black = "*"
+coverage = "*"
+django-debug-toolbar = "*"
+# we need to pin flake8 because of package dependencies that cause it to downgrade and 
+# therefore cause issues with linting since older versions do not take .flake8 as config
+flake8 = "^3.9.2"
+invoke = "*"
+ipython = "*"
+mkdocs = "*"
+pydocstyle = "*"
+pylint = "*"
+pylint-django = "*"
+pytest = "*"
+yamllint = "*"
+Markdown = "*"
+toml = "*"
 ansible = "*"
-pynautobot = "^2.0.1"
-invoke = "^2.2.0"
-deepmerge = "^1.1.0"
+deepmerge = "*"
 
 [tool.poetry.extras]
 nautobot = ["nautobot"]
 
+[tool.black]
+line-length = 120
+target-version = ['py37']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | settings.py     # This is where you define files that should not be stylized by black
+                     # the root of the project
+)
+'''
 
 [tool.pylint.master]
 # Include the pylint_django plugin to avoid spurious warnings about Django patterns

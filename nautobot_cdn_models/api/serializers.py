@@ -3,22 +3,27 @@ from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from drf_spectacular.utils import extend_schema_field
 
+from nautobot.utilities.api import get_serializer_for_model
 from nautobot.core.api import (
     ContentTypeField,
-    NautobotModelSerializer,
-    NotesSerializerMixin,
-    ValidatedModelSerializer,
-    TreeModelSerializerMixin,
     SerializedPKRelatedField,
     ValidatedModelSerializer,
 )
-from nautobot.core.api.utils import get_serializer_for_model
-from nautobot.dcim.models import Location
-from nautobot.extras.models import Tag
-from nautobot.dcim.api.serializers import (
-    LocationSerializer
+from nautobot.dcim.models import Region
+from nautobot.dcim.api.nested_serializers import (
+    NestedRegionSerializer,
+    NestedSiteSerializer
 )
-from nautobot.extras.api.serializers import NautobotModelSerializer, ConfigContextSchemaSerializer
+from nautobot.extras.api.serializers import (
+    NautobotModelSerializer,
+    StatusModelSerializerMixin,
+    NotesSerializerMixin
+)
+from nautobot.extras.api.nested_serializers import (
+    NestedConfigContextSchemaSerializer,
+)
+from nautobot.extras.models import Tag
+
 from nautobot.extras.utils import FeatureQuery
 
 from .. import models
@@ -35,46 +40,39 @@ class HyperCacheMemoryProfileSerializer(NautobotModelSerializer):
         fields = "__all__"
 
 
-class SiteRoleSerializer(NautobotModelSerializer, TreeModelSerializerMixin):
+class SiteRoleSerializer(NautobotModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="plugins-api:nautobot_cdn_models-api:siterole-detail"
     )
-    cdnsite_count = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = models.SiteRole
         fields = "__all__"
-        list_display_fields = ["name", "cdnsite_count", "description", "actions"]
 
 
-class CdnSiteSerializer(NautobotModelSerializer):
+class CdnSiteSerializer(NautobotModelSerializer, StatusModelSerializerMixin):
     url = serializers.HyperlinkedIdentityField(
         view_name="plugins-api:nautobot_cdn_models-api:cdnsite-detail"
     )
-    cdn_site_role = nested_serializers.CdnNestedSiteRoleSerializer(required=False, allow_null=True)
-    location = LocationSerializer(required=False, allow_null=True)
-    cacheMemoryProfileId = nested_serializers.CdnNestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
-    device_count = serializers.IntegerField(read_only=True)
-    ipaddress_count = serializers.IntegerField(read_only=True)
-    prefix_count = serializers.IntegerField(read_only=True)
-    virtualmachine_count = serializers.IntegerField(read_only=True)
+    cdn_site_role = nested_serializers.NestedSiteRoleSerializer(required=False, allow_null=True)
+    region = NestedRegionSerializer(required=False, allow_null=True)
+    site = NestedSiteSerializer(required=False, allow_null=True)
+    cacheMemoryProfileId = nested_serializers.NestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
     # neighbor1 = nested_serializers.NestedCdnSiteSerializer()
     # neighbor2 = nested_serializers.NestedCdnSiteSerializer(required=False, allow_null=True)
-    local_context_schema = ConfigContextSchemaSerializer(required=False, allow_null=True)
+    local_context_schema = NestedConfigContextSchemaSerializer(required=False, allow_null=True)
     
     class Meta:
         model = models.CdnSite
-        fields = "__all__"
-        list_display_fields = [
+        fields = [
             "url",
             "name",
-            "status",
             "abbreviatedName",
             "bandwidthLimitMbps",
             "enableDisklessMode",
             "siteId",
             "cdn_site_role",
-            "location",
+            "region",
             "site",
             "cacheMemoryProfileId",
             "neighbor1",
@@ -85,19 +83,19 @@ class CdnSiteSerializer(NautobotModelSerializer):
             "local_context_schema",
             "local_context_data",
         ]
-        
-class CdnSiteWithRedirectMapContextSerializer(CdnSiteSerializer):
-    redirect_map_context = serializers.SerializerMethodField()
+
+class CdnSiteWithConfigContextSerializer(CdnSiteSerializer):
+    cdn_config_context = serializers.SerializerMethodField()
 
     class Meta(CdnSiteSerializer.Meta):
-        fields = [CdnSiteSerializer.Meta.fields] + ["redirect_map_context"]
+        fields = CdnSiteSerializer.Meta.fields + ["cdn_config_context"]
 
     @extend_schema_field(serializers.DictField)
-    def get_redirect_map_context(self, obj):
-        return obj.get_redirect_map_context()
+    def get_cdn_config_context(self, obj):
+        return obj.get_cdn_config_context()
 
-class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixin):
-    url = serializers.HyperlinkedIdentityField(view_name="plugins-api:nautobot_cdn_models-api:redirectmapcontext-detail")
+class CdnConfigContextSerializer(ValidatedModelSerializer, NotesSerializerMixin):
+    url = serializers.HyperlinkedIdentityField(view_name="plugins-api:nautobot_cdn_models-api:cdnconfigcontext-detail")
     owner_content_type = ContentTypeField(
         queryset=ContentType.objects.filter(FeatureQuery("config_context_owners").get_query()),
         required=False,
@@ -105,10 +103,10 @@ class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixi
         default=None,
     )
     owner = serializers.SerializerMethodField(read_only=True)
-    schema = ConfigContextSchemaSerializer(required=False, allow_null=True)
-    locations = SerializedPKRelatedField(
-        queryset=Location.objects.all(),
-        serializer=LocationSerializer,
+    schema = NestedConfigContextSchemaSerializer(required=False, allow_null=True)
+    regions = SerializedPKRelatedField(
+        queryset=Region.objects.all(),
+        serializer=NestedRegionSerializer,
         required=False,
         many=True,
     )
@@ -118,9 +116,15 @@ class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixi
         required=False,
         many=True,
     )
+    failover_site = SerializedPKRelatedField(
+        queryset=models.CdnSite.objects.all(),
+        serializer=nested_serializers.NestedCdnSiteSerializer,
+        required=False,
+        many=True,
+    )
     cdn_site_roles = SerializedPKRelatedField(
         queryset=models.SiteRole.objects.all(),
-        serializer=nested_serializers.CdnNestedSiteRoleSerializer,
+        serializer=nested_serializers.NestedSiteRoleSerializer,
         required=False,
         many=True,
     )
@@ -133,7 +137,7 @@ class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixi
 
 
     class Meta:
-        model = models.RedirectMapContext
+        model = models.CdnConfigContext
         fields = [
             "url",
             "name",
@@ -144,8 +148,9 @@ class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixi
             "description",
             "schema",
             "is_active",
-            "locations",
+            "regions",
             "cdnsites",
+            "failover_site",
             "cdn_site_roles",
             "tags",
             "data",
@@ -158,3 +163,31 @@ class RedirectMapContextSerializer(ValidatedModelSerializer, NotesSerializerMixi
         serializer = get_serializer_for_model(obj.owner, prefix="Nested")
         context = {"request": self.context["request"]}
         return serializer(obj.owner, context=context).data
+
+#
+# Content Delivery
+#
+
+class ServiceProviderSerializer(NautobotModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="plugins-api:nautobot_cdn_models-api:serviceprovider-detail"
+    )
+    class Meta:
+        model = models.ServiceProvider
+        fields = "__all__"
+        
+class ContentProviderSerializer(NautobotModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="plugins-api:nautobot_cdn_models-api:contentprovider-detail"
+    )
+    class Meta:
+        model = models.ContentProvider
+        fields = "__all__"
+        
+class OriginSerializer(NautobotModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="plugins-api:nautobot_cdn_models-api:origin-detail"
+    )
+    class Meta:
+        model = models.Origin
+        fields = "__all__"

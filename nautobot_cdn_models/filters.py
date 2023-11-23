@@ -1,33 +1,28 @@
 import django_filters
+from django.db import models
+import django_filters
 
-from nautobot.core.filters import (
-    BaseFilterSet,
-    ContentTypeFilter,
-    NameSearchFilterSet,
-    NaturalKeyOrPKMultipleChoiceFilter,
-    RelatedMembershipBooleanFilter,
-    SearchFilter,
-    TreeNodeMultipleChoiceFilter,
-)
-from nautobot.extras.filters import NautobotFilterSet
-from nautobot.dcim.models import Device, Location
-from nautobot.ipam.models import IPAddress, Prefix
-from nautobot.virtualization.models import VirtualMachine
-from nautobot.extras.models import SecretsGroup
+
 from nautobot.extras.filters.mixins import (
     LocalContextModelFilterSetMixin,
     StatusModelFilterSetMixin,
 )
-from nautobot.extras.models import ConfigContextSchema
 
-from .models import CdnSite, SiteRole, HyperCacheMemoryProfile, RedirectMapContext
-
-
-__all__ = (
-    "CdnSiteFilterSet",
-    "SiteRoleFilterSet",
-    "HyperCacheMemoryProfileFilterSet"
+from nautobot.extras.filters import (
+    NautobotFilterSet,
+    LocalContextModelFilterSetMixin,
+    StatusModelFilterSetMixin,
 )
+from nautobot.utilities.filters import (
+    BaseFilterSet,
+    ContentTypeFilter,
+    NaturalKeyOrPKMultipleChoiceFilter,
+    SearchFilter,
+    TreeNodeMultipleChoiceFilter,
+)
+from nautobot.extras.models import ConfigContextSchema
+from nautobot.dcim.models import Region, Site
+from . import models
 
 class HyperCacheMemoryProfileFilterSet(NautobotFilterSet):
     q = SearchFilter(
@@ -36,65 +31,56 @@ class HyperCacheMemoryProfileFilterSet(NautobotFilterSet):
         },
     )
     class Meta:
-        model = HyperCacheMemoryProfile
+        model = models.HyperCacheMemoryProfile
         fields = "__all__"
-        
-class SiteRoleFilterSet(NautobotFilterSet, NameSearchFilterSet):
-    parent = NaturalKeyOrPKMultipleChoiceFilter(
-        queryset=SiteRole.objects.all(),
-        label="Parent site role (name or ID)",
-        to_field_name="name",
-    )
-    children = NaturalKeyOrPKMultipleChoiceFilter(
-        queryset=SiteRole.objects.all(),
-        label="Children (name or ID)",
-        to_field_name="name",
-    )
-    has_children = RelatedMembershipBooleanFilter(
-        field_name="children",
-        label="Has children",
-    )
-    cdnsits = NaturalKeyOrPKMultipleChoiceFilter(
-        queryset=CdnSite.objects.all(),
-        label="CdnSites (name or ID)",
-        to_field_name="name",
-    )
-    has_cdnsites = RelatedMembershipBooleanFilter(
-        field_name="CdnSites",
-        label="Has CdnSites",
-    )
 
-    class Meta:
-        model = SiteRole
-        fields = ["id", "name", "description"]
-
-
-class CdnSiteFilterSet(NautobotFilterSet):
+class SiteRoleFilterSet(NautobotFilterSet):
     q = SearchFilter(
         filter_predicates={
             "name": "icontains",
-            "description": "icontains",
-            "comments": "icontains",
         },
     )
-    cdn_site_role = TreeNodeMultipleChoiceFilter(
-        queryset=SiteRole.objects.all(),
-        field_name="cdn_site_role",
-        label="Site Role (name or ID)",
-        to_field_name="name",
+    class Meta:
+        model = models.SiteRole
+        fields = "__all__"
+
+class CdnSiteFilterSet(NautobotFilterSet, LocalContextModelFilterSetMixin, StatusModelFilterSetMixin,):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
     )
-    locations = TreeNodeMultipleChoiceFilter(
-        queryset=Location.objects.all(),
-        to_field_name="name",
-        label="Locations (names and/or IDs)",
+    region_id = TreeNodeMultipleChoiceFilter(
+        queryset=Region.objects.all(),
+        field_name="region",
+        label="Region (ID)",
+    )
+    region = TreeNodeMultipleChoiceFilter(
+        queryset=Region.objects.all(),
+        field_name="region",
+        label="Region (slug)",
+    )
+    site_id = TreeNodeMultipleChoiceFilter(
+        queryset=Site.objects.all(),
+        field_name="site",
+        label="Site (ID)",
+    )
+    site = TreeNodeMultipleChoiceFilter(
+        queryset=Site.objects.all(),
+        field_name="site",
+        label="Site (slug)",
+    )
+    cdn_site_role = NaturalKeyOrPKMultipleChoiceFilter(
+        queryset=models.SiteRole.objects.all(),
+        label="Site Role (slug or ID)"
     )
     cacheMemoryProfileId = django_filters.ModelChoiceFilter(
         field_name='name',
         to_field_name='name',
-        queryset=HyperCacheMemoryProfile.objects.all(),
+        queryset=models.HyperCacheMemoryProfile.objects.all(),
     )
     class Meta:
-        model = CdnSite
+        model = models.CdnSite
         fields = [
         "name",
         "abbreviatedName",
@@ -102,12 +88,14 @@ class CdnSiteFilterSet(NautobotFilterSet):
         "enableDisklessMode",
         "siteId",
         "cdn_site_role",
+        "region",
+        "site",
         "cacheMemoryProfileId",
         "neighbor1",
         "neighbor1_preference",
         "neighbor2",
         "neighbor2_preference",
-        "failover_site",
+        'failover_site',
     ]
 
 #
@@ -115,7 +103,7 @@ class CdnSiteFilterSet(NautobotFilterSet):
 #
 
 
-class RedirectMapContextFilterSet(BaseFilterSet):
+class CdnConfigContextFilterSet(BaseFilterSet):
     q = SearchFilter(
         filter_predicates={
             "name": "icontains",
@@ -124,40 +112,40 @@ class RedirectMapContextFilterSet(BaseFilterSet):
         },
     )
     owner_content_type = ContentTypeFilter()
-    config_context_schema = NaturalKeyOrPKMultipleChoiceFilter(
-        field_name="config_context_schema",
+    schema = NaturalKeyOrPKMultipleChoiceFilter(
+        field_name="schema",
         queryset=ConfigContextSchema.objects.all(),
         to_field_name="slug",
-        label="config_context_schema (slug or PK)",
+        label="Schema (slug or PK)",
     )
-    location_id = django_filters.ModelMultipleChoiceFilter(
-        field_name="locations",
-        queryset=Location.objects.all(),
-        label="Location (ID) - Deprecated (use region filter)",
+    region_id = django_filters.ModelMultipleChoiceFilter(
+        field_name="regions",
+        queryset=Region.objects.all(),
+        label="Region (ID) - Deprecated (use region filter)",
     )
-    location = NaturalKeyOrPKMultipleChoiceFilter(
-        field_name="Locations",
-        queryset=Location.objects.all(),
-        label="Location (ID or slug)",
+    region = NaturalKeyOrPKMultipleChoiceFilter(
+        field_name="regions",
+        queryset=Region.objects.all(),
+        label="Region (ID or slug)",
     )
     cdnsite_id = django_filters.ModelMultipleChoiceFilter(
         field_name="cdnsites",
-        queryset=CdnSite.objects.all(),
+        queryset=models.CdnSite.objects.all(),
         label="Site (ID) - Deprecated (use site filter)",
     )
     cdnsite = NaturalKeyOrPKMultipleChoiceFilter(
         field_name="cdnsites",
-        queryset=CdnSite.objects.all(),
+        queryset=models.CdnSite.objects.all(),
         label="Site (ID or slug)",
     )
-    cdn_site_role_id = django_filters.ModelMultipleChoiceFilter(
-        field_name="siteroles",
-        queryset=SiteRole.objects.all(),
-        label="Role (ID) - Deprecated (use role filter)",
-    )
+    # cdn_site_role_id = django_filters.ModelMultipleChoiceFilter(
+    #     field_name="siteroles",
+    #     queryset=models.SiteRole.objects.all(),
+    #     label="Role (ID) - Deprecated (use role filter)",
+    # )
     cdn_site_role = NaturalKeyOrPKMultipleChoiceFilter(
         field_name="siteroles",
-        queryset=SiteRole.objects.all(),
+        queryset=models.SiteRole.objects.all(),
         label="Role (ID or slug)",
     )
 
@@ -166,7 +154,45 @@ class RedirectMapContextFilterSet(BaseFilterSet):
     #     super().__init__(*args, **kwargs)
 
     class Meta:
-        model = RedirectMapContext
+        model = models.CdnConfigContext
         fields = ["id", "name", "is_active", "owner_content_type", "owner_object_id"]
 
 
+#
+# Content Delivery
+#
+
+class ServiceProviderFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
+    )
+    class Meta:
+        model = models.ServiceProvider
+        fields = "__all__"
+
+class ContentProviderFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
+    )
+    class Meta:
+        model = models.ContentProvider
+        fields = "__all__"
+
+class OriginFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
+    )
+    class Meta:
+        model = models.Origin
+        fields = [
+            'name',
+            'contentProviderId',
+            'enable',
+            'originTimeout',
+        ]

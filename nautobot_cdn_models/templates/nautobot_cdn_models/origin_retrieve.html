@@ -1,0 +1,105 @@
+{% extends 'generic/object_retrieve.html' %}
+{% load helpers %}
+
+{% block content_left_page %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>General Configuration</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table">
+                <tr>
+                    <td>Name</td>
+                    <td>{{ object.name|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td>{{ object.description|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Enabled to Serve content</td>
+                    <td>{{ object.enable|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Shareable Host FQDN</td>
+                    <td>{{ object.hostnameOverride|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Resolvable FQDNs</td>
+                    <td>{{ object.resolvableHostnames|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Origin Timeout (s)</td>
+                    <td>{{ object.originTimeout|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Akamai Content Provider</td>
+                    <td>{{ object.contentProviderId|placeholder }}</td>
+                </tr>                                                                                                           
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>CDN Confiuration</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table">
+                <tr>
+                    <td>Origin Health Check</td>
+                    <td>{{ object.dynamicHierarchy|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Fast Reroute</td>
+                    <td>{{ object.fastReroute|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Site Redirects Enabled</td>
+                    <td>{{ object.enableSiteRedirects|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>HTTP Status Error Response Codes</td>
+                    <td>{{ object.cacheableErrorResponseCodes|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Error Max Retry</td>
+                    <td>{{ object.errorCacheMaxRetry|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Error Max Age (s)</td>
+                    <td>{{ object.errorCacheMaxAge|placeholder }}</td>
+                </tr>                                                                                                       
+            </table>
+            <table class="table table-hover panel-body attr-table">
+                <tr>
+                    <td>Storage Partition ID</td>
+                    <td>{{ object.storagePartitionId|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Authenticated Content Enabled</td>
+                    <td>{{ object.enableAuthenticatedContent|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Site Redirects Enabled</td>
+                    <td>{{ object.enableSiteRedirects|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>InterSite Protocol</td>
+                    <td>{{ object.interSiteProtocol|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>IntraSite Protocol</td>
+                    <td>{{ object.intraSiteProtocol|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>EdgeHost Type</td>
+                    <td>{{ object.edgeHostType|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Edge Hostname</td>
+                    <td>{{ object.edgeHostname|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>IP Address Types</td>
+                    <td>{{ object.ipAddressTypes|placeholder }}</td>
+                </tr>
+            </table>
+        </div>
+{% endblock content_left_page %}

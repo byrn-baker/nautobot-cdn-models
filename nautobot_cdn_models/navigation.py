@@ -17,10 +17,6 @@ menu_items = (
                                 link="plugins:nautobot_cdn_models:hypercachememoryprofile_add",
                                 permissions=[],
                             ),
-                            NavMenuImportButton(
-                                link="plugins:nautobot_cdn_models:hypercachememoryprofile_import",
-                                permissions=[],
-                            ),
                         ),
                     ),
                     NavMenuItem(
@@ -40,7 +36,7 @@ menu_items = (
                     ),
                     NavMenuItem(
                         link="plugins:nautobot_cdn_models:cdnsite_list",
-                        name="Akamai Site Configuration",
+                        name="Akamai Sites Configuration",
                         permissions=[],
                         buttons=(
                             NavMenuAddButton(
@@ -56,16 +52,55 @@ menu_items = (
                 ),
             ),
             NavMenuGroup(
-                name="Redirect Maps",
-                weight=200,
+                name="Akamai Redirect Maps",
+                weight=150,
                 items=(
                     NavMenuItem(
-                        link="plugins:nautobot_cdn_models:redirectmapcontext_list",
+                        link="plugins:nautobot_cdn_models:cdnconfigcontext_list",
                         name="Redirect Map Contexts",
                         permissions=[],
                         buttons=(
                             NavMenuAddButton(
-                                link="plugins:nautobot_cdn_models:redirectmapcontext_add",
+                                link="plugins:nautobot_cdn_models:cdnconfigcontext_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            NavMenuGroup(
+                name="Akamai Content Delivery",
+                weight=200,
+                items=(
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:serviceprovider_list",
+                        name="Service Providers",
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:serviceprovider_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:contentprovider_list",
+                        name="Content Providers",
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:contentprovider_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:origin_list",
+                        name="Origins",
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:origin_add",
                                 permissions=[],
                             ),
                         ),

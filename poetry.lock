@@ -3154,8 +3154,10 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 
 [extras]
 nautobot = ["nautobot"]
+nautobot-device-lifecycle-mgmt = []
+nautobot-welcome-wizard = []
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12"
-content-hash = "321d544406d4bd802ba79fd7862563f9937b5f056672dddf90148f477b18f2eb"
+content-hash = "65965bc7c4b4f1888a1b1e8095dff8837130b7fc6e5d3a2ba68cf205b57aa56d"

@@ -83,7 +83,7 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
     neighbor2_preference = tables.Column(verbose_name="Secondary Site Neighbor Preference")
     failover_site =  tables.Column(verbose_name="Sister Site")
     siteId = tables.Column(verbose_name="Akamai Site ID")
-    cacheMemoryProfileId = tables.LinkColumn(verbose_name="Cache Memory Profile")
+    hyperCacheMemoryProfileId = tables.LinkColumn(verbose_name="Cache Memory Profile")
 
     class Meta(BaseTable.Meta):
         model = models.CdnSite
@@ -102,7 +102,7 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
             'neighbor2',
             'neighbor2_preference',
             'failover_site',
-            'cacheMemoryProfileId',
+            'hyperCacheMemoryProfileId',
             'siteId',
         )
         default_columns = (
@@ -116,7 +116,7 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
             'neighbor1',
             'neighbor2',
             'failover_site',
-            'cacheMemoryProfileId',
+            'hyperCacheMemoryProfileId',
             'siteId',
         )
     

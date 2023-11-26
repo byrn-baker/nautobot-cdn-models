@@ -104,7 +104,7 @@ class CdnSiteForm(NautobotModelForm, LocalContextModelForm):
     cdn_site_role = forms.ModelChoiceField(required=False, queryset=models.SiteRole.objects.all())
     neighbor1 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Primary Site Neighbor")
     neighbor2 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Secondary Site Neighbor")
-    cacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
+    hyperCacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
     failover_site = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Failover Site")
     class Meta:
         model = models.CdnSite
@@ -119,7 +119,7 @@ class CdnSiteForm(NautobotModelForm, LocalContextModelForm):
             'neighbor2',
             'neighbor2_preference',
             'failover_site',
-            'cacheMemoryProfileId',
+            'hyperCacheMemoryProfileId',
             'siteId',
             'cdn_site_role',
             'region',
@@ -135,7 +135,7 @@ class CdnSiteFilterForm(NautobotFilterForm, StatusModelFilterFormMixin, LocalCon
     name = forms.CharField(required=False)
     bandwidthLimitMbps = forms.IntegerField(required=False, label="Site Bandwidth Limit")
     enableDisklessMode = forms.BooleanField(required=False, label="Site Disk Mode")
-    cacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
+    hyperCacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
     neighbor1 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Primary Site Neighbor")
     neighbor2 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Secondary Site Neighbor")
     cdn_site_role = DynamicModelMultipleChoiceField(required=False, queryset=models.SiteRole.objects.all())
@@ -146,7 +146,7 @@ class CdnSiteBulkEditForm(StatusModelBulkEditFormMixin, NautobotBulkEditForm):
     cdn_site_role = DynamicModelChoiceField(queryset=models.SiteRole.objects.all(), required=False)
     bandwidthLimitMbps = forms.IntegerField(required=False, label="Site Bandwidth Limit")
     enableDisklessMode = forms.BooleanField(required=False, label="Site Disk Mode")
-    cacheMemoryProfileId = forms.ModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
+    hyperCacheMemoryProfileId = forms.ModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
     neighbor1 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Primary Site Neighbor")
     neighbor1_preference = forms.IntegerField(required=False, label="Neighbor Preference")
     neighbor2 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Secondary Site Neighbor")

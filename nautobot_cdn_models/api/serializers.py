@@ -32,9 +32,7 @@ from . import nested_serializers
 
 
 class HyperCacheMemoryProfileSerializer(NautobotModelSerializer):
-    url = serializers.HyperlinkedIdentityField(
-        view_name="plugins-api:nautobot_cdn_models-api:hypercachememoryprofile-detail"
-    )
+    
     class Meta:
         model = models.HyperCacheMemoryProfile
         fields = "__all__"
@@ -57,7 +55,7 @@ class CdnSiteSerializer(NautobotModelSerializer, StatusModelSerializerMixin):
     cdn_site_role = nested_serializers.NestedSiteRoleSerializer(required=False, allow_null=True)
     region = NestedRegionSerializer(required=False, allow_null=True)
     site = NestedSiteSerializer(required=False, allow_null=True)
-    cacheMemoryProfileId = nested_serializers.NestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
+    hyperCacheMemoryProfileId = nested_serializers.NestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
     # neighbor1 = nested_serializers.NestedCdnSiteSerializer()
     # neighbor2 = nested_serializers.NestedCdnSiteSerializer(required=False, allow_null=True)
     local_context_schema = NestedConfigContextSchemaSerializer(required=False, allow_null=True)
@@ -74,7 +72,7 @@ class CdnSiteSerializer(NautobotModelSerializer, StatusModelSerializerMixin):
             "cdn_site_role",
             "region",
             "site",
-            "cacheMemoryProfileId",
+            "hyperCacheMemoryProfileId",
             "neighbor1",
             "neighbor1_preference",
             "neighbor2",

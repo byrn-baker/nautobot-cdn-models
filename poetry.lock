@@ -1414,13 +1414,13 @@ six = ">=1.12"
 
 [[package]]
 name = "idna"
-version = "3.4"
+version = "3.5"
 description = "Internationalized Domain Names in Applications (IDNA)"
 optional = false
 python-versions = ">=3.5"
 files = [
-    {file = "idna-3.4-py3-none-any.whl", hash = "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"},
-    {file = "idna-3.4.tar.gz", hash = "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4"},
+    {file = "idna-3.5-py3-none-any.whl", hash = "sha256:79b8f0ac92d2351be5f6122356c9a592c96d81c9a79e4b488bf2a6a15f88057a"},
+    {file = "idna-3.5.tar.gz", hash = "sha256:27009fe2735bf8723353582d48575b23c533cc2c2de7b5a68908d91b5eb18d08"},
 ]
 
 [[package]]
@@ -3154,10 +3154,8 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 
 [extras]
 nautobot = ["nautobot"]
-nautobot-device-lifecycle-mgmt = []
-nautobot-welcome-wizard = []
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12"
-content-hash = "65965bc7c4b4f1888a1b1e8095dff8837130b7fc6e5d3a2ba68cf205b57aa56d"
+content-hash = "321d544406d4bd802ba79fd7862563f9937b5f056672dddf90148f477b18f2eb"

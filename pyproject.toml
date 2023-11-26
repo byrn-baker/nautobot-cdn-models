@@ -11,9 +11,7 @@ include = [
     "README.md",
 ]
 packages = [
-    { include = "nautobot_cdn_models"},
-     { include = "nautobot-device-lifecycle-mgmt"}, 
-     { include ="nautobot-welcome-wizard" },
+    { include = "nautobot_cdn_models"}
 ]
 
 [tool.poetry.dependencies]
@@ -42,10 +40,9 @@ toml = "*"
 ansible = "*"
 deepmerge = "*"
 
+
 [tool.poetry.extras]
 nautobot = ["nautobot"]
-nautobot-welcome-wizard = ["nautobot-welcome-wizard"]
-nautobot-device-lifecycle-mgmt = ["nautobot-device-lifecycle-mgmt"]
 
 [tool.black]
 line-length = 120

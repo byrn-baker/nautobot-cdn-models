@@ -74,7 +74,7 @@ class CdnSiteFilterSet(NautobotFilterSet, LocalContextModelFilterSetMixin, Statu
         queryset=models.SiteRole.objects.all(),
         label="Site Role (slug or ID)"
     )
-    cacheMemoryProfileId = django_filters.ModelChoiceFilter(
+    hyperCacheMemoryProfileId = django_filters.ModelChoiceFilter(
         field_name='name',
         to_field_name='name',
         queryset=models.HyperCacheMemoryProfile.objects.all(),
@@ -90,7 +90,7 @@ class CdnSiteFilterSet(NautobotFilterSet, LocalContextModelFilterSetMixin, Statu
         "cdn_site_role",
         "region",
         "site",
-        "cacheMemoryProfileId",
+        "hyperCacheMemoryProfileId",
         "neighbor1",
         "neighbor1_preference",
         "neighbor2",

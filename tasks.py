@@ -264,7 +264,6 @@ def makemigrations(context, name=""):
 
     run_command(context, command)
 
-
 @task
 def migrate(context):
     """Perform migrate operation in Django."""

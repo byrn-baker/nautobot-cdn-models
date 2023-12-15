@@ -18,8 +18,8 @@ from ..querysets import CdnConfigContextModelQuerySet
     'graphql'
 )
 class HyperCacheMemoryProfile(PrimaryModel):
-    name = models.CharField(max_length=255, unique=True, help_text="Profile Name.")
-    slug = AutoSlugField(populate_from="name", unique=True)
+    name = models.CharField(max_length=255, help_text="Profile Name.")
+    slug = AutoSlugField(populate_from="name")
     description = models.CharField(max_length=255, blank=True, help_text="A description of the Memory profile.")
     frontEndCacheMemoryPercent = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
@@ -35,12 +35,7 @@ class HyperCacheMemoryProfile(PrimaryModel):
     )
     cacheMemoryProfileId = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(10000)],
-        blank=True,
-        null=True,
     )
-    
-    class Meta:
-        ordering = ["name"]
    
     def get_absolute_url(self):
         return reverse("plugins:nautobot_cdn_models:hypercachememoryprofile", args=[self.pk])
@@ -101,7 +96,7 @@ class SiteRole(MPTTModel, OrganizationalModel):
     'graphql'
 )
 class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
-    name = models.CharField(max_length=255, unique=True, help_text="Akamai Site Name.")
+    name = models.CharField(max_length=255, help_text="Akamai Site Name.")
     _name = NaturalOrderingField(target_field="name", max_length=100, blank=True, db_index=True)
     cdn_site_role = models.ForeignKey(
         to="SiteRole",
@@ -177,10 +172,10 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         related_name="sister_site",
         help_text="Select the site to which this site will failover to."
     )
-    hyperCacheMemoryProfileId = models.ForeignKey(
+    cacheMemoryProfileId = models.ForeignKey(
         to="HyperCacheMemoryProfile",
-        on_delete=models.SET_NULL,
-        related_name="cdnsites",
+        on_delete=models.PROTECT,
+        related_name="CacheMemoryProfileId",
         blank=True,
         null=True,
     )
@@ -206,7 +201,7 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         "neighbor1_preference",
         "neighbor2",
         "neighbor2_preference",
-        "hyperCacheMemoryProfileId",
+        "cacheMemoryProfileId",
         "siteId",
 
     ]
@@ -220,14 +215,14 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         "neighbor1_preference",
         "neighbor2",
         "neighbor2_preference",
-        "hyperCacheMemoryProfileId",
+        "cacheMemoryProfileId",
         "siteId",
     ]
 
     class Meta:
         ordering = ["cdn_site_role", "_name"]
         unique_together = (
-            ("name"),  # See validate_unique below
+            ("cdn_site_role", "region", "name"),  # See validate_unique below
         )
     
     def __str__(self):
@@ -245,11 +240,6 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
 
     def clean(self):
         super().clean()
-    
-    def save(self, *args, **kwargs):
-        is_new = not self.present_in_database
-
-        super().save(*args, **kwargs)
 
     
     def to_csv(self):
@@ -263,7 +253,7 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
             self.neighbor1_preference,
             self.neighbor2,
             self.neighbor2_preference,
-            self.hyperCacheMemoryProfileId,
+            self.cacheMemoryProfileId,
             self.status,
             self.region,
             self.site,

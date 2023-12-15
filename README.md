@@ -1,6 +1,6 @@
-# Nautobot CDN Source of Truth
-This nautobot plugin is for maintaining and managing a CDNs configuration components.
-This plugin has been developed for Nautobot 1.5.5 to 1.6.6
+# Nautobot CDN Source of Truth Version 0.2.0
+
+This nautobot plugin is to maintain and manage CDN LCDN configuration with Nautobot. Testing on Nautobot Version 1.5.7
 
 ## Added features
 - Modeling the Content Delivery configurations on the AMC. This will include the following as these can and are nested items typically. 
@@ -32,6 +32,6 @@ $ invoke migrate
 
 ```shell
 $ poetry build
-$ pip install ./dist/nautobot_cdn_configuration_manager-0.2.0.tar.gz
+$ pip install ./dist/nautobot_cdn_configuration_manager-0.1.0.tar.gz
 ```
 Poetry build will create the tar in the root of whatever directory you run ```poetry build``` in if you do not specify a directory.

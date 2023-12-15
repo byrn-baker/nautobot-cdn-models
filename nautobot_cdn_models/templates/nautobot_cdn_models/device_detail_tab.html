@@ -1,17 +1,13 @@
 {% extends 'dcim/device.html' %}
 
 {% block content %}
-    <!-- DataDog graph -->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <strong>DataDog Graph - Utilization over the past week</strong>
-        </div>
-        <div class="panel-body">
-            {% if datadog_graph_url %}
+        <!-- DataDog graph -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>DataDog Graph - Utilization over the past week</strong>
+            </div>
+            <div class="panel-body">
                 <iframe src="{{ datadog_graph_url }}" width="800" height="600" frameborder="0"></iframe>
-            {% else %}
-                <p>DataDog settings need to be configured in the plugin configuration.</p>
-            {% endif %}
+            </div>
         </div>
-    </div>
 {% endblock content %}

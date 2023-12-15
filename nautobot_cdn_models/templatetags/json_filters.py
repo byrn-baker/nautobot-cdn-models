@@ -8,3 +8,4 @@ def jsonify(object):
     if isinstance(object, str):
         return json.loads(object)
     return json.dumps(object, indent=4)
+

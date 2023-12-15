@@ -1,17 +1,17 @@
 [tool.poetry]
 name = "nautobot-cdn-models"
 version = "0.2.0"
-description = "Nautobot Akamai LCDN configuration manager"
+description = "Source of Truth plugin for Akamai LCDN"
 authors = ["Byrn Baker"]
 readme = "README.md"
-homepage = "https://github.com/byrn-baker/nautobot-cdn-models"
-repository = "https://github.com/byrn-baker/nautobot-cdn-models"
-keywords = ["nautobot", "nautobot-plugin", "Akamai", "LCDN"]
+homepage = "https://gitlab.spectrumflow.net/ipvd/cdn/nautobot/nautobot-cdn-models"
+repository = "https://gitlab.spectrumflow.net/ipvd/cdn/nautobot/nautobot-cdn-models"
+keywords = ["nautobot", "nautobot-plugin"]
 include = [
     "README.md",
 ]
 packages = [
-    { include = "nautobot_cdn_models"}
+    { include = "nautobot_cdn_models" },
 ]
 
 [tool.poetry.dependencies]

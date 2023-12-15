@@ -1,6 +1,7 @@
 from jsonschema.validators import Draft7Validator
 from django_tables2 import RequestConfig
 from django.views.generic.detail import DetailView
+from django.conf import settings
 from deepmerge import Merger
 import json
 import requests
@@ -19,7 +20,6 @@ from nautobot.dcim.models import Device
 
 from nautobot.extras.tables import RelationshipAssociationTable
 
-from nautobot.extras.plugins import PluginConfig
 
 from .models import (
     HyperCacheMemoryProfile,
@@ -132,51 +132,56 @@ class CdnSiteView(generic.ObjectView):
     queryset = CdnSite.objects.select_related("region", "cdn_site_role", "status")
     
     def get_datadog_graph(self, cdnsite_name):
-        if not all(key in PluginConfig.settings['nautobot_cdn_models']['datadog'] for key in ['api_key', 'app_key', 'api_host']):
-            # If not, return a default value or handle the situation
+        try:
+            if not all(key in settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog'] for key in ['api_key', 'app_key', 'api_host']):
+                # If not, return a default value or handle the situation
+                return {
+                    "datadog_graph_url": None  # Return None for the URL
+                }
+                region, site_name, state, streamtype, tier = cdnsite_name.split('_')
+                # Setup the correct query
+                if 'shield' in cdnsite_name:
+                    query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
+                elif 'mid' in cdnsite_name:
+                    query = f"sum:akamai_aura.mid.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
+                else:
+                    query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
+                # Initialize request parameters with Datadog API/APP key
+                options = {
+                    'api_key': settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog']['api_key'],
+                    'app_key': settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog']['app_key'],
+                    'api_host': settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog']['api_host'],
+                }
+
+                initialize(**options)
+
+                graph_json = {
+                    "requests": [{
+                        "q": query
+                    }],
+                    "viz": "timeseries",
+                    "events": []
+                }
+                graph_json = json.dumps(graph_json)
+
+                embed = api.Embed.create(
+                    graph_json=graph_json,
+                    timeframe="1_week",
+                    size="large",
+                    legend="yes"
+                )
+
+                parser = MyHTMLParser()
+                parser.feed(embed['html'])
+                datadog_graph_url = parser.iframe_src
+
+                return {
+                    "datadog_graph_url": datadog_graph_url  # Only return the URL for the Datadog graph
+                }
+        except KeyError:
             return {
                 "datadog_graph_url": None  # Return None for the URL
             }
-        region, site_name, state, streamtype, tier = cdnsite_name.split('_')
-        # Setup the correct query
-        if 'shield' in cdnsite_name:
-            query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
-        elif 'mid' in cdnsite_name:
-            query = f"sum:akamai_aura.mid.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
-        else:
-            query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
-        # Initialize request parameters with Datadog API/APP key
-        options = {
-            'api_key': PluginConfig.settings['nautobot_cdn_models']['datadog']['api_key'],
-            'app_key': PluginConfig.settings['nautobot_cdn_models']['datadog']['app_key'],
-            'api_host': PluginConfig.settings['nautobot_cdn_models']['datadog']['api_host'],
-        }
-
-        initialize(**options)
-
-        graph_json = {
-            "requests": [{
-                "q": query
-            }],
-            "viz": "timeseries",
-            "events": []
-        }
-        graph_json = json.dumps(graph_json)
-
-        embed = api.Embed.create(
-            graph_json=graph_json,
-            timeframe="1_week",
-            size="large",
-            legend="yes"
-        )
-
-        parser = MyHTMLParser()
-        parser.feed(embed['html'])
-        datadog_graph_url = parser.iframe_src
-
-        return {
-            "datadog_graph_url": datadog_graph_url  # Only return the URL for the Datadog graph
-        }
     
     def get_extra_context(self, request, instance):
         datadog_graph = self.get_datadog_graph(instance.name)
@@ -206,54 +211,54 @@ class DeviceDetailPluginView(generic.ObjectView):
     
     def get_datadog_graph(self, device_name):
         # Check if the required settings are defined
-        if not all(key in PluginConfig.settings['nautobot_cdn_models']['datadog'] for key in ['api_key', 'app_key', 'api_host']):
-            # If not, return a default value or handle the situation
-            return {
-                "datadog_graph_url": None  # Return None for the URL
-            }
+        try:
+            if not all(key in settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog'] for key in ['api_key', 'app_key', 'api_host']):
+                return {"datadog_graph_url": None}
             
-        device = device_name.replace(PluginConfig.settings['nautobot_cdn_models']['datadog']['domain'], "")
-        options = {
-            'api_key': PluginConfig.settings['nautobot_cdn_models']['datadog']['api_key'],
-            'app_key': PluginConfig.settings['nautobot_cdn_models']['datadog'],
-            'api_host': PluginConfig.settings['nautobot_cdn_models']['datadog'],
-        }
-        if 'shc0' in device_name:
-            query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:vod,host:{device}}} by {{host}} * 1000000"
-        elif 'shc1' in device_name:
-            query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
-        elif 'mid' in device_name:
-            query = f"sum:akamai_aura.mid.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
-        elif 'hpc0' in device_name:
-            query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:vod,host:{device}}} by {{host}} * 1000000"
-        elif 'hpc1' in device_name:
-            query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
+                device = device_name.replace(settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog']['domain'], "")
+                options = {
+                    'api_key': settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog']['api_key'],
+                    'app_key': settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog'],
+                    'api_host': settings.PLUGINS_CONFIG['nautobot_cdn_models']['datadog'],
+                }
+                if 'shc0' in device_name:
+                    query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:vod,host:{device}}} by {{host}} * 1000000"
+                elif 'shc1' in device_name:
+                    query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
+                elif 'mid' in device_name:
+                    query = f"sum:akamai_aura.mid.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
+                elif 'hpc0' in device_name:
+                    query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:vod,host:{device}}} by {{host}} * 1000000"
+                elif 'hpc1' in device_name:
+                    query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
 
-        initialize(**options)
+                initialize(**options)
 
-        graph_json = {
-            "requests": [{
-                "q": query
-            }],
-            "viz": "timeseries",
-            "events": []
-        }
-        graph_json = json.dumps(graph_json)
+                graph_json = {
+                    "requests": [{
+                        "q": query
+                    }],
+                    "viz": "timeseries",
+                    "events": []
+                }
+                graph_json = json.dumps(graph_json)
 
-        embed = api.Embed.create(
-            graph_json=graph_json,
-            timeframe="1_week",
-            size="large",
-            legend="yes"
-        )
+                embed = api.Embed.create(
+                    graph_json=graph_json,
+                    timeframe="1_week",
+                    size="large",
+                    legend="yes"
+                )
 
-        parser = MyHTMLParser()
-        parser.feed(embed['html'])
-        datadog_graph_url = parser.iframe_src
+                parser = MyHTMLParser()
+                parser.feed(embed['html'])
+                datadog_graph_url = parser.iframe_src
 
-        return {
-            "datadog_graph_url": datadog_graph_url  # Only return the URL for the Datadog graph
-        }
+                return {
+                    "datadog_graph_url": datadog_graph_url  # Only return the URL for the Datadog graph
+                }
+        except KeyError:
+            return {"datadog_graph_url": None}
         
     def get_extra_context(self, request, instance):
         datadog_graph = self.get_datadog_graph(instance.name)

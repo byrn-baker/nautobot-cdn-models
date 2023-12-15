@@ -25,7 +25,7 @@ class NautobotcdnModelsConfig(PluginConfig):
     max_version = "1.9999"
     default_settings = {
         "default_statuses": {
-            "CdnSite": ["active", "maintenance", "planned", "staged"],
+            "CdnSite": ["active", "maintenance", "planned", "staged", "Decommissioned", "Moved to next phase"],
         }
     }
     caching_config = {}

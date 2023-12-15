@@ -1,6 +1,6 @@
 from .sites import HyperCacheMemoryProfile, SiteRole, CdnSite
 from .contexts import CdnConfigContext, CdnConfigContextModel
-from .content_delivery import ServiceProvider, ContentProvider, Origin
+from .content_delivery import ServiceProvider, ContentProvider, Origin, CdnPrefix, CdnPrefixDefaultBehavior, CdnPrefixBehavior
 __all__ = (
     "HyperCacheMemoryProfile",
     "SiteRole",
@@ -9,5 +9,8 @@ __all__ = (
     "CdnConfigContextModel",
     "ServiceProvider",
     "ContentProvider",
-    "Origin"
+    "Origin",
+    "CdnPrefix",
+    "CdnPrefixDefaultBehavior",
+    "CdnPrefixBehavior"
 )

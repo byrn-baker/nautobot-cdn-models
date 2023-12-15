@@ -147,12 +147,6 @@ def generate_packages(context):
 # START / STOP / DEBUG
 # ------------------------------------------------------------------------------
 @task
-def pylint(context):
-    """Run pylint inside the Docker container."""
-    command = "pylint /opt/nautobot"
-    run_command(context, command)
-    
-@task
 def debug(context):
     """Start Nautobot and its dependencies in debug mode."""
     print("Starting Nautobot in debug mode...")
@@ -263,6 +257,7 @@ def makemigrations(context, name=""):
         command += f" --name {name}"
 
     run_command(context, command)
+
 
 @task
 def migrate(context):

@@ -40,3 +40,4 @@ class NestedCdnConfigContextSerializer(WritableNestedSerializer):
     class Meta:
         model = models.CdnConfigContext
         fields = ["id", "url", "name"]
+

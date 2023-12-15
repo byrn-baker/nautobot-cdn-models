@@ -95,15 +95,21 @@
         </div>
         {% include 'nautobot_cdn_models/inc/paginator.html' with paginator=relation_table.paginator page=relation_table.page %}
         <div class="row"></div>
+        {% block content %}
         <!-- DataDog graph -->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <strong>DataDog Graph - Utilization over the past week</strong>
             </div>
             <div class="panel-body">
-                <iframe src="{{ datadog_graph_url }}" width="800" height="600" frameborder="0"></iframe>
+                {% if datadog_graph_url %}
+                    <iframe src="{{ datadog_graph_url }}" width="800" height="600" frameborder="0"></iframe>
+                {% else %}
+                    <p>DataDog settings need to be configured in the plugin configuration.</p>
+                {% endif %}
             </div>
         </div>
+{% endblock content %}
 {% endblock content_right_page %}
 
 {% block extra_nav_tabs %}

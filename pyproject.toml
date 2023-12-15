@@ -39,7 +39,7 @@ Markdown = "*"
 toml = "*"
 ansible = "*"
 deepmerge = "*"
-
+datadog = "*"
 
 [tool.poetry.extras]
 nautobot = ["nautobot"]

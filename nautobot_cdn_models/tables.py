@@ -81,9 +81,9 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
     neighbor1_preference = tables.Column(verbose_name="Primary Site Neighbor Preference")
     neighbor2 = tables.LinkColumn(verbose_name="Secondary Site Neighbor")
     neighbor2_preference = tables.Column(verbose_name="Secondary Site Neighbor Preference")
-    failover_site =  tables.Column(verbose_name="Sister Site")
+    failover_site =  tables.LinkColumn(verbose_name="Sister Site")
     siteId = tables.Column(verbose_name="Akamai Site ID")
-    hyperCacheMemoryProfileId = tables.LinkColumn(verbose_name="Cache Memory Profile")
+    cacheMemoryProfileId = tables.LinkColumn(verbose_name="Cache Memory Profile")
 
     class Meta(BaseTable.Meta):
         model = models.CdnSite
@@ -102,7 +102,7 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
             'neighbor2',
             'neighbor2_preference',
             'failover_site',
-            'hyperCacheMemoryProfileId',
+            'cacheMemoryProfileId',
             'siteId',
         )
         default_columns = (
@@ -116,7 +116,7 @@ class CdnSiteTable(StatusTableMixin, BaseTable):
             'neighbor1',
             'neighbor2',
             'failover_site',
-            'hyperCacheMemoryProfileId',
+            'cacheMemoryProfileId',
             'siteId',
         )
     
@@ -224,4 +224,84 @@ class OriginTable(BaseTable):
             'contentProviderId',
             'enable',
             'originTimeout',
+        )
+
+class CdnPrefixTable(BaseTable):
+    pk = ToggleColumn()
+    name = tables.LinkColumn()
+    contentProviderId = tables.LinkColumn(verbose_name="Content Provider")
+    
+    class Meta(BaseTable.Meta):
+        model = models.CdnPrefix
+        fields = (
+            'pk',
+            'name',
+            'status',
+            'contentProviderId',
+            'cdnPrefixId',
+            'ipAddressTagId',
+            'enable',
+            'dnsTtl',
+            'prefixPrioritization',
+            'keepaliveRequests',
+            'siteMapId',
+            'accessMapId',
+        )
+        default_columns = (
+            'pk',
+            'name',
+            'status',
+            'contentProviderId',
+            'cdnPrefixId',
+            'ipAddressTagId',
+            'enable',
+            'dnsTtl',
+            'prefixPrioritization',
+            'keepaliveRequests',
+            'siteMapId',
+            'accessMapId',
+        )
+
+class CdnPrefixDefaultBehaviorTable(BaseTable):
+    pk = ToggleColumn()
+    name = tables.LinkColumn()
+    contentProviderId = tables.LinkColumn(verbose_name="Content Provider")
+    
+    class Meta(BaseTable.Meta):
+        model = models.CdnPrefixDefaultBehavior
+        fields = (
+            'pk',
+            'name',
+            'contentProviderId',
+            'status',
+            'cdnPrefixId',
+        )
+        default_columns = (
+            'pk',
+            'name',
+            'contentProviderId',
+            'status',
+            'cdnPrefixId',
+        )
+
+class CdnPrefixBehaviorTable(BaseTable):
+    pk = ToggleColumn()
+    name = tables.LinkColumn()
+    contentProviderId = tables.LinkColumn(verbose_name="Content Provider")
+    
+    class Meta(BaseTable.Meta):
+        model = models.CdnPrefixBehavior
+        fields = (
+            'pk',
+            'name',
+            'contentProviderId',
+            'status',
+            'cdnPrefixId',
+        )
+        default_columns = (
+            'pk',
+            'name',
+            'contentProviderId',
+            'status',
+            'cdnPrefixId',
         )

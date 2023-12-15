@@ -105,6 +105,39 @@ menu_items = (
                             ),
                         ),
                     ),
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:cdnprefix_list",
+                        name="Cdn Prefixes",
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:cdnprefix_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:cdnprefixbehavior_list",
+                        name="Cdn Prefix Behaviors",
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:cdnprefixbehavior_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
+                    NavMenuItem(
+                        link="plugins:nautobot_cdn_models:cdnprefixdefaultbehavior_list",
+                        name="Cdn Prefixes Default Behaviors",
+                        permissions=[],
+                        buttons=(
+                            NavMenuAddButton(
+                                link="plugins:nautobot_cdn_models:cdnprefixdefaultbehavior_add",
+                                permissions=[],
+                            ),
+                        ),
+                    ),
                 ),
             ),
         ),

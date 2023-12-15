@@ -32,7 +32,9 @@ from . import nested_serializers
 
 
 class HyperCacheMemoryProfileSerializer(NautobotModelSerializer):
-    
+    url = serializers.HyperlinkedIdentityField(
+        view_name="plugins-api:nautobot_cdn_models-api:hypercachememoryprofile-detail"
+    )
     class Meta:
         model = models.HyperCacheMemoryProfile
         fields = "__all__"
@@ -55,7 +57,7 @@ class CdnSiteSerializer(NautobotModelSerializer, StatusModelSerializerMixin):
     cdn_site_role = nested_serializers.NestedSiteRoleSerializer(required=False, allow_null=True)
     region = NestedRegionSerializer(required=False, allow_null=True)
     site = NestedSiteSerializer(required=False, allow_null=True)
-    hyperCacheMemoryProfileId = nested_serializers.NestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
+    cacheMemoryProfileId = nested_serializers.NestedHyperCacheMemoryProfileSerializer(required=False, allow_null=True)
     # neighbor1 = nested_serializers.NestedCdnSiteSerializer()
     # neighbor2 = nested_serializers.NestedCdnSiteSerializer(required=False, allow_null=True)
     local_context_schema = NestedConfigContextSchemaSerializer(required=False, allow_null=True)
@@ -72,7 +74,7 @@ class CdnSiteSerializer(NautobotModelSerializer, StatusModelSerializerMixin):
             "cdn_site_role",
             "region",
             "site",
-            "hyperCacheMemoryProfileId",
+            "cacheMemoryProfileId",
             "neighbor1",
             "neighbor1_preference",
             "neighbor2",
@@ -188,4 +190,28 @@ class OriginSerializer(NautobotModelSerializer):
     )
     class Meta:
         model = models.Origin
+        fields = "__all__"
+
+class CdnPrefixSerializer(NautobotModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="plugins-api:nautobot_cdn_models-api:cdnprefix-detail"
+    )
+    class Meta:
+        model = models.CdnPrefix
+        fields = "__all__"
+        
+class CdnPrefixDefaultBehaviorSerializer(NautobotModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="plugins-api:nautobot_cdn_models-api:cdnprefixdefaultbehavior-detail"
+    )
+    class Meta:
+        model = models.CdnPrefixDefaultBehavior
+        fields = "__all__"
+        
+class CdnPrefixBehaviorSerializer(NautobotModelSerializer):
+    url = serializers.HyperlinkedIdentityField(
+        view_name="plugins-api:nautobot_cdn_models-api:cdnprefixbehavior-detail"
+    )
+    class Meta:
+        model = models.CdnPrefixBehavior
         fields = "__all__"

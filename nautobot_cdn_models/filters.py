@@ -74,7 +74,7 @@ class CdnSiteFilterSet(NautobotFilterSet, LocalContextModelFilterSetMixin, Statu
         queryset=models.SiteRole.objects.all(),
         label="Site Role (slug or ID)"
     )
-    hyperCacheMemoryProfileId = django_filters.ModelChoiceFilter(
+    cacheMemoryProfileId = django_filters.ModelChoiceFilter(
         field_name='name',
         to_field_name='name',
         queryset=models.HyperCacheMemoryProfile.objects.all(),
@@ -90,7 +90,7 @@ class CdnSiteFilterSet(NautobotFilterSet, LocalContextModelFilterSetMixin, Statu
         "cdn_site_role",
         "region",
         "site",
-        "hyperCacheMemoryProfileId",
+        "cacheMemoryProfileId",
         "neighbor1",
         "neighbor1_preference",
         "neighbor2",
@@ -196,3 +196,33 @@ class OriginFilterSet(NautobotFilterSet):
             'enable',
             'originTimeout',
         ]
+
+class CdnPrefixFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
+    )
+    class Meta:
+        model = models.CdnPrefix
+        fields = "__all__"
+        
+class CdnPrefixDefaultBehaviorFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
+    )
+    class Meta:
+        model = models.CdnPrefixDefaultBehavior
+        fields = "__all__"
+
+class CdnPrefixBehaviorFilterSet(NautobotFilterSet):
+    q = SearchFilter(
+        filter_predicates={
+            "name": "icontains",
+        },
+    )
+    class Meta:
+        model = models.CdnPrefixBehavior
+        fields = "__all__"

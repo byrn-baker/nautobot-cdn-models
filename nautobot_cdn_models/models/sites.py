@@ -180,7 +180,7 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
     hyperCacheMemoryProfileId = models.ForeignKey(
         to="HyperCacheMemoryProfile",
         on_delete=models.SET_NULL,
-        related_name="hyperCacheMemoryProfileId",
+        related_name="cdnsites",
         blank=True,
         null=True,
     )
@@ -227,7 +227,7 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
     class Meta:
         ordering = ["cdn_site_role", "_name"]
         unique_together = (
-            ("cdn_site_role", "region", "name"),  # See validate_unique below
+            ("name"),  # See validate_unique below
         )
     
     def __str__(self):
@@ -245,6 +245,11 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
 
     def clean(self):
         super().clean()
+    
+    def save(self, *args, **kwargs):
+        is_new = not self.present_in_database
+
+        super().save(*args, **kwargs)
 
     
     def to_csv(self):

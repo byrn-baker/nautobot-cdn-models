@@ -1,5 +1,7 @@
 {% extends 'generic/object_retrieve.html' %}
 {% load helpers %}
+{% load plugins %}
+{% load render_table from django_tables2 %}
 
 {% block content_left_page %}
     <div class="panel panel-default">
@@ -10,6 +12,12 @@
             <tr>
                 <td>Akamai Site Name</td>
                 <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <span class="label" style="color: {{ object.status.color|fgcolor }}; background-color: #{{ object.status.color }}">{{ object.get_status_display }}</span>
+                </td>
             </tr>
             <tr>
                 <td>Abbreviated Name</td>
@@ -29,11 +37,11 @@
             </tr>  
             <tr>
                 <td>Akamai Site Memory Profile </td>
-                <td>{{ object.hyperCacheMemoryProfileId }}</td>
+                <td>{{ object.cacheMemoryProfileId }}</td>
             </tr>
             <tr>
                 <td>Akamai Site Primary Neighbor </td>
-                <td>{{ object.neighbor1 }}</td>
+                <td>{{ object.neighbor1|hyperlinked_object }}</td>
             </tr>
             <tr>
                 <td>Akamai Site Primary Neighbor Preference </td>
@@ -41,15 +49,19 @@
             </tr>
             <tr>
                 <td>Akamai Site Secondary Neighbor </td>
-                <td>{{ object.neighbor2 }}</td>
+                <td>{{ object.neighbor2|hyperlinked_object }}</td>
             </tr>
             <tr>
                 <td>Akamai Site Secondary Neighbor Preference </td>
                 <td>{{ object.neighbor2_preference }}</td>
             </tr>
             <tr>
+                <td>Akamai Failover Site </td>
+                <td>{{ object.failover_site|hyperlinked_object }}</td>
+            </tr>
+            <tr>
                 <td>CDN Role </td>
-                <td>{{ object.cdn_site_role }}</td>
+                <td>{{ object.cdn_site_role|hyperlinked_object }}</td>
             </tr>
         </table>
     </div>
@@ -83,6 +95,15 @@
         </div>
         {% include 'nautobot_cdn_models/inc/paginator.html' with paginator=relation_table.paginator page=relation_table.page %}
         <div class="row"></div>
+        <!-- DataDog graph -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>DataDog Graph - Utilization over the past week</strong>
+            </div>
+            <div class="panel-body">
+                <iframe src="{{ datadog_graph_url }}" width="800" height="600" frameborder="0"></iframe>
+            </div>
+        </div>
 {% endblock content_right_page %}
 
 {% block extra_nav_tabs %}

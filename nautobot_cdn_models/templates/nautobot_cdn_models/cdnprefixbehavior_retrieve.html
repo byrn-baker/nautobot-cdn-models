@@ -1,0 +1,38 @@
+{% extends 'generic/object_retrieve.html' %}
+{% load helpers %}
+{% load json_filters %}
+
+{% block content_left_page %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>General Configuration</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table">
+                <tr>
+                    <td>Name</td>
+                    <td>{{ object.name|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Akamai Content Provider</td>
+                    <td>{{ object.contentProviderId|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Akamai Prefix ID</td>
+                    <td>{{ object.cdnPrefixId|placeholder }}</td>
+                </tr>                                                                                                   
+            </table>
+        </div>
+{% endblock content_left_page %}
+
+{% block content_right_page %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Behavior Options</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table"></table>
+                <tr>
+                    <td><pre>{{ object.Behaviors|jsonify }}</pre></td>
+                </tr>
+            </table>
+        </div>
+{% endblock content_right_page %}

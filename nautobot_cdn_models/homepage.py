@@ -10,6 +10,7 @@ from .models import (
     ServiceProvider,
     ContentProvider,
     Origin,
+    CdnPrefix
 )
 
 layout = (
@@ -88,6 +89,30 @@ layout = (
                         description="Akamai Origin Configuration",
                         permissions=[],
                         weight=400,
+                    ),
+                    HomePageItem(
+                        name="Akamai Prefixes",
+                        link="plugins:nautobot_cdn_models:cdnprefix_list",
+                        model=CdnPrefix,
+                        description="Akamai Prefix Configuration",
+                        permissions=[],
+                        weight=450,
+                    ),
+                    HomePageItem(
+                        name="Akamai Prefix Behaviors",
+                        link="plugins:nautobot_cdn_models:cdnprefixbehavior_list",
+                        model=CdnPrefix,
+                        description="Akamai Prefix Behavior rules",
+                        permissions=[],
+                        weight=450,
+                    ),
+                    HomePageItem(
+                        name="Akamai Prefix Default Behaviors",
+                        link="plugins:nautobot_cdn_models:cdnprefixdefaultbehavior_list",
+                        model=CdnPrefix,
+                        description="Akamai Prefix Default Behavior rules",
+                        permissions=[],
+                        weight=450,
                     ),
                 ),
             ),

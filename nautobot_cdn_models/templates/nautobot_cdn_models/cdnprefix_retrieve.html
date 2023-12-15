@@ -1,0 +1,102 @@
+{% extends 'generic/object_retrieve.html' %}
+{% load helpers %}
+{% load json_filters %}
+
+{% block content_left_page %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>General Configuration</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table">
+                <tr>
+                    <td>Name</td>
+                    <td>{{ object.name|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Enabled to Serve content</td>
+                    <td>{{ object.enable|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>IP Address Tag Association</td>
+                    <td>{{ object.ipAddressTagId|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>DNS Response TTL (s)</td>
+                    <td>{{ object.dnsTtl|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Prefix Prioritization</td>
+                    <td>{{ object.prefixPrioritization|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Keep Alive Requests</td>
+                    <td>{{ object.keepaliveRequests|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Akamai Site Map ID</td>
+                    <td>{{ object.siteMapId|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Akamai Access Map ID</td>
+                    <td>{{ object.accessMapId|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Akamai Content Provider</td>
+                    <td>{{ object.contentProviderId|placeholder }}</td>
+                </tr>
+                <tr>
+                    <td>Akamai Prefix ID</td>
+                    <td>{{ object.cdnPrefixId|placeholder }}</td>
+                </tr>                                                                                                          
+            </table>
+        </div>
+{% endblock content_left_page %}
+
+{% block content_right_page %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Default Behaviors</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table">
+                {% for behavior in object.cdnprefixdefaultbehavior_set.all %}
+                    <tr>
+                        <td>{{ behavior.name }}</td>
+                        <td>
+                            {% if behavior.defaultBehaviors is not none %}
+                                <pre>{{ behavior.defaultBehaviors|jsonify }}</pre>
+                            {% else %}
+                                <pre>No rules defined</pre>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2">No Default Behavior Rules associated.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Behaviors</strong>
+            </div>
+            <table class="table table-hover panel-body attr-table">
+                {% for behavior in object.cdnprefixbehavior_set.all %}
+                    <tr>
+                        <td>{{ behavior.name }}</td>
+                        <td>
+                            {% if behavior.Behaviors is not none %}
+                                <pre>{{ behavior.Behaviors|jsonify }}</pre>
+                            {% else %}
+                                <pre>No rules defined</pre>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2">No Behavior Rules associated.</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+{% endblock content_right_page %}

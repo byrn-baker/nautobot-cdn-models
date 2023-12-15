@@ -1,6 +1,11 @@
 from jsonschema.validators import Draft7Validator
 from django_tables2 import RequestConfig
+from django.views.generic.detail import DetailView
 from deepmerge import Merger
+import json
+import requests
+from datadog import initialize, api
+from html.parser import HTMLParser
 
 
 from nautobot.core.views import mixins as view_mixins
@@ -9,6 +14,8 @@ from nautobot.extras.views import ObjectChangeLogView
 from nautobot.extras.models import RelationshipAssociation
 from nautobot.utilities.tables import ButtonsColumn
 from nautobot.utilities.paginator import EnhancedPaginator, get_paginate_count
+
+from nautobot.dcim.models import Device
 
 from nautobot.extras.tables import RelationshipAssociationTable
 
@@ -19,7 +26,10 @@ from .models import (
     CdnConfigContext,
     ServiceProvider,
     ContentProvider,
-    Origin
+    Origin,
+    CdnPrefix,
+    CdnPrefixDefaultBehavior,
+    CdnPrefixBehavior
 )
 
 from . import ( 
@@ -109,18 +119,64 @@ class CdnSiteListView(generic.ObjectListView):
     filterset_form = forms.CdnSiteFilterForm
     table = tables.CdnSiteTable
 
-
+class MyHTMLParser(HTMLParser):
+    def handle_starttag(self, tag, attrs):
+        if tag == 'iframe':
+            for attr in attrs:
+                if attr[0] == 'src':
+                    self.iframe_src = attr[1]
+                    
 class CdnSiteView(generic.ObjectView):
     queryset = CdnSite.objects.select_related("region", "cdn_site_role", "status")
-    def get_extra_context(self, request, instance):
-        stats = {
-            "device_count": RelationshipAssociation.objects.all().filter(destination_id=instance.id).count()
+    
+    def get_datadog_graph(self, cdnsite_name):
+        region, site_name, state, streamtype, tier = cdnsite_name.split('_')
+        # Setup the correct query
+        if 'shield' in cdnsite_name:
+            query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
+        elif 'mid' in cdnsite_name:
+            query = f"sum:akamai_aura.mid.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
+        else:
+            query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:{streamtype.lower()},siteloc:{site_name.lower()}}} by {{siteloc}}.rollup(max, 60) * 1000000"
+        # Initialize request parameters with Datadog API/APP key
+        options = {
+            'api_host': 'https://charter-ipvc.datadoghq.com/',
+            'api_key': '11e1df945b0fce8b5b2422b57ce889e5',
+            'app_key': '225bf34f541e97825f0b40aec3cf658a9490ce23'
         }
-        return{
-            "stats": stats
+
+        initialize(**options)
+
+        graph_json = {
+            "requests": [{
+                "q": query
+            }],
+            "viz": "timeseries",
+            "events": []
+        }
+        graph_json = json.dumps(graph_json)
+
+        embed = api.Embed.create(
+            graph_json=graph_json,
+            timeframe="1_week",
+            size="large",
+            legend="yes"
+        )
+
+        parser = MyHTMLParser()
+        parser.feed(embed['html'])
+        datadog_graph_url = parser.iframe_src
+
+        return {
+            "datadog_graph_url": datadog_graph_url  # Only return the URL for the Datadog graph
         }
     
     def get_extra_context(self, request, instance):
+        datadog_graph = self.get_datadog_graph(instance.name)
+        datadog_graph_url = datadog_graph['datadog_graph_url']
+        stats = {
+            "device_count": RelationshipAssociation.objects.all().filter(destination_id=instance.id).count()
+        }
         relations = RelationshipAssociation.objects.all().filter(destination_id=instance.id)
 
         relation_table = RelationshipAssociationTable(relations)
@@ -131,10 +187,68 @@ class CdnSiteView(generic.ObjectView):
             "per_page": get_paginate_count(request),
         }
         RequestConfig(request, paginate).configure(relation_table)
+        return{
+            "stats": stats,
+            "relation_table": relation_table,
+            "datadog_graph_url": datadog_graph_url,
+        }
+
+class DeviceDetailPluginView(generic.ObjectView):
+    queryset = Device.objects.all()
+    template_name = "nautobot_cdn_models/device_detail_tab.html"
+    
+    def get_datadog_graph(self, device_name):
+        device = device_name.replace(".spectrum.com", "")
+        options = {
+            'api_key': '11e1df945b0fce8b5b2422b57ce889e5',
+            'app_key': '225bf34f541e97825f0b40aec3cf658a9490ce23',
+            'api_host': 'https://charter-ipvc.datadoghq.com/'
+        }
+        if 'shc0' in device_name:
+            query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:vod,host:{device}}} by {{host}} * 1000000"
+        elif 'shc1' in device_name:
+            query = f"sum:akamai_aura.origin.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
+        elif 'mid' in device_name:
+            query = f"sum:akamai_aura.mid.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
+        elif 'hpc0' in device_name:
+            query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:vod,host:{device}}} by {{host}} * 1000000"
+        elif 'hpc1' in device_name:
+            query = f"sum:akamai_aura.sent_bw{{env:prod,streamtype:linear,host:{device}}} by {{host}} * 1000000"
+
+        initialize(**options)
+
+        graph_json = {
+            "requests": [{
+                "q": query
+            }],
+            "viz": "timeseries",
+            "events": []
+        }
+        graph_json = json.dumps(graph_json)
+
+        embed = api.Embed.create(
+            graph_json=graph_json,
+            timeframe="1_week",
+            size="large",
+            legend="yes"
+        )
+
+        parser = MyHTMLParser()
+        parser.feed(embed['html'])
+        datadog_graph_url = parser.iframe_src
 
         return {
-            "relation_table": relation_table
+            "datadog_graph_url": datadog_graph_url  # Only return the URL for the Datadog graph
         }
+        
+    def get_extra_context(self, request, instance):
+        datadog_graph = self.get_datadog_graph(instance.name)
+        datadog_graph_url = datadog_graph['datadog_graph_url']
+        
+        return{
+            "datadog_graph_url": datadog_graph_url,
+    }
+            
     
 class CdnSiteEditView(generic.ObjectEditView):
     queryset = CdnSite.objects.all()
@@ -162,6 +276,8 @@ class CdnSiteBulkDeleteView(generic.BulkDeleteView):
 
 class CdnSiteChangeLogView(ObjectChangeLogView):
     base_template = "nautobot_akamai_models/cdnsite.html"
+
+
 
 #
 # Config contexts
@@ -314,5 +430,53 @@ class OriginUIViewSet(
     filterset_class = filters.OriginFilterSet
     filterset_form_class = forms.OriginFilterForm
     serializer_class = serializers.OriginSerializer
+    action_buttons = ("add",)
+    lookup_field = "pk"
+
+class CdnPrefixUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
+    queryset = CdnPrefix.objects.all()
+    table_class = tables.CdnPrefixTable
+    form_class = forms.CdnPrefixForm
+    filterset_class = filters.CdnPrefixFilterSet
+    filterset_form_class = forms.CdnPrefixFilterForm
+    serializer_class = serializers.CdnPrefixSerializer
+    action_buttons = ("add",)
+    lookup_field = "pk"
+    
+class CdnPrefixDefaultBehaviorUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
+    queryset = CdnPrefixDefaultBehavior.objects.all()
+    table_class = tables.CdnPrefixDefaultBehaviorTable
+    form_class = forms.CdnPrefixDefaultBehaviorForm
+    filterset_class = filters.CdnPrefixDefaultBehaviorFilterSet
+    filterset_form_class = forms.CdnPrefixDefaultBehaviorFilterForm
+    serializer_class = serializers.CdnPrefixDefaultBehaviorSerializer
+    action_buttons = ("add",)
+    lookup_field = "pk"
+
+class CdnPrefixBehaviorUIViewSet(
+    view_mixins.ObjectListViewMixin,
+    view_mixins.ObjectDetailViewMixin,
+    view_mixins.ObjectEditViewMixin,
+    view_mixins.ObjectDestroyViewMixin,
+    view_mixins.ObjectBulkDestroyViewMixin,
+):
+    queryset = CdnPrefixBehavior.objects.all()
+    table_class = tables.CdnPrefixBehaviorTable
+    form_class = forms.CdnPrefixBehaviorForm
+    filterset_class = filters.CdnPrefixBehaviorFilterSet
+    filterset_form_class = forms.CdnPrefixBehaviorFilterForm
+    serializer_class = serializers.CdnPrefixBehaviorSerializer
     action_buttons = ("add",)
     lookup_field = "pk"

@@ -15,6 +15,9 @@ router.register("hypercachememoryprofiles", views.HyperCacheMemoryProfileUIViewS
 router.register("serviceproviders", views.ServiceProviderUIViewSet)
 router.register("contentproviders", views.ContentProviderUIViewSet)
 router.register("origins", views.OriginUIViewSet)
+router.register("cdnprefix", views.CdnPrefixUIViewSet)
+router.register("cdnprefixdefaultbehavior", views.CdnPrefixDefaultBehaviorUIViewSet)
+router.register("cdnprefixbehavior", views.CdnPrefixBehaviorUIViewSet)
 
 urlpatterns = [
     path("siteroles/", views.SiteRoleListView.as_view(), name="siterole_list"),
@@ -74,6 +77,11 @@ urlpatterns = [
         views.CdnSiteConfigContextView.as_view(),
         name="cdnsite_cdnconfigcontext",
     ),
+    path(
+        "devices/<uuid:pk>/device_detail_tab/",
+        views.DeviceDetailPluginView.as_view(),
+        name="device_detail_tab",
+    ),
     # Config contexts
     path(
         "cdnconfig-contexts/",
@@ -122,6 +130,5 @@ urlpatterns = [
         name="cdnconfigcontext_notes",
         kwargs={"model": CdnConfigContext},
     ),
-
 ]
 urlpatterns += router.urls

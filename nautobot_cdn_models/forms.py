@@ -32,18 +32,7 @@ from nautobot.dcim.models import Region, Site
 from nautobot.extras.models import ConfigContextSchema
 from . import models
 
-### This class is for the array fields being used instead of json fields.
-class ArrayField(forms.Field):
-    def to_python(self, value):
-        if not value:
-            return []
-        if isinstance(value, list):
-            return value
-        try:
-            return [item.strip() for item in value.split(',')]
-        except (ValueError, TypeError):
-            raise exceptions.ValidationError('Invalid input for array field')
-        
+       
 class HyperCacheMemoryProfileForm(NautobotModelForm):
     slug = SlugField()
 
@@ -104,7 +93,7 @@ class CdnSiteForm(NautobotModelForm, LocalContextModelForm):
     cdn_site_role = forms.ModelChoiceField(required=False, queryset=models.SiteRole.objects.all())
     neighbor1 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Primary Site Neighbor")
     neighbor2 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Secondary Site Neighbor")
-    hyperCacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
+    cacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
     failover_site = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Failover Site")
     class Meta:
         model = models.CdnSite
@@ -119,7 +108,7 @@ class CdnSiteForm(NautobotModelForm, LocalContextModelForm):
             'neighbor2',
             'neighbor2_preference',
             'failover_site',
-            'hyperCacheMemoryProfileId',
+            'cacheMemoryProfileId',
             'siteId',
             'cdn_site_role',
             'region',
@@ -135,7 +124,7 @@ class CdnSiteFilterForm(NautobotFilterForm, StatusModelFilterFormMixin, LocalCon
     name = forms.CharField(required=False)
     bandwidthLimitMbps = forms.IntegerField(required=False, label="Site Bandwidth Limit")
     enableDisklessMode = forms.BooleanField(required=False, label="Site Disk Mode")
-    hyperCacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
+    cacheMemoryProfileId = DynamicModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
     neighbor1 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Primary Site Neighbor")
     neighbor2 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Secondary Site Neighbor")
     cdn_site_role = DynamicModelMultipleChoiceField(required=False, queryset=models.SiteRole.objects.all())
@@ -146,7 +135,7 @@ class CdnSiteBulkEditForm(StatusModelBulkEditFormMixin, NautobotBulkEditForm):
     cdn_site_role = DynamicModelChoiceField(queryset=models.SiteRole.objects.all(), required=False)
     bandwidthLimitMbps = forms.IntegerField(required=False, label="Site Bandwidth Limit")
     enableDisklessMode = forms.BooleanField(required=False, label="Site Disk Mode")
-    hyperCacheMemoryProfileId = forms.ModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
+    cacheMemoryProfileId = forms.ModelChoiceField(required=False, queryset=models.HyperCacheMemoryProfile.objects.all(), label="Akamai Site Memory Profile ID")
     neighbor1 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Primary Site Neighbor")
     neighbor1_preference = forms.IntegerField(required=False, label="Neighbor Preference")
     neighbor2 = DynamicModelChoiceField(required=False, queryset=models.CdnSite.objects.all(), label="Secondary Site Neighbor")
@@ -279,56 +268,62 @@ class ContentProviderFilterForm(NautobotFilterForm):
     q = forms.CharField(required=False, label="Search")
     name = forms.CharField(required=False)
 
+class OriginFilterForm(NautobotFilterForm):
+    model = models.Origin
+
+    q = forms.CharField(required=False, label="Search")
+    name = forms.CharField(required=False)
+
 class OriginForm(NautobotModelForm):
     contentProviderId = DynamicModelChoiceField(queryset=models.ContentProvider.objects.all(), required=False)
-    resolvableHostnames = ArrayField(
+    resolvableHostnames = JSONField(
         label="Shareable Host FQDN", 
         help_text="A list of virtual hosts, origin servers with resolvable hostnames. These resolvable hostnames are used by DNS to determine the IP addresses of the destination origin server.",
-        widget=forms.Textarea,
         required=False
     )
     dynamicHierarchy = JSONField(
         label="Origin Health Check",
-        help_text="Configure a HyperCache node that is the endpoint of an origin path (a root HyperCache) to monitor the health of the origin server by sending a GET request for a specific URL."
+        help_text="Configure a HyperCache node that is the endpoint of an origin path (a root HyperCache) to monitor the health of the origin server by sending a GET request for a specific URL.",
+        widget=forms.Textarea,
+        required=False,
     )
     fastReroute = JSONField(
         label="Fast ReRoute",
-        help_text="Enables a HyperCache node to detect failed or slow connections to a specific origin IP address, or between Sites, and to send a second request to an alternate origin IP (or site) if the first request is delayed. If a successful response is received from either origin IP (or site), the first response is used to fulfill a client's request. The second response, if received, is ignored. If no connection to either destination is established, or if no response is received within the configured origin timeout value, the requests to the origin (or site) are retried four times before a 504 is returned to the client. This method helps ensure rapid recovery in case a temporary network problem results in loss of the initial request or response."
+        help_text="Enables a HyperCache node to detect failed or slow connections to a specific origin IP address, or between Sites, and to send a second request to an alternate origin IP (or site) if the first request is delayed. If a successful response is received from either origin IP (or site), the first response is used to fulfill a client's request. The second response, if received, is ignored. If no connection to either destination is established, or if no response is received within the configured origin timeout value, the requests to the origin (or site) are retried four times before a 504 is returned to the client. This method helps ensure rapid recovery in case a temporary network problem results in loss of the initial request or response.",
+        required=False,
     )
-    ipAddressTypes = ArrayField(
+    ipAddressTypes = JSONField(
         label="IP Address Types", 
         help_text="A list of IP address types, in preference order, that may be used to communicate with this origin server. Choices include IPV4 and IPV6. By default, both IPv6 and IPv4 are enabled, and IPv6 is preferred. Use a commas to seperate the code or range or codes Ex. 'IPV4', 'IPV6'",
-        widget=forms.Textarea,
         required=False
     )
-    cacheableErrorResponseCodes = ArrayField(
+    cacheableErrorResponseCodes = JSONField(
         label="HTTP Status Codes", 
         help_text="A list of HTTP status codes that the HPC caches. Each item is either a single code or a range of codes. The following codes are not allowed, either in single code or as part of a range: 200, 203, 206, 300, 301, 410, 416.. Use a commas to seperate the code or range or codes Ex. '400-499', '500'",
-        widget=forms.Textarea,
-        required=False
+        required=False,
     )
     errorCacheMaxRetry = forms.IntegerField(label="Max Retry", help_text="The maximum number of retries in the case of an error response.")
     errorCacheMaxAge = forms.IntegerField(label="Max Age (s)",help_text="The maximum age used to specify the length of time that an HTTP status code can be cached by the HPC.")
     
     def clean_dynamicHierarchy(self):
-        data = self.cleaned_data['dynamicHierarchy']
-        if isinstance(data, str):
+        dynamicHierarchy = self.cleaned_data['dynamicHierarchy']
+        if isinstance(dynamicHierarchy, str):
             try:
                 # Try to parse the string into a JSON object
-                json.loads(data)
+                json.loads(dynamicHierarchy)
             except json.JSONDecodeError:
                 raise forms.ValidationError("Invalid JSON data for dynamicHierarchy field")
-        return data
+        return dynamicHierarchy
 
     def clean_fastReroute(self):
-        data = self.cleaned_data['fastReroute']
-        if isinstance(data, str):
+        fastReroute = self.cleaned_data['fastReroute']
+        if isinstance(fastReroute, str):
             try:
                 # Try to parse the string into a JSON object
-                json.loads(data)
+                json.loads(fastReroute)
             except json.JSONDecodeError:
                 raise ValidationError("Invalid JSON data for fastReroute field")
-        return data
+        return fastReroute
     
     class Meta:
         model = models.Origin
@@ -357,8 +352,63 @@ class OriginForm(NautobotModelForm):
             'ipAddressTypes',
         )
 
-class OriginFilterForm(NautobotFilterForm):
-    model = models.Origin
+class CdnPrefixFilterForm(NautobotFilterForm):
+    model = models.CdnPrefix
 
     q = forms.CharField(required=False, label="Search")
     name = forms.CharField(required=False)
+class CdnPrefixForm(NautobotModelForm):
+    contentProviderId = DynamicModelChoiceField(queryset=models.ContentProvider.objects.all(), required=False)   
+    class Meta:
+        model = models.CdnPrefix
+        fields = (
+            'name',
+            'contentProviderId',
+            'cdnPrefixId',
+            'ipAddressTagId',
+            'enable',
+            'dnsTtl',
+            'prefixPrioritization',
+            'keepaliveRequests',
+            'siteMapId',
+            'accessMapId'
+        )
+
+
+class CdnPrefixDefaultBehaviorFilterForm(NautobotFilterForm):
+    model = models.CdnPrefixDefaultBehavior
+
+    q = forms.CharField(required=False, label="Search")
+    name = forms.CharField(required=False)
+
+
+class CdnPrefixDefaultBehaviorForm(NautobotModelForm):
+    contentProviderId = DynamicModelChoiceField(queryset=models.ContentProvider.objects.all(), required=False)
+    
+    class Meta:
+        model = models.CdnPrefixDefaultBehavior
+        fields = (
+            'name',
+            'cdnPrefixId',
+            'contentProviderId',
+            'defaultBehaviors',
+        )
+
+class CdnPrefixBehaviorFilterForm(NautobotFilterForm):
+    model = models.CdnPrefixBehavior
+
+    q = forms.CharField(required=False, label="Search")
+    name = forms.CharField(required=False)
+
+
+class CdnPrefixBehaviorForm(NautobotModelForm):
+    contentProviderId = DynamicModelChoiceField(queryset=models.ContentProvider.objects.all(), required=False)
+    
+    class Meta:
+        model = models.CdnPrefixBehavior
+        fields = (
+            'name',
+            'cdnPrefixId',
+            'contentProviderId',
+            'Behaviors',
+        )

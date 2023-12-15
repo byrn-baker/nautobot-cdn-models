@@ -38,7 +38,7 @@ namespace = Collection("nautobot_cdn_models")
 namespace.configure(
     {
         "nautobot_cdn_models": {
-            "nautobot_ver": "1.6.6",
+            "nautobot_ver": "1.5.7",
             "project_name": "nautobot_cdn_models",
             "python_ver": "3.8",
             "local": False,

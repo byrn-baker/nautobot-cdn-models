@@ -11,5 +11,8 @@ router.register("cdnconfig-contexts", views.CdnConfigContextViewSet)
 # Content Delivery
 router.register("serviceprovider", views.ServiceProviderViewSet)
 router.register("contentprovider", views.ContentProviderViewSet)
-router.register("originprovider", views.OriginViewSet)
+router.register("origin", views.OriginViewSet)
+router.register("cdnprefix", views.CdnPrefixViewSet)
+router.register("cdnprefixdefaultbehavior", views.CdnPrefixDefaultBehaviorViewSet)
+router.register("cdnprefixbehavior", views.CdnPrefixBehaviorViewSet)
 urlpatterns = router.urls

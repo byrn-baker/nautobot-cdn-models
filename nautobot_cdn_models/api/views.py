@@ -101,3 +101,18 @@ class OriginViewSet(NautobotModelViewSet):
     queryset = models.Origin.objects.all()
     serializer_class = serializers.OriginSerializer
     filter_class = filters.OriginFilterSet
+
+class CdnPrefixViewSet(NautobotModelViewSet):
+    queryset = models.CdnPrefix.objects.all()
+    serializer_class = serializers.CdnPrefixSerializer
+    filter_class = filters.CdnPrefixFilterSet
+
+class CdnPrefixDefaultBehaviorViewSet(NautobotModelViewSet):
+    queryset = models.CdnPrefixDefaultBehavior.objects.all()
+    serializer_class = serializers.CdnPrefixDefaultBehaviorSerializer
+    filter_class = filters.CdnPrefixDefaultBehaviorFilterSet
+
+class CdnPrefixBehaviorViewSet(NautobotModelViewSet):
+    queryset = models.CdnPrefixBehavior.objects.all()
+    serializer_class = serializers.CdnPrefixBehaviorSerializer
+    filter_class = filters.CdnPrefixBehaviorFilterSet

@@ -1,9 +1,0 @@
-cachememprofiles:
-{% for cache in memory_profiles.json.cacheMemoryProfiles %}
-  - name: {{ cache.name }}
-    frontEndCacheMemoryPercent: {{ cache.frontEndCacheMemoryPercent }}
-    ramOnlyCacheMemoryPercent: {{ cache.ramOnlyCacheMemoryPercent}}
-    hotCacheMemoryPercent: {{ cache.hotCacheMemoryPercent}}
-    diskIndexMemoryPercent: {{ cache.diskIndexMemoryPercent}}
-    cacheMemoryProfileId: {{ cache.cacheMemoryProfileId}}
-{% endfor %}

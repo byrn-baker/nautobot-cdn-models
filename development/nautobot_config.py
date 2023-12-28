@@ -143,3 +143,5 @@ PLUGINS = ["nautobot_cdn_models"]
 #     }
 # }
 CONFIG_CONTEXT_DYNAMIC_GROUPS_ENABLED = False
+
+ENABLE_ALPHA_UI = True

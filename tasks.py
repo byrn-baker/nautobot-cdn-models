@@ -38,9 +38,9 @@ namespace = Collection("nautobot_cdn_models")
 namespace.configure(
     {
         "nautobot_cdn_models": {
-            "nautobot_ver": "1.5.7",
+            "nautobot_ver": "2.0.3",
             "project_name": "nautobot_cdn_models",
-            "python_ver": "3.8",
+            "python_ver": "3.10",
             "local": False,
             "compose_dir": os.path.join(os.path.dirname(__file__), "development"),
             "compose_files": [
@@ -146,6 +146,12 @@ def generate_packages(context):
 # ------------------------------------------------------------------------------
 # START / STOP / DEBUG
 # ------------------------------------------------------------------------------
+@task
+def pylint(context):
+    """Run pylint inside the Docker container."""
+    command = "pylint /opt/nautobot"
+    run_command(context, command)
+    
 @task
 def debug(context):
     """Start Nautobot and its dependencies in debug mode."""

@@ -31,7 +31,7 @@
                     </tr>
                     <tr>
                         <td>Schema</td>
-                        <td>{{ object.schema|hyperlinked_object }}</td>
+                        <td>{{ object.config_context_schema|hyperlinked_object }}</td>
                     </tr>
                     <tr>
                         <td>Active</td>
@@ -48,12 +48,12 @@
                 </div>
                 <table class="table table-hover panel-body attr-table">
                     <tr>
-                        <td>Regions</td>
+                        <td>Locations</td>
                         <td>
-                            {% if object.regions.all %}
+                            {% if object.locations.all %}
                                 <ul>
-                                    {% for region in object.regions.all %}
-                                        <li>{{ region|hyperlinked_object }}</li>
+                                    {% for location in object.locations.all %}
+                                        <li>{{ location|hyperlinked_object }}</li>
                                     {% endfor %}
                                 </ul>
                             {% else %}

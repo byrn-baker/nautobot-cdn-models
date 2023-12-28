@@ -1,25 +1,27 @@
+from django.db import models
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.db import models
 from django.urls import reverse
-from mptt.models import MPTTModel, TreeForeignKey
 
-from nautobot.extras.models import StatusModel
-from nautobot.extras.utils import extras_features
-from nautobot.core.fields import AutoSlugField
 from nautobot.core.models.generics import OrganizationalModel, PrimaryModel
-from nautobot.utilities.fields import NaturalOrderingField
-from nautobot.utilities.mptt import TreeManager
+from nautobot.core.models.tree_queries import TreeModel
+from nautobot.extras.utils import extras_features
+from nautobot.extras.models import StatusField, Tag
 
-from .contexts import CdnConfigContextModel
-from ..querysets import CdnConfigContextModelQuerySet
+from ..querysets import RedirectMapContextModelQuerySet
+from .redirectmap import RedirectMapContextModel
+
+__all__ = (
+    "CdnSite",
+    "SiteRole",
+    "HyperCacheMemoryProfile"
+)
 
 @extras_features(
     'graphql'
 )
 class HyperCacheMemoryProfile(PrimaryModel):
-    name = models.CharField(max_length=255, help_text="Profile Name.")
-    slug = AutoSlugField(populate_from="name")
+    name = models.CharField(max_length=100, help_text="Profile Name.")
     description = models.CharField(max_length=255, blank=True, help_text="A description of the Memory profile.")
     frontEndCacheMemoryPercent = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)],
@@ -37,83 +39,56 @@ class HyperCacheMemoryProfile(PrimaryModel):
         validators=[MinValueValidator(0), MaxValueValidator(10000)],
     )
    
+    class Meta:
+        ordering = ["name"]
+        unique_together = (
+            ("name"),  # See validate_unique below
+        )
+        
+    def validate_unique(self, exclude=None):
+        if self.name and hasattr(self, "name"):
+            if CdnSite.objects.exclude(pk=self.pk).filter(name=self.name):
+                raise ValidationError({"name": "A profile with this name already exists."})
+
+        super().validate_unique(exclude)
+    
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_cdn_models:hypercachememoryprofile", args=[self.slug])
+        return reverse("plugins:nautobot_cdn_models:hypercachememoryprofile", args=[self.pk])
     
     def __str__(self):
         return self.name
+    
 
 @extras_features(
-    'graphql'
+    "custom_validators",
+    "graphql",
 )
-class SiteRole(MPTTModel, OrganizationalModel):
+class SiteRole(TreeModel, OrganizationalModel):
     name = models.CharField(max_length=100, unique=True)
-    slug = AutoSlugField(populate_from="name")
-    parent = TreeForeignKey(
-        to="self",
-        on_delete=models.CASCADE,
-        related_name="children",
-        blank=True,
-        null=True,
-        db_index=True,
-    )
     description = models.CharField(max_length=200, blank=True)
-
-    objects = TreeManager()
-
-    csv_headers = ["name", "slug", "parent", "description"]
 
     class Meta:
         ordering = ["name"]
 
-    class MPTTMeta:
-        order_insertion_by = ["name"]
-
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
-        return reverse("plugins:nautobot_cdn_models:siterole", args=[self.slug])
-    
-    def to_csv(self):
-        return (
-            self.name,
-            self.slug,
-            self.parent.name if self.parent else "",
-            self.description,
-        )
-    
-    def to_objectchange(self, action, object_data_exclude=None, **kwargs):
-        if object_data_exclude is None:
-            object_data_exclude = []
-        # Remove MPTT-internal fields
-        object_data_exclude += ["level", "lft", "rght", "tree_id"]
-        return super().to_objectchange(action, object_data_exclude=object_data_exclude, **kwargs)
+        return reverse("plugins:nautobot_cdn_models:siterole", args=[self.pk])
+
 
 @extras_features(
-    'statuses',
-    'relationships',
-    'graphql'
+    "locations",
+    "custom_links",
+    "custom_validators",
+    "export_templates",
+    "graphql",
+    "webhooks",
 )
-class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
-    name = models.CharField(max_length=255, help_text="Akamai Site Name.")
-    _name = NaturalOrderingField(target_field="name", max_length=100, blank=True, db_index=True)
+class CdnSite(PrimaryModel, RedirectMapContextModel):
+    name = models.CharField(max_length=100, help_text="Akamai Site Name.")
     cdn_site_role = models.ForeignKey(
         to="SiteRole",
-        on_delete=models.SET_NULL,
-        related_name="cdnsites",
-        blank=True,
-        null=True,
-    )
-    region = models.ForeignKey(
-        to="dcim.Region",
-        on_delete=models.SET_NULL,
-        related_name="cdnsites",
-        blank=True,
-        null=True,
-    )
-    site = models.ForeignKey(
-        to="dcim.Site",
         on_delete=models.SET_NULL,
         related_name="cdnsites",
         blank=True,
@@ -124,6 +99,10 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         on_delete=models.PROTECT,
         related_name="cdnsites",
         blank=True,
+        null=True,
+    )
+    status = StatusField(
+        blank=False, 
         null=True,
     )
     abbreviatedName = models.CharField(max_length=255, blank=True, help_text="Akamai Site Name Abbreviation")
@@ -164,6 +143,14 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         null=True,
         default=750
     )
+    failover_site = models.ForeignKey(
+        to="self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="sister_site",
+        help_text="Select the site to which this site will failover to."
+    )
     cacheMemoryProfileId = models.ForeignKey(
         to="HyperCacheMemoryProfile",
         on_delete=models.PROTECT,
@@ -177,13 +164,14 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         null=True,
         default=None,
     )
+    tags = models.ManyToManyField(to="extras.Tag", related_name="+", blank=True)
 
-    objects = CdnConfigContextModelQuerySet.as_manager()
+    objects = RedirectMapContextModelQuerySet.as_manager()
 
     csv_headers = [
         "name",
         "status",
-        "region",
+        "location",
         "site",
         "cdn_site_role",
         "abbreviatedName",
@@ -193,13 +181,14 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         "neighbor1_preference",
         "neighbor2",
         "neighbor2_preference",
+        "failover_site",
         "cacheMemoryProfileId",
         "siteId",
 
     ]
     clone_fields = [
         "status",
-        "region",
+        "location",
         "abbreviatedName",
         "bandwidthLimitMbps",
         "enableDisklessMode",
@@ -207,14 +196,15 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         "neighbor1_preference",
         "neighbor2",
         "neighbor2_preference",
+        "failover_site",
         "cacheMemoryProfileId",
         "siteId",
     ]
 
     class Meta:
-        ordering = ["cdn_site_role", "_name"]
+        ordering = ["cdn_site_role", "name"]
         unique_together = (
-            ("cdn_site_role", "region", "name"),  # See validate_unique below
+            ("cdn_site_role", "location", "name"),  # See validate_unique below
         )
     
     def __str__(self):
@@ -224,8 +214,8 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
         return reverse("plugins:nautobot_cdn_models:cdnsite", args=[self.pk])
        
     def validate_unique(self, exclude=None):
-        if self.name and hasattr(self, "cdnsite") and self.region is None:
-            if CdnSite.objects.exclude(pk=self.pk).filter(name=self.name, site=self.cdnsite, region__isnull=True):
+        if self.name and hasattr(self, "cdnsite") and self.location is None:
+            if CdnSite.objects.exclude(pk=self.pk).filter(name=self.name, location=self.cdnsite):
                 raise ValidationError({"name": "A cdnsite with this name already exists."})
 
         super().validate_unique(exclude)
@@ -246,9 +236,7 @@ class CdnSite(PrimaryModel, CdnConfigContextModel, StatusModel):
             self.neighbor2,
             self.neighbor2_preference,
             self.cacheMemoryProfileId,
+            self.failover_site,
             self.status,
-            self.region,
-            self.site,
             self.siteId,
         )
-    

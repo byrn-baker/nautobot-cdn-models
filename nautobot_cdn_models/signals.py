@@ -1,12 +1,20 @@
 """Nautobot signal handler functions for nautobot_cdn_models."""
+import os
+import shutil
 
 from django.apps import apps as global_apps
 from django.conf import settings
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
 
 from nautobot.extras.choices import RelationshipTypeChoices
+from nautobot.core.celery import app
+
+from nautobot.extras.choices import JobResultStatusChoices
+from nautobot.extras.models import JobResult
+
 
 PLUGIN_SETTINGS = settings.PLUGINS_CONFIG["nautobot_cdn_models"]
-
 
 def post_migrate_create_statuses(sender, *, apps=global_apps, **kwargs):
     """Callback function for post_migrate() -- create default Statuses."""
@@ -21,11 +29,11 @@ def post_migrate_create_statuses(sender, *, apps=global_apps, **kwargs):
 
         ContentType = apps.get_model("contenttypes", "ContentType")
         ct_model = ContentType.objects.get_for_model(model)
-        for slug in default_statuses:
+        for name in default_statuses:
             try:
-                status = Status.objects.get(slug=slug)
+                status = Status.objects.get(name=name)
             except Status.DoesNotExist:
-                print(f"nautobot_cdn_models: Unable to find status: {slug} .. SKIPPING")
+                print(f"nautobot_cdn_models: Unable to find status: {name} .. SKIPPING")
                 continue
 
             if ct_model not in status.content_types.all():
@@ -42,9 +50,9 @@ def create_cdnsite_to_device_relationship(sender, apps, **kwargs):
 
     # Ensure that CdnSite to Devices Relationship exists
     Relationship.objects.update_or_create(
-        slug="cdnsite-devices",
+        key="cdnsite_devices",
         defaults={
-            "name": "CdnSite's Associated Devices",
+            "label": "CdnSite's Associated Devices",
             "type": RelationshipTypeChoices.TYPE_MANY_TO_MANY,
             "source_type": ContentType.objects.get_for_model(Device),
             "source_label": "Devices associated with a CdnSite",
@@ -63,9 +71,9 @@ def create_cdnsite_to_vm_relationship(sender, apps, **kwargs):
 
     # Ensure that CdnSite to VMs Relationship exists
     Relationship.objects.update_or_create(
-        slug="cdnsite-vms",
+        key="cdnsite_vms",
         defaults={
-            "name": "CdnSite's Associated VirtualMachines",
+            "label": "CdnSite's Associated VirtualMachines",
             "type": RelationshipTypeChoices.TYPE_MANY_TO_MANY,
             "source_type": ContentType.objects.get_for_model(VirtualMachine),
             "source_label": "VMs associated with a CdnSite",

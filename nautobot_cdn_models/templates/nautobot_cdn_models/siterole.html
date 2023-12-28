@@ -4,7 +4,7 @@
 {% block content_left_page %}
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Akamai Site Role</strong>
+                <strong>Site Role</strong>
             </div>
             <table class="table table-hover panel-body attr-table">
                 <tr>
@@ -16,9 +16,9 @@
                     <td>{{ object.parent|hyperlinked_object }}</td>
                 </tr>
                 <tr>
-                    <td>Akamai Site Role</td>
+                    <td>CDN Site</td>
                     <td>
-                        <a href="{% url 'plugins:nautobot_cdn_models:cdnsite_list' %}?cdn_site_role={{ object.pk }}">{{ cdnsite_table.rows|length }}</a>
+                        <a href="{% url 'plugins:nautobot_cdn_models:cdnsite_list' %}?group={{ object.name }}">{{ cdnsite_table.rows|length }}</a>
                     </td>
                 </tr>
             </table>
@@ -28,15 +28,17 @@
 {% block content_right_page %}
         <div class="panel panel-default">
             <div class="panel-heading">
-                <strong>Akamai Sites</strong>
+                <strong>CDN Sites</strong>
             </div>
-            {% include 'nautobot_cdn_models/inc/table.html' with table=cdnsite_table %}
+            {% include 'inc/table.html' with table=cdnsite_table %}
+            {% if perms.cdnsite.add_cdnsite %}
                 <div class="panel-footer text-right noprint">
-                    <a href="{% url 'plugins:nautobot_cdn_models:cdnsite_add' %}?cdn_site_role={{ object.pk }}" class="btn btn-xs btn-primary">
-                        <span class="mdi mdi-plus-thick" aria-hidden="true"></span> Add Akamai CDN Site
+                    <a href="{% url 'plugins:nautobot_cdn_models:cdnsite_add' %}?siterole={{ object.pk }}" class="btn btn-xs btn-primary">
+                        <span class="mdi mdi-plus-thick" aria-hidden="true"></span> Add CDN Site
                     </a>
                 </div>
+            {% endif %}
         </div>
-        {% include 'nautobot_cdn_models/inc/paginator.html' with paginator=cdnsite_table.paginator page=cdnsite_table.page %}
+        {% include 'inc/paginator.html' with paginator=cdnsite_table.paginator page=cdnsite_table.page %}
         <div class="row"></div>
 {% endblock content_right_page %}

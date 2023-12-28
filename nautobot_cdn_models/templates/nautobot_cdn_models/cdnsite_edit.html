@@ -15,6 +15,7 @@
             {% render_field form.neighbor1_preference %}
             {% render_field form.neighbor2 %}
             {% render_field form.neighbor2_preference %}
+            {% render_field form.failover_site %}
             {% render_field form.status %}
         </div>
     </div>
@@ -25,19 +26,17 @@
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading"><strong>Region</strong></div>
+        <div class="panel-heading"><strong>Location</strong></div>
         <div class="panel-body">
-            {% render_field form.region %}
-            {% render_field form.site %}
             {% render_field form.location %}
         </div>
     </div>
     {% include 'inc/extras_features_edit_form_fields.html' %}
     <div class="panel panel-default">
-        <div class="panel-heading"><strong>Local Config Context Data</strong></div>
+        <div class="panel-heading"><strong>Local Redirect Map Context Data</strong></div>
         <div class="panel-body">
-            {% render_field form.local_context_schema %}
-            {% render_field form.local_context_data %}
+            {% render_field form.local_redirectmap_context_schema %}
+            {% render_field form.local_redirectmap_context_data %}
         </div>
     </div>
 {% endblock %}

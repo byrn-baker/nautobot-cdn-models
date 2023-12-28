@@ -1,13 +1,8 @@
 from rest_framework import serializers
-from rest_framework import serializers
-
 from nautobot.core.api import WritableNestedSerializer
-
-from nautobot.core.api import WritableNestedSerializer
-
 from .. import models
 
-class NestedHyperCacheMemoryProfileSerializer(WritableNestedSerializer):
+class CdnNestedHyperCacheMemoryProfileSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="plugins-api:nautobot_cdn_models-api:hypercachememoryprofile-detail"
     )
@@ -16,7 +11,7 @@ class NestedHyperCacheMemoryProfileSerializer(WritableNestedSerializer):
         model = models.HyperCacheMemoryProfile
         fields = "__all__"
 
-class NestedSiteRoleSerializer(WritableNestedSerializer):
+class CdnNestedSiteRoleSerializer(WritableNestedSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name="plugins-api:nautobot_cdn_models-api:siterole-detail"
     )
@@ -34,17 +29,9 @@ class NestedCdnSiteSerializer(WritableNestedSerializer):
         model = models.CdnSite
         fields = "__all__"
 
-class NestedCdnConfigContextSerializer(WritableNestedSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name="plugins-api:nautobot_cdn_models-api:cdnconfigcontext-detail")
+class NestedRedirectMapContexttSerializer(WritableNestedSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name="plugins-api:nautobot_cdn_models-api:redirectmapcontext-detail")
 
     class Meta:
-        model = models.CdnConfigContext
+        model = models.RedirectMapContext
         fields = ["id", "url", "name"]
-
-
-# class NestedCdnConfigContextSchemaSerializer(WritableNestedSerializer):
-#     url = serializers.HyperlinkedIdentityField(view_name="plugins-api:nautobot_cdn_models-api:cdnconfigcontextschema-detail")
-
-#     class Meta:
-#         model = models.CdnConfigContextSchema
-#         fields = ["id", "url", "name", "slug"]

@@ -10,30 +10,30 @@ from .models import (
 
 layout = (
     HomePagePanel(
-        name="Akamai SoT",
+        name="Akamai LCDN",
         weight=100,
         items=(
             HomePageItem(
-                name="HyperCache Memory Profiles",
+                name="Akamai HyperCache Memory Profiles",
                 link="plugins:nautobot_cdn_models:hypercachememoryprofile_list",
                 model=HyperCacheMemoryProfile,
-                description="Hypercache Memory Profiles",
+                description="Akamai Site Hypercache Memory Profiles",
                 permissions=[],
                 weight=100,
             ),
             HomePageItem(
-                name="Site Roles",
+                name="Akamai Site Roles",
                 link="plugins:nautobot_cdn_models:siterole_list",
                 model=SiteRole,
-                description="CDN Site Roles",
+                description="Akamai LCDN Site Groupings",
                 permissions=[],
                 weight=150,
             ),
             HomePageItem(
-                name="CDN Sites",
+                name="Akamai Site Configuration",
                 link="plugins:nautobot_cdn_models:cdnsite_list",
                 model=CdnSite,
-                description="CDN Sites",
+                description="Akamai Site Configuration Source of Truth",
                 permissions=[],
                 weight=200,
             ),

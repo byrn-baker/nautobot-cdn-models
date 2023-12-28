@@ -17,6 +17,8 @@ services:
   worker:
     volumes:
       - "./nautobot_config.py:/opt/nautobot/nautobot_config.py"
+      - "./git_api_token.txt:/opt/nautobot/git_api_token.txt"
+      - "./git_username.txt:/opt/nautobot/git_username.txt"
       - "../jobs/:/opt/nautobot/jobs"
       - "../config_contexts/:/opt/nautobot/config_contexts"
       - "../:/source"

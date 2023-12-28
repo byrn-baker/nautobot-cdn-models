@@ -6,7 +6,7 @@ from nautobot.core.api.filter_backends import NautobotFilterBackend
 from nautobot.core.api.views import (
     ModelViewSet,
 )
-from nautobot.extras.api.views import NautobotModelViewSet, NotesViewSetMixin
+from nautobot.extras.api.views import NautobotModelViewSet
 
 from .. import models, filters
 from . import serializers
@@ -32,7 +32,7 @@ class CdnSiteViewSet(NautobotModelViewSet):
 #
 
 
-class CdnConfigContextFilterBackend(NautobotFilterBackend):
+class RedirectMapContextFilterBackend(NautobotFilterBackend):
     """
     Used by views that work with config context models (device and virtual machine).
 
@@ -48,14 +48,14 @@ class CdnConfigContextFilterBackend(NautobotFilterBackend):
         return kwargs
 
 
-class CdnConfigContextQuerySetMixin:
+class RedirectMapContextQuerySetMixin:
     """
     Used by views that work with config context models (device and virtual machine).
     Provides a get_queryset() method which deals with adding the config context
     data annotation or not.
     """
 
-    filter_backends = [CdnConfigContextFilterBackend]
+    filter_backends = [RedirectMapContextFilterBackend]
 
     def get_queryset(self):
         """
@@ -68,27 +68,16 @@ class CdnConfigContextQuerySetMixin:
         """
         queryset = super().get_queryset()
         request = self.get_serializer_context()["request"]
-        if self.brief or (request is not None and "cdnconfig_context" in request.query_params.get("exclude", [])):
+        if self.brief or (request is not None and "redirect_map_context" in request.query_params.get("exclude", [])):
             return queryset
         return queryset.annotate_config_context_data()
 
 
-class CdnConfigContextViewSet(ModelViewSet, NotesViewSetMixin):
-    queryset = models.CdnConfigContext.objects.prefetch_related(
+class RedirectMapContextViewSet(ModelViewSet):
+    queryset = models.RedirectMapContext.objects.prefetch_related(
         "regions",
         "cdnsites",
         "cdn_site_roles",
     )
-    serializer_class = serializers.CdnConfigContextSerializer
-    filterset_class = filters.CdnConfigContextFilterSet
-
-
-#
-# Config context schemas
-#
-
-
-# class CdnConfigContextSchemaViewSet(ModelViewSet, NotesViewSetMixin):
-#     queryset = models.CdnConfigContextSchema.objects.all()
-#     serializer_class = serializers.CdnConfigContextSchemaSerializer
-#     filterset_class = filters.CdnConfigContextSchemaFilterSet
+    serializer_class = serializers.RedirectMapContextSerializer
+    filterset_class = filters.RedirectMapContextFilterSet

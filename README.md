@@ -7,7 +7,7 @@ Before using this code, you will need to install Python, [Python Poetry](https:/
 
 Setup the virtual environment on a mac
 
-```poetry env use 3.8```
+```poetry env use 3.10```
 
 ```shell
 $ poetry install

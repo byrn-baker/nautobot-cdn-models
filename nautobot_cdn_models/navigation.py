@@ -1,7 +1,7 @@
 from nautobot.core.apps import NavMenuAddButton, NavMenuGroup, NavMenuItem, NavMenuImportButton, NavMenuTab
 menu_items = (
     NavMenuTab(
-        name="Nautobot Akamai SoT",
+        name="Akamai LCDN",
         weight=100,
         groups=(
             NavMenuGroup(
@@ -17,6 +17,10 @@ menu_items = (
                                 link="plugins:nautobot_cdn_models:hypercachememoryprofile_add",
                                 permissions=[],
                             ),
+                            NavMenuImportButton(
+                                link="plugins:nautobot_cdn_models:hypercachememoryprofile_import",
+                                permissions=[],
+                            ),
                         ),
                     ),
                     NavMenuItem(
@@ -28,15 +32,23 @@ menu_items = (
                                 link="plugins:nautobot_cdn_models:siterole_add",
                                 permissions=[],
                             ),
+                            NavMenuImportButton(
+                                link="plugins:nautobot_cdn_models:siterole_import",
+                                permissions=[],
+                            ),
                         ),
                     ),
                     NavMenuItem(
                         link="plugins:nautobot_cdn_models:cdnsite_list",
-                        name="Akamai Sites Configuration",
+                        name="Akamai Site Configuration",
                         permissions=[],
                         buttons=(
                             NavMenuAddButton(
                                 link="plugins:nautobot_cdn_models:cdnsite_add",
+                                permissions=[],
+                            ),
+                            NavMenuImportButton(
+                                link="plugins:nautobot_cdn_models:cdnsite_import",
                                 permissions=[],
                             ),
                         ),
@@ -44,16 +56,16 @@ menu_items = (
                 ),
             ),
             NavMenuGroup(
-                name="Contexts",
-                weight=100,
+                name="Redirect Maps",
+                weight=200,
                 items=(
                     NavMenuItem(
-                        link="plugins:nautobot_cdn_models:cdnconfigcontext_list",
-                        name="Contexts",
+                        link="plugins:nautobot_cdn_models:redirectmapcontext_list",
+                        name="Redirect Map Contexts",
                         permissions=[],
                         buttons=(
                             NavMenuAddButton(
-                                link="plugins:nautobot_cdn_models:cdnconfigcontext_add",
+                                link="plugins:nautobot_cdn_models:redirectmapcontext_add",
                                 permissions=[],
                             ),
                         ),

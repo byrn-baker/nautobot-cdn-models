@@ -21,11 +21,11 @@ class NautobotcdnModelsConfig(PluginConfig):
     description = "Nautobot cdn Soure of Truth."
     base_url = "nautobot-cdn-models"
     required_settings = []
-    min_version = "1.2.0"
-    max_version = "1.9999"
+    min_version = "1.5.5"
+    max_version = "2.9999"
     default_settings = {
         "default_statuses": {
-            "CdnSite": ["active", "maintenance", "planned", "staged"],
+            "CdnSite": ["Active", "Maintenance", "Planned", "Staged"],
         }
     }
     caching_config = {}
